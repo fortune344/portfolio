@@ -113,6 +113,21 @@ body {
   opacity: 0.7;
 }
 
+/* Animation d'entrée des modales admin */
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.modal-enter {
+  animation: modal-in 0.24s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+}
+
 /* Images en gris par défaut, couleurs normales au survol */
 .color-reveal {
   filter: grayscale(1);
