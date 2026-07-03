@@ -1,0 +1,244 @@
+{
+  "profile": {
+    "name": "Fortune Assouan",
+    "firstName": "Fortune",
+    "lastName": "Assouan",
+    "initials": "FA",
+    "role": "Data Analyst & DÃ©veloppeur IT",
+    "location": "LomÃ©, Togo",
+    "email": "fortune.assouan@lomebs.com",
+    "phone": "+228 96 03 34 86",
+    "phoneHref": "tel:+22896033486",
+    "github": "https://github.com/fortune344",
+    "githubUser": "fortune344",
+    "linkedin": "https://www.linkedin.com/in/fortunÃ©-assouan-a29561a74",
+    "availability": "Disponible pour un stage en Data",
+    "statusLine": "Ã‰tudiant en Bachelor 2 SystÃ¨mes d'Information Ã  LomÃ© Business School,",
+    "statusLink": {
+      "label": "disponible pour un stage en Data",
+      "href": "#contact"
+    },
+    "focusLine": "PassionnÃ© par les donnÃ©es et les interfaces, basÃ© Ã  LomÃ©, Togo.",
+    "manifesto": [
+      "J'analyse les donnÃ©es,",
+      "rÃ©vÃ¨le les tendances,",
+      "Ã©claire les dÃ©cisions."
+    ],
+    "bio": [
+      "Ã‰tudiant en Bachelor 2 SystÃ¨mes d'Information Ã  LomÃ© Business School, je suis passionnÃ© par l'analyse de donnÃ©es, les bases de donnÃ©es et le dÃ©veloppement web.",
+      "Je conÃ§ois des projets concrets avec Python, SQL, Excel et Power BI pour transformer des donnÃ©es brutes en informations exploitables â€” du nettoyage de datasets Ã  la crÃ©ation de tableaux de bord interactifs, en passant par des applications web complÃ¨tes avec Django.",
+      "Je suis Ã  la recherche d'un stage ou d'une premiÃ¨re expÃ©rience professionnelle dans le domaine de la Data."
+    ]
+  },
+  "skillGroups": [
+    {
+      "title": "Data & Analyse",
+      "skills": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "Power BI",
+        "Excel (TCD, graphiques)",
+        "Nettoyage de donnÃ©es",
+        "Visualisation de donnÃ©es"
+      ]
+    },
+    {
+      "title": "Bases de donnÃ©es",
+      "skills": [
+        "SQL Server",
+        "MySQL",
+        "phpMyAdmin",
+        "ModÃ©lisation relationnelle",
+        "RequÃªtes avancÃ©es (JOIN, GROUP BY)",
+        "Contraintes d'intÃ©gritÃ©"
+      ]
+    },
+    {
+      "title": "DÃ©veloppement web",
+      "skills": [
+        "Python (Django)",
+        "HTML / CSS",
+        "JavaScript",
+        "Tailwind CSS",
+        "Interfaces responsives"
+      ]
+    },
+    {
+      "title": "Outils & MÃ©thodes",
+      "skills": [
+        "Git",
+        "GitHub",
+        "VS Code",
+        "Word",
+        "PowerPoint"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "DÃ©tection de fraude â€” INTELO 2026",
+      "description": "Pipeline de dÃ©tection de transactions frauduleuses dÃ©veloppÃ© en hackathon : exploration du dataset, feature engineering et modÃ¨le de classification en Python.",
+      "tags": [
+        "Python",
+        "Pandas",
+        "Machine Learning"
+      ],
+      "github": "https://github.com/fortune344/fraud-challenge",
+      "category": "Data",
+      "featured": true,
+      "screen": "terminal"
+    },
+    {
+      "title": "GestionPro",
+      "description": "Plateforme web collaborative de suivi de projets et de tÃ¢ches : tableau Kanban, invitations par e-mail, notifications et gestion des utilisateurs. Interface responsive avec Tailwind CSS.",
+      "tags": [
+        "Django",
+        "Python",
+        "SQLite",
+        "Tailwind CSS"
+      ],
+      "github": "https://github.com/fortune344/GestionPro",
+      "category": "Web",
+      "featured": true,
+      "screen": "kanban"
+    },
+    {
+      "title": "Tableau de bord Power BI",
+      "description": "Conception d'un tableau de bord d'analyse avec indicateurs de performance, visualisations dynamiques, filtres et segments pour l'exploration des donnÃ©es.",
+      "tags": [
+        "Power BI",
+        "DAX",
+        "KPI",
+        "Data Viz"
+      ],
+      "github": "https://github.com/fortune344/Projet_Tableau_de_Bord_Kin",
+      "category": "Data",
+      "featured": true,
+      "screen": "chart"
+    },
+    {
+      "title": "Gestion commerciale SQL Server",
+      "description": "ModÃ©lisation d'une base relationnelle complÃ¨te : tables, clÃ©s Ã©trangÃ¨res, contraintes d'intÃ©gritÃ© et requÃªtes SQL pour la gestion des clients, produits et commandes.",
+      "tags": [
+        "SQL Server",
+        "T-SQL",
+        "ModÃ©lisation"
+      ],
+      "github": "https://github.com/fortune344/SQL_PROJET",
+      "category": "Data",
+      "featured": true,
+      "screen": "table"
+    },
+    {
+      "title": "Analyse du dataset Iris",
+      "description": "Nettoyage, transformation et analyse statistique d'un dataset : gestion des valeurs manquantes, calculs statistiques et visualisations avec Matplotlib.",
+      "tags": [
+        "Python",
+        "Pandas",
+        "Matplotlib"
+      ],
+      "github": "https://github.com/fortune344/projet-visualisation-iris-python",
+      "category": "Data",
+      "featured": true,
+      "screen": "chart"
+    },
+    {
+      "title": "VoiceTranslate",
+      "description": "Application Windows de traduction vocale franÃ§ais â†” anglais en temps rÃ©el, basÃ©e sur la reconnaissance vocale Google Speech et Argos Translate.",
+      "tags": [
+        "Python",
+        "Speech-to-Text",
+        "Desktop"
+      ],
+      "github": "https://github.com/fortune344/VoiceTranslate",
+      "category": "Outil",
+      "featured": true,
+      "screen": "terminal"
+    },
+    {
+      "title": "Allume",
+      "description": "Application mobile de suivi et de signalement des coupures d'Ã©lectricitÃ© au Togo.",
+      "tags": [
+        "Flutter",
+        "Dart",
+        "Mobile"
+      ],
+      "github": "https://github.com/fortune344/allume",
+      "category": "Mobile",
+      "featured": false,
+      "screen": "kanban"
+    },
+    {
+      "title": "Analyse de donnÃ©es commerciales Excel",
+      "description": "Analyse de ventes avec tris, filtres, graphiques et tableaux croisÃ©s dynamiques.",
+      "tags": [
+        "Excel",
+        "TCD",
+        "Analyse"
+      ],
+      "github": "https://github.com/fortune344/Analyse_Excel",
+      "category": "Data",
+      "featured": false,
+      "screen": "table"
+    }
+  ],
+  "timeline": [
+    {
+      "period": "2025 â€” PrÃ©sent",
+      "title": "Bachelor 2 â€” SystÃ¨mes d'Information",
+      "place": "LomÃ© Business School, LomÃ© (Togo)",
+      "description": "Approfondissement en analyse de donnÃ©es, bases de donnÃ©es et dÃ©veloppement web. Projets pratiques en Python, SQL Server, Power BI et Django.",
+      "type": "formation"
+    },
+    {
+      "period": "2026",
+      "title": "Hackathon INTELO 2026 â€” DÃ©tection de fraude",
+      "place": "CompÃ©tition IT",
+      "description": "DÃ©veloppement en Ã©quipe d'un modÃ¨le de dÃ©tection de transactions frauduleuses en Python : un premier dÃ©fi data grandeur nature.",
+      "type": "projet"
+    },
+    {
+      "period": "DÃ©c. 2025 â€” Mai 2026",
+      "title": "MontÃ©e en compÃ©tences Data",
+      "place": "Projets personnels",
+      "description": "EnchaÃ®nement de projets concrets : analyse de datasets avec Pandas, application Django, base SQL Server et tableau de bord Power BI.",
+      "type": "projet"
+    },
+    {
+      "period": "2024 â€” 2025",
+      "title": "Bachelor 1 â€” SystÃ¨mes d'Information",
+      "place": "LomÃ© Business School, LomÃ© (Togo)",
+      "description": "Fondamentaux des systÃ¨mes d'information : algorithmique, programmation, bases de donnÃ©es et bureautique avancÃ©e.",
+      "type": "formation"
+    },
+    {
+      "period": "2024",
+      "title": "BaccalaurÃ©at â€” SÃ©rie D",
+      "place": "CEG HouÃ©gbo (BÃ©nin)",
+      "description": "Obtention du baccalaurÃ©at scientifique, point de dÃ©part de mon orientation vers l'informatique et la data.",
+      "type": "formation"
+    }
+  ],
+  "languages": [
+    {
+      "name": "FranÃ§ais",
+      "level": "Excellent"
+    },
+    {
+      "name": "Anglais",
+      "level": "IntermÃ©diaire"
+    },
+    {
+      "name": "Fon",
+      "level": "Courant"
+    }
+  ],
+  "interests": [
+    "Lecture",
+    "Cuisine",
+    "Sport",
+    "Jeux vidÃ©o"
+  ]
+}
