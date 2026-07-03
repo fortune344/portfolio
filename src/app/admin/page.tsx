@@ -1,189 +1,45 @@
 "use client";
 
-import { useCallback, useEffect, useState, type ChangeEvent, type FormEvent } from "react";
-import type {
-  PortfolioData,
-  Project,
-  ProjectCategory,
-  ProjectScreenKind,
-} from "@/data/portfolio";
+import {
+  Briefcase,
+  FolderGit2,
+  Languages,
+  LayoutDashboard,
+  Menu,
+  Route as RouteIcon,
+  User,
+  X,
+  type LucideIcon,
+} from "lucide-react";
+import { useCallback, useEffect, useState, type FormEvent } from "react";
+import {
+  AboutPanel,
+  ExtrasPanel,
+  JourneyPanel,
+  ProfilePanel,
+  ProjectsPanel,
+  SkillsPanel,
+} from "@/components/admin/panels";
+import { BTN_PRIMARY, BTN_SMALL, INPUT, LABEL } from "@/components/admin/primitives";
+import type { PortfolioData } from "@/data/portfolio";
+import { cn } from "@/lib/utils";
 
 /**
- * Panneau d'administration du portfolio.
- * - Connexion par mot de passe (ADMIN_PASSWORD) avec session sécurisée.
- * - Lecture/écriture dans Supabase (ou JSON local en développement).
- * - Upload d'images de projets vers Supabase Storage.
+ * Tableau de bord d'administration du portfolio.
+ * Navigation latérale par onglets (un panneau visible à la fois) — connexion
+ * par mot de passe, données Supabase (ou JSON local en dev), upload d'images.
  */
 
-const CATEGORIES: ProjectCategory[] = ["Data", "Web", "Mobile", "Outil"];
-const SCREENS: { value: ProjectScreenKind; label: string }[] = [
-  { value: "chart", label: "Graphique (dashboard)" },
-  { value: "kanban", label: "Kanban (app web)" },
-  { value: "table", label: "Tableau (SQL / Excel)" },
-  { value: "terminal", label: "Terminal (script)" },
+type TabId = "profil" | "apropos" | "competences" | "projets" | "parcours" | "extras";
+
+const TABS: { id: TabId; label: string; icon: LucideIcon }[] = [
+  { id: "profil", label: "Profil", icon: User },
+  { id: "apropos", label: "À propos", icon: LayoutDashboard },
+  { id: "competences", label: "Compétences", icon: Briefcase },
+  { id: "projets", label: "Projets", icon: FolderGit2 },
+  { id: "parcours", label: "Parcours", icon: RouteIcon },
+  { id: "extras", label: "Langues & intérêts", icon: Languages },
 ];
-
-const INPUT =
-  "w-full rounded-lg border border-line bg-black/40 px-3 py-2 text-sm outline-none transition-colors focus:border-foreground/60";
-const LABEL =
-  "mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.18em] text-muted";
-const BTN_SMALL =
-  "rounded-md border border-line px-2.5 py-1 text-xs text-muted transition-colors hover:border-foreground/50 hover:text-foreground disabled:opacity-30";
-const BTN_ADD =
-  "rounded-lg border border-dashed border-line px-4 py-2.5 text-sm text-muted transition-colors hover:border-foreground/50 hover:text-foreground";
-const BTN_PRIMARY =
-  "rounded-lg bg-foreground px-5 py-2 text-sm font-semibold text-ink transition-opacity hover:opacity-85 disabled:opacity-50";
-
-function Field({
-  label,
-  value,
-  onChange,
-  textarea = false,
-  placeholder,
-}: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  textarea?: boolean;
-  placeholder?: string;
-}) {
-  return (
-    <label className="block">
-      <span className={LABEL}>{label}</span>
-      {textarea ? (
-        <textarea
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          rows={3}
-          placeholder={placeholder}
-          className={INPUT}
-        />
-      ) : (
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          className={INPUT}
-        />
-      )}
-    </label>
-  );
-}
-
-/** Champ « liste » séparé par des virgules (commit au blur). */
-function ListField({
-  label,
-  values,
-  onCommit,
-  reloadKey,
-}: {
-  label: string;
-  values: string[];
-  onCommit: (values: string[]) => void;
-  reloadKey: number;
-}) {
-  return (
-    <label className="block">
-      <span className={LABEL}>{label} (séparés par des virgules)</span>
-      <textarea
-        key={reloadKey}
-        defaultValue={values.join(", ")}
-        onBlur={(e) =>
-          onCommit(
-            e.target.value
-              .split(",")
-              .map((item) => item.trim())
-              .filter(Boolean)
-          )
-        }
-        rows={2}
-        className={INPUT}
-      />
-    </label>
-  );
-}
-
-/** Upload d'image de projet avec aperçu. */
-function ImageField({
-  value,
-  onChange,
-}: {
-  value?: string | null;
-  onChange: (url: string | null) => void;
-}) {
-  const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleFile(e: ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    setError(null);
-    try {
-      const form = new FormData();
-      form.append("file", file);
-      const res = await fetch("/api/upload", { method: "POST", body: form });
-      const json = (await res.json()) as { url?: string; error?: string };
-      if (!res.ok || !json.url) throw new Error(json.error || "Erreur d'upload.");
-      onChange(json.url);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Erreur d'upload.");
-    } finally {
-      setUploading(false);
-      e.target.value = "";
-    }
-  }
-
-  return (
-    <div>
-      <span className={LABEL}>Image du projet (affichée dans le laptop)</span>
-      {value ? (
-        <div className="mb-2 flex items-center gap-3">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={value}
-            alt="Aperçu de l'image du projet"
-            className="h-20 w-32 rounded-md border border-line object-cover"
-          />
-          <button type="button" onClick={() => onChange(null)} className={BTN_SMALL}>
-            Retirer l&apos;image
-          </button>
-        </div>
-      ) : null}
-      <input
-        type="file"
-        accept="image/png,image/jpeg,image/webp,image/gif"
-        onChange={handleFile}
-        disabled={uploading}
-        aria-label="Choisir une image de projet"
-        className="block w-full text-xs text-muted file:mr-3 file:cursor-pointer file:rounded-md file:border-0 file:bg-foreground file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-ink"
-      />
-      {uploading ? <p className="mt-1 text-xs text-muted">Envoi en cours…</p> : null}
-      {error ? <p className="mt-1 text-xs text-red-400">{error}</p> : null}
-      <p className="mt-1 text-[10px] text-muted">
-        PNG, JPEG, WebP ou GIF — 4 Mo max. Sans image, un aperçu dessiné est affiché.
-      </p>
-    </div>
-  );
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section className="rounded-2xl border border-line bg-white/[0.02] p-5 sm:p-7">
-      <h2 className="mb-6 font-display text-2xl uppercase tracking-wide">{title}</h2>
-      <div className="space-y-5">{children}</div>
-    </section>
-  );
-}
-
-function moveInList<T>(list: T[], index: number, dir: -1 | 1): T[] {
-  const target = index + dir;
-  if (target < 0 || target >= list.length) return list;
-  const copy = [...list];
-  [copy[index], copy[target]] = [copy[target], copy[index]];
-  return copy;
-}
 
 type View = "loading" | "login" | "disabled" | "ready";
 
@@ -195,7 +51,9 @@ export default function AdminPage() {
   const [message, setMessage] = useState<string | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
 
-  // État du formulaire de connexion
+  const [tab, setTab] = useState<TabId>("profil");
+  const [navOpen, setNavOpen] = useState(false);
+
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState<string | null>(null);
   const [loggingIn, setLoggingIn] = useState(false);
@@ -207,14 +65,8 @@ export default function AdminPage() {
   const load = useCallback(async () => {
     try {
       const res = await fetch("/api/portfolio", { cache: "no-store" });
-      if (res.status === 401) {
-        setView("login");
-        return;
-      }
-      if (res.status === 403) {
-        setView("disabled");
-        return;
-      }
+      if (res.status === 401) return setView("login");
+      if (res.status === 403) return setView("disabled");
       if (!res.ok) throw new Error();
       const json = (await res.json()) as {
         data: PortfolioData;
@@ -272,13 +124,10 @@ export default function AdminPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (res.status === 401) {
-        setView("login");
-        return;
-      }
+      if (res.status === 401) return setView("login");
       const json = (await res.json()) as { error?: string };
       if (!res.ok) throw new Error(json.error || "Erreur lors de l'enregistrement.");
-      setMessage("Enregistré — le site est à jour.");
+      setMessage("✓ Enregistré — le site est à jour.");
     } catch (err) {
       setMessage(err instanceof Error ? err.message : "Erreur lors de l'enregistrement.");
     } finally {
@@ -315,32 +164,15 @@ export default function AdminPage() {
   if (view === "login") {
     return (
       <main className="flex min-h-svh items-center justify-center px-5">
-        <form
-          onSubmit={handleLogin}
-          className="w-full max-w-sm rounded-2xl border border-line bg-white/[0.02] p-8"
-        >
+        <form onSubmit={handleLogin} className="w-full max-w-sm rounded-2xl border border-line bg-white/[0.02] p-8">
           <h1 className="font-display text-3xl uppercase tracking-wide">Admin</h1>
-          <p className="mt-2 text-sm text-muted">
-            Entre ton mot de passe pour gérer le portfolio.
-          </p>
+          <p className="mt-2 text-sm text-muted">Entre ton mot de passe pour gérer le portfolio.</p>
           <label className="mt-6 block">
             <span className={LABEL}>Mot de passe</span>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoFocus
-              className={INPUT}
-            />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoFocus className={INPUT} />
           </label>
-          {loginError ? (
-            <p className="mt-3 text-xs text-red-400">{loginError}</p>
-          ) : null}
-          <button
-            type="submit"
-            disabled={loggingIn}
-            className={`${BTN_PRIMARY} mt-6 w-full`}
-          >
+          {loginError ? <p className="mt-3 text-xs text-red-400">{loginError}</p> : null}
+          <button type="submit" disabled={loggingIn} className={`${BTN_PRIMARY} mt-6 w-full`}>
             {loggingIn ? "Connexion…" : "Se connecter"}
           </button>
         </form>
@@ -350,574 +182,120 @@ export default function AdminPage() {
 
   if (!data) return null;
 
-  const { profile } = data;
-  const patchProfile = (patch: Partial<PortfolioData["profile"]>) =>
-    setData((d) => d && { ...d, profile: { ...d.profile, ...patch } });
-  const patchProject = (index: number, patch: Partial<Project>) =>
-    setData(
-      (d) =>
-        d && {
-          ...d,
-          projects: d.projects.map((p, j) => (j === index ? { ...p, ...patch } : p)),
-        }
-    );
+  const active = TABS.find((t) => t.id === tab) ?? TABS[0];
+  const panelProps = { data, setData, reloadKey };
 
   return (
-    <main className="mx-auto max-w-4xl px-5 pb-24 sm:px-8">
-      {/* Barre d'actions */}
-      <header className="sticky top-0 z-10 -mx-5 mb-10 border-b border-line bg-background/90 px-5 py-4 backdrop-blur sm:-mx-8 sm:px-8">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <h1 className="font-display text-2xl uppercase tracking-wide">
-              Admin — Portfolio
-            </h1>
-            <p className="text-xs text-muted">
-              {passwordConfigured
-                ? "Connecté. Les modifications sont publiées dès l'enregistrement."
-                : "Mode développement (aucun mot de passe configuré)."}
-            </p>
+    <div className="min-h-svh md:grid md:grid-cols-[248px_1fr]">
+      {/* ————— Barre latérale ————— */}
+      <aside
+        className={cn(
+          "z-40 flex flex-col border-r border-line bg-panel md:sticky md:top-0 md:h-svh",
+          "fixed inset-y-0 left-0 w-64 transition-transform duration-300 md:translate-x-0",
+          navOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        <div className="flex items-center justify-between px-5 py-5">
+          <span className="font-display text-xl uppercase tracking-wide">
+            Admin<span className="text-muted">.</span>
+          </span>
+          <button type="button" onClick={() => setNavOpen(false)} aria-label="Fermer le menu" className="md:hidden">
+            <X size={20} />
+          </button>
+        </div>
+
+        <nav className="flex-1 space-y-1 px-3">
+          {TABS.map((t) => {
+            const Icon = t.icon;
+            const isActive = t.id === tab;
+            return (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => {
+                  setTab(t.id);
+                  setNavOpen(false);
+                }}
+                className={cn(
+                  "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
+                  isActive
+                    ? "bg-foreground text-ink font-semibold"
+                    : "text-muted hover:bg-white/5 hover:text-foreground"
+                )}
+              >
+                <Icon size={17} />
+                {t.label}
+              </button>
+            );
+          })}
+        </nav>
+
+        <div className="space-y-1 border-t border-line p-3">
+          <a href="/" className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-muted transition-colors hover:bg-white/5 hover:text-foreground">
+            ↗ Voir le site
+          </a>
+          {passwordConfigured ? (
+            <button type="button" onClick={handleLogout} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-muted transition-colors hover:bg-white/5 hover:text-foreground">
+              ← Se déconnecter
+            </button>
+          ) : null}
+        </div>
+      </aside>
+
+      {/* Voile mobile */}
+      {navOpen ? (
+        <button
+          type="button"
+          aria-label="Fermer le menu"
+          onClick={() => setNavOpen(false)}
+          className="fixed inset-0 z-30 bg-black/60 md:hidden"
+        />
+      ) : null}
+
+      {/* ————— Contenu ————— */}
+      <div className="flex min-w-0 flex-col">
+        <header className="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-line bg-background/90 px-5 py-4 backdrop-blur sm:px-8">
+          <div className="flex items-center gap-3">
+            <button type="button" onClick={() => setNavOpen(true)} aria-label="Ouvrir le menu" className="md:hidden">
+              <Menu size={22} />
+            </button>
+            <div>
+              <h1 className="font-display text-xl uppercase tracking-wide sm:text-2xl">
+                {active.label}
+              </h1>
+              <p className="hidden text-xs text-muted sm:block">
+                {passwordConfigured
+                  ? "Modifie puis enregistre — publié immédiatement."
+                  : "Mode développement (aucun mot de passe configuré)."}
+              </p>
+            </div>
           </div>
           <div className="flex items-center gap-3">
-            {message ? <span className="text-xs text-muted">{message}</span> : null}
-            <a href="/" className={BTN_SMALL}>
-              Voir le site
-            </a>
+            {message ? (
+              <span className="hidden max-w-xs truncate text-xs text-muted sm:inline">{message}</span>
+            ) : null}
             <button type="button" onClick={load} className={BTN_SMALL}>
               Recharger
             </button>
-            {passwordConfigured ? (
-              <button type="button" onClick={handleLogout} className={BTN_SMALL}>
-                Se déconnecter
-              </button>
-            ) : null}
             <button type="button" onClick={save} disabled={saving} className={BTN_PRIMARY}>
               {saving ? "Enregistrement…" : "Enregistrer"}
             </button>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <div className="space-y-8">
-        {/* ————— Profil ————— */}
-        <Section title="Profil">
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="Prénom" value={profile.firstName} onChange={(v) => patchProfile({ firstName: v })} />
-            <Field label="Nom" value={profile.lastName} onChange={(v) => patchProfile({ lastName: v })} />
-            <Field label="Nom complet" value={profile.name} onChange={(v) => patchProfile({ name: v })} />
-            <Field label="Rôle" value={profile.role} onChange={(v) => patchProfile({ role: v })} />
-            <Field label="E-mail" value={profile.email} onChange={(v) => patchProfile({ email: v })} />
-            <Field label="Téléphone (affiché)" value={profile.phone} onChange={(v) => patchProfile({ phone: v })} />
-            <Field label="Téléphone (lien tel:)" value={profile.phoneHref} onChange={(v) => patchProfile({ phoneHref: v })} />
-            <Field label="Localisation" value={profile.location} onChange={(v) => patchProfile({ location: v })} />
-            <Field label="Lien GitHub" value={profile.github} onChange={(v) => patchProfile({ github: v })} />
-            <Field label="Lien LinkedIn" value={profile.linkedin} onChange={(v) => patchProfile({ linkedin: v })} />
-            <Field label="Disponibilité (bulle avatar)" value={profile.availability} onChange={(v) => patchProfile({ availability: v })} />
-          </div>
-          <Field
-            label="Hero — texte en bas à gauche"
-            value={profile.statusLine}
-            onChange={(v) => patchProfile({ statusLine: v })}
-            textarea
-          />
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Field
-              label="Hero — texte du lien souligné"
-              value={profile.statusLink.label}
-              onChange={(v) => patchProfile({ statusLink: { ...profile.statusLink, label: v } })}
-            />
-            <Field
-              label="Hero — cible du lien (#contact, URL…)"
-              value={profile.statusLink.href}
-              onChange={(v) => patchProfile({ statusLink: { ...profile.statusLink, href: v } })}
-            />
-          </div>
-          <Field
-            label="Hero — texte en bas à droite"
-            value={profile.focusLine}
-            onChange={(v) => patchProfile({ focusLine: v })}
-            textarea
-          />
-        </Section>
+        {message ? (
+          <p className="border-b border-line bg-white/[0.02] px-5 py-2 text-xs text-muted sm:hidden">{message}</p>
+        ) : null}
 
-        {/* ————— Manifeste & bio ————— */}
-        <Section title="À propos">
-          <div>
-            <span className={LABEL}>Manifeste (une ligne géante par champ)</span>
-            <div className="space-y-2">
-              {profile.manifesto.map((line, i) => (
-                <div key={i} className="flex gap-2">
-                  <input
-                    type="text"
-                    value={line}
-                    onChange={(e) =>
-                      patchProfile({
-                        manifesto: profile.manifesto.map((l, j) =>
-                          j === i ? e.target.value : l
-                        ),
-                      })
-                    }
-                    aria-label={`Ligne ${i + 1} du manifeste`}
-                    className={INPUT}
-                  />
-                  <button
-                    type="button"
-                    onClick={() =>
-                      patchProfile({ manifesto: profile.manifesto.filter((_, j) => j !== i) })
-                    }
-                    className={BTN_SMALL}
-                  >
-                    ✕
-                  </button>
-                </div>
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={() => patchProfile({ manifesto: [...profile.manifesto, ""] })}
-              className={`${BTN_ADD} mt-3`}
-            >
-              + Ajouter une ligne
-            </button>
-          </div>
-          <div>
-            <span className={LABEL}>Bio (un paragraphe par champ)</span>
-            <div className="space-y-2">
-              {profile.bio.map((paragraph, i) => (
-                <div key={i} className="flex gap-2">
-                  <textarea
-                    value={paragraph}
-                    onChange={(e) =>
-                      patchProfile({
-                        bio: profile.bio.map((p, j) => (j === i ? e.target.value : p)),
-                      })
-                    }
-                    rows={3}
-                    aria-label={`Paragraphe ${i + 1} de la bio`}
-                    className={INPUT}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => patchProfile({ bio: profile.bio.filter((_, j) => j !== i) })}
-                    className={BTN_SMALL}
-                  >
-                    ✕
-                  </button>
-                </div>
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={() => patchProfile({ bio: [...profile.bio, ""] })}
-              className={`${BTN_ADD} mt-3`}
-            >
-              + Ajouter un paragraphe
-            </button>
-          </div>
-        </Section>
-
-        {/* ————— Compétences ————— */}
-        <Section title="Compétences">
-          {data.skillGroups.map((group, i) => (
-            <div key={i} className="rounded-xl border border-line p-4">
-              <div className="flex items-start gap-2">
-                <div className="flex-1 space-y-4">
-                  <Field
-                    label="Titre du groupe"
-                    value={group.title}
-                    onChange={(v) =>
-                      setData((d) => d && {
-                        ...d,
-                        skillGroups: d.skillGroups.map((g, j) =>
-                          j === i ? { ...g, title: v } : g
-                        ),
-                      })
-                    }
-                  />
-                  <ListField
-                    label="Compétences"
-                    values={group.skills}
-                    reloadKey={reloadKey}
-                    onCommit={(values) =>
-                      setData((d) => d && {
-                        ...d,
-                        skillGroups: d.skillGroups.map((g, j) =>
-                          j === i ? { ...g, skills: values } : g
-                        ),
-                      })
-                    }
-                  />
-                </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setData((d) => d && {
-                      ...d,
-                      skillGroups: d.skillGroups.filter((_, j) => j !== i),
-                    })
-                  }
-                  className={BTN_SMALL}
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={() =>
-              setData((d) => d && {
-                ...d,
-                skillGroups: [...d.skillGroups, { title: "Nouveau groupe", skills: [] }],
-              })
-            }
-            className={BTN_ADD}
-          >
-            + Ajouter un groupe
-          </button>
-        </Section>
-
-        {/* ————— Projets ————— */}
-        <Section title="Projets">
-          {data.projects.map((project, i) => (
-            <div key={i} className="rounded-xl border border-line p-4">
-              <div className="mb-4 flex items-center justify-between gap-2">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                  Projet {i + 1}
-                </p>
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    disabled={i === 0}
-                    onClick={() =>
-                      setData((d) => d && { ...d, projects: moveInList(d.projects, i, -1) })
-                    }
-                    className={BTN_SMALL}
-                  >
-                    ↑
-                  </button>
-                  <button
-                    type="button"
-                    disabled={i === data.projects.length - 1}
-                    onClick={() =>
-                      setData((d) => d && { ...d, projects: moveInList(d.projects, i, 1) })
-                    }
-                    className={BTN_SMALL}
-                  >
-                    ↓
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setData((d) => d && {
-                        ...d,
-                        projects: d.projects.filter((_, j) => j !== i),
-                      })
-                    }
-                    className={BTN_SMALL}
-                  >
-                    Supprimer
-                  </button>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <Field label="Titre" value={project.title} onChange={(v) => patchProject(i, { title: v })} />
-                <Field
-                  label="Description"
-                  value={project.description}
-                  textarea
-                  onChange={(v) => patchProject(i, { description: v })}
-                />
-                <ImageField
-                  value={project.image}
-                  onChange={(url) => patchProject(i, { image: url })}
-                />
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <Field
-                    label="Lien GitHub (optionnel)"
-                    value={project.github ?? ""}
-                    placeholder="https://github.com/…"
-                    onChange={(v) => patchProject(i, { github: v.trim() || null })}
-                  />
-                  <Field
-                    label="Lien du site en ligne (optionnel)"
-                    value={project.liveUrl ?? ""}
-                    placeholder="https://…"
-                    onChange={(v) => patchProject(i, { liveUrl: v.trim() || null })}
-                  />
-                  <ListField
-                    label="Tags"
-                    values={project.tags}
-                    reloadKey={reloadKey}
-                    onCommit={(values) => patchProject(i, { tags: values })}
-                  />
-                  <label className="block">
-                    <span className={LABEL}>Catégorie</span>
-                    <select
-                      value={project.category}
-                      onChange={(e) =>
-                        patchProject(i, { category: e.target.value as Project["category"] })
-                      }
-                      className={INPUT}
-                    >
-                      {CATEGORIES.map((c) => (
-                        <option key={c} value={c}>
-                          {c}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <label className="block">
-                    <span className={LABEL}>Aperçu dessiné (si aucune image)</span>
-                    <select
-                      value={project.screen}
-                      onChange={(e) =>
-                        patchProject(i, { screen: e.target.value as Project["screen"] })
-                      }
-                      className={INPUT}
-                    >
-                      {SCREENS.map((s) => (
-                        <option key={s.value} value={s.value}>
-                          {s.label}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                </div>
-                <label className="flex items-center gap-2.5 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={project.featured}
-                    onChange={(e) => patchProject(i, { featured: e.target.checked })}
-                    className="h-4 w-4 accent-[#e8e3d7]"
-                  />
-                  Projet vedette (grande carte avec mockup) — sinon affiché en liste compacte
-                </label>
-              </div>
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={() =>
-              setData((d) => d && {
-                ...d,
-                projects: [
-                  ...d.projects,
-                  {
-                    title: "Nouveau projet",
-                    description: "",
-                    tags: [],
-                    github: null,
-                    liveUrl: null,
-                    image: null,
-                    category: "Data",
-                    featured: false,
-                    screen: "chart",
-                  },
-                ],
-              })
-            }
-            className={BTN_ADD}
-          >
-            + Ajouter un projet
-          </button>
-        </Section>
-
-        {/* ————— Parcours ————— */}
-        <Section title="Parcours">
-          {data.timeline.map((entry, i) => (
-            <div key={i} className="rounded-xl border border-line p-4">
-              <div className="mb-4 flex items-center justify-between gap-2">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                  Étape {i + 1}
-                </p>
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    disabled={i === 0}
-                    onClick={() =>
-                      setData((d) => d && { ...d, timeline: moveInList(d.timeline, i, -1) })
-                    }
-                    className={BTN_SMALL}
-                  >
-                    ↑
-                  </button>
-                  <button
-                    type="button"
-                    disabled={i === data.timeline.length - 1}
-                    onClick={() =>
-                      setData((d) => d && { ...d, timeline: moveInList(d.timeline, i, 1) })
-                    }
-                    className={BTN_SMALL}
-                  >
-                    ↓
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setData((d) => d && {
-                        ...d,
-                        timeline: d.timeline.filter((_, j) => j !== i),
-                      })
-                    }
-                    className={BTN_SMALL}
-                  >
-                    Supprimer
-                  </button>
-                </div>
-              </div>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <Field
-                  label="Période"
-                  value={entry.period}
-                  onChange={(v) =>
-                    setData((d) => d && {
-                      ...d,
-                      timeline: d.timeline.map((t, j) => (j === i ? { ...t, period: v } : t)),
-                    })
-                  }
-                />
-                <label className="block">
-                  <span className={LABEL}>Type</span>
-                  <select
-                    value={entry.type}
-                    onChange={(e) =>
-                      setData((d) => d && {
-                        ...d,
-                        timeline: d.timeline.map((t, j) =>
-                          j === i
-                            ? { ...t, type: e.target.value as "formation" | "projet" }
-                            : t
-                        ),
-                      })
-                    }
-                    className={INPUT}
-                  >
-                    <option value="formation">Formation</option>
-                    <option value="projet">Projet</option>
-                  </select>
-                </label>
-                <Field
-                  label="Titre"
-                  value={entry.title}
-                  onChange={(v) =>
-                    setData((d) => d && {
-                      ...d,
-                      timeline: d.timeline.map((t, j) => (j === i ? { ...t, title: v } : t)),
-                    })
-                  }
-                />
-                <Field
-                  label="Lieu / contexte"
-                  value={entry.place}
-                  onChange={(v) =>
-                    setData((d) => d && {
-                      ...d,
-                      timeline: d.timeline.map((t, j) => (j === i ? { ...t, place: v } : t)),
-                    })
-                  }
-                />
-              </div>
-              <div className="mt-4">
-                <Field
-                  label="Description"
-                  value={entry.description}
-                  textarea
-                  onChange={(v) =>
-                    setData((d) => d && {
-                      ...d,
-                      timeline: d.timeline.map((t, j) =>
-                        j === i ? { ...t, description: v } : t
-                      ),
-                    })
-                  }
-                />
-              </div>
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={() =>
-              setData((d) => d && {
-                ...d,
-                timeline: [
-                  ...d.timeline,
-                  {
-                    period: "2026",
-                    title: "Nouvelle étape",
-                    place: "",
-                    description: "",
-                    type: "projet",
-                  },
-                ],
-              })
-            }
-            className={BTN_ADD}
-          >
-            + Ajouter une étape
-          </button>
-        </Section>
-
-        {/* ————— Langues & intérêts ————— */}
-        <Section title="Langues & centres d'intérêt">
-          {data.languages.map((lang, i) => (
-            <div key={i} className="flex items-end gap-2">
-              <div className="grid flex-1 gap-4 sm:grid-cols-2">
-                <Field
-                  label="Langue"
-                  value={lang.name}
-                  onChange={(v) =>
-                    setData((d) => d && {
-                      ...d,
-                      languages: d.languages.map((l, j) => (j === i ? { ...l, name: v } : l)),
-                    })
-                  }
-                />
-                <Field
-                  label="Niveau"
-                  value={lang.level}
-                  onChange={(v) =>
-                    setData((d) => d && {
-                      ...d,
-                      languages: d.languages.map((l, j) => (j === i ? { ...l, level: v } : l)),
-                    })
-                  }
-                />
-              </div>
-              <button
-                type="button"
-                onClick={() =>
-                  setData((d) => d && {
-                    ...d,
-                    languages: d.languages.filter((_, j) => j !== i),
-                  })
-                }
-                className={`${BTN_SMALL} mb-1`}
-              >
-                ✕
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={() =>
-              setData((d) => d && {
-                ...d,
-                languages: [...d.languages, { name: "", level: "" }],
-              })
-            }
-            className={BTN_ADD}
-          >
-            + Ajouter une langue
-          </button>
-          <ListField
-            label="Centres d'intérêt"
-            values={data.interests}
-            reloadKey={reloadKey}
-            onCommit={(values) => setData((d) => d && { ...d, interests: values })}
-          />
-        </Section>
+        <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-8 sm:px-8">
+          {tab === "profil" && <ProfilePanel {...panelProps} />}
+          {tab === "apropos" && <AboutPanel {...panelProps} />}
+          {tab === "competences" && <SkillsPanel {...panelProps} />}
+          {tab === "projets" && <ProjectsPanel {...panelProps} />}
+          {tab === "parcours" && <JourneyPanel {...panelProps} />}
+          {tab === "extras" && <ExtrasPanel {...panelProps} />}
+        </main>
       </div>
-    </main>
+    </div>
   );
 }
