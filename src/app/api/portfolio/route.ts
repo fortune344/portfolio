@@ -2,6 +2,7 @@ import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { adminEnabled, isAuthenticated, passwordConfigured } from "@/lib/auth";
 import { getPortfolio, savePortfolio } from "@/lib/portfolio-store";
+import { getSupabase, supabaseConfigError } from "@/lib/supabase";
 
 /**
  * API d'édition du contenu du portfolio (protégée par session admin).
@@ -29,7 +30,11 @@ export async function GET() {
   const data = await getPortfolio();
   return NextResponse.json({
     data,
-    meta: { passwordConfigured: passwordConfigured() },
+    meta: {
+      passwordConfigured: passwordConfigured(),
+      supabaseConnected: Boolean(getSupabase()),
+      supabaseError: supabaseConfigError(),
+    },
   });
 }
 

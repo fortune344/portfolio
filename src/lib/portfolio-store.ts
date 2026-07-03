@@ -1,7 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { defaultPortfolio, type PortfolioData } from "@/data/portfolio";
-import { getSupabase, STORAGE_BUCKET } from "@/lib/supabase";
+import { getSupabase, STORAGE_BUCKET, supabaseConfigError } from "@/lib/supabase";
 
 /**
  * Couche d'accès aux données du portfolio.
@@ -29,6 +29,9 @@ export async function getPortfolio(): Promise<PortfolioData> {
 }
 
 export async function savePortfolio(content: PortfolioData): Promise<void> {
+  const configError = supabaseConfigError();
+  if (configError) throw new Error(configError);
+
   const supabase = getSupabase();
   if (supabase) {
     const { error } = await supabase.from("portfolio").upsert({
@@ -36,7 +39,12 @@ export async function savePortfolio(content: PortfolioData): Promise<void> {
       content,
       updated_at: new Date().toISOString(),
     });
-    if (error) throw new Error(`Supabase : ${error.message}`);
+    if (error) {
+      throw new Error(
+        `Enregistrement Supabase impossible : ${error.message}. ` +
+          "Vérifie que la table « portfolio » existe (exécute supabase/schema.sql)."
+      );
+    }
     return;
   }
   if (isProd) {
@@ -76,13 +84,21 @@ export async function uploadImage(file: File): Promise<string> {
   const filename = `${Date.now()}-${base || "image"}.${ext}`;
   const buffer = Buffer.from(await file.arrayBuffer());
 
+  const configError = supabaseConfigError();
+  if (configError) throw new Error(configError);
+
   const supabase = getSupabase();
   if (supabase) {
     const objectPath = `projets/${filename}`;
     const { error } = await supabase.storage
       .from(STORAGE_BUCKET)
       .upload(objectPath, buffer, { contentType: file.type, upsert: false });
-    if (error) throw new Error(`Supabase Storage : ${error.message}`);
+    if (error) {
+      throw new Error(
+        `Upload Supabase impossible : ${error.message}. ` +
+          "Vérifie que le bucket « portfolio » existe (exécute supabase/schema.sql)."
+      );
+    }
     const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(objectPath);
     return data.publicUrl;
   }
