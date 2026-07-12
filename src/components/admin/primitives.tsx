@@ -150,6 +150,75 @@ export function ImageField({
   );
 }
 
+/** Upload d'un document (CV en PDF/DOC) avec lien vers le fichier courant. */
+export function FileField({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value?: string | null;
+  onChange: (url: string | null) => void;
+}) {
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleFile(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    setError(null);
+    try {
+      const form = new FormData();
+      form.append("file", file);
+      form.append("kind", "document");
+      const res = await fetch("/api/upload", { method: "POST", body: form });
+      const json = (await res.json()) as { url?: string; error?: string };
+      if (!res.ok || !json.url) throw new Error(json.error || "Erreur d'upload.");
+      onChange(json.url);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erreur d'upload.");
+    } finally {
+      setUploading(false);
+      e.target.value = "";
+    }
+  }
+
+  return (
+    <div>
+      <span className={LABEL}>{label}</span>
+      {value ? (
+        <div className="mb-2 flex flex-wrap items-center gap-3">
+          <a
+            href={value}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md border border-line px-3 py-1.5 text-xs text-foreground underline-offset-2 hover:underline"
+          >
+            Voir le fichier actuel ↗
+          </a>
+          <button type="button" onClick={() => onChange(null)} className={BTN_SMALL}>
+            Retirer
+          </button>
+        </div>
+      ) : (
+        <p className="mb-2 text-xs text-muted">Aucun fichier pour le moment.</p>
+      )}
+      <input
+        type="file"
+        accept="application/pdf,.doc,.docx"
+        onChange={handleFile}
+        disabled={uploading}
+        aria-label={label}
+        className="block w-full text-xs text-muted file:mr-3 file:cursor-pointer file:rounded-md file:border-0 file:bg-foreground file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-ink"
+      />
+      {uploading ? <p className="mt-1 text-xs text-muted">Envoi en cours…</p> : null}
+      {error ? <p className="mt-1 text-xs text-red-400">{error}</p> : null}
+      <p className="mt-1 text-[10px] text-muted">PDF, DOC ou DOCX — 8 Mo max.</p>
+    </div>
+  );
+}
+
 export function moveInList<T>(list: T[], index: number, dir: -1 | 1): T[] {
   const target = index + dir;
   if (target < 0 || target >= list.length) return list;

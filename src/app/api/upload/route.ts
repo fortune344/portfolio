@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { adminEnabled, isAuthenticated } from "@/lib/auth";
-import { uploadImage } from "@/lib/portfolio-store";
+import { uploadFile, type UploadKind } from "@/lib/portfolio-store";
 
-/** Upload d'une image de projet (protégé par session admin). */
+/** Upload d'un fichier image ou document (protégé par session admin). */
 
 export const dynamic = "force-dynamic";
 
@@ -18,10 +18,12 @@ export async function POST(request: Request) {
   }
 
   let file: File | null = null;
+  let kind: UploadKind = "image";
   try {
     const form = await request.formData();
     const entry = form.get("file");
     file = entry instanceof File ? entry : null;
+    if (form.get("kind") === "document") kind = "document";
   } catch {
     return NextResponse.json({ error: "Requête invalide." }, { status: 400 });
   }
@@ -31,7 +33,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const url = await uploadImage(file);
+    const url = await uploadFile(file, kind);
     return NextResponse.json({ url });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erreur d'upload.";

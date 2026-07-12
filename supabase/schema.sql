@@ -13,7 +13,7 @@ create table if not exists public.portfolio (
 -- service role, utilisée uniquement côté serveur par le site.
 alter table public.portfolio enable row level security;
 
--- 2) Bucket de stockage public pour les images de projets.
+-- 2) Bucket de stockage public pour les images de projets et le CV (PDF).
 insert into storage.buckets (id, name, public)
 values ('portfolio', 'portfolio', true)
 on conflict (id) do nothing;

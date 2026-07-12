@@ -33,6 +33,17 @@ export function Contact({ profile }: { profile: Profile }) {
                   Appelez-moi
                 </a>
               </p>
+              {profile.cvUrl ? (
+                <a
+                  href={profile.cvUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  className="mt-6 inline-flex items-center gap-2 rounded-xl border border-foreground/40 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-foreground hover:text-ink"
+                >
+                  Télécharger mon CV
+                </a>
+              ) : null}
             </div>
           </Reveal>
 

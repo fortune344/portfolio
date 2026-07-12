@@ -7,6 +7,7 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
+import { Download } from "lucide-react";
 import { useRef } from "react";
 import type { Profile } from "@/data/portfolio";
 
@@ -63,6 +64,17 @@ export function Hero({ profile }: { profile: Profile }) {
           Me contacter
         </a>
         <nav className="flex items-center gap-5 text-sm font-medium sm:gap-8">
+          {profile.cvUrl ? (
+            <a
+              href={profile.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="hidden transition-opacity hover:opacity-70 sm:inline"
+            >
+              CV
+            </a>
+          ) : null}
           <a
             href={profile.github}
             target="_blank"
@@ -159,13 +171,27 @@ export function Hero({ profile }: { profile: Profile }) {
         animate="visible"
         className="z-10 grid gap-3 p-5 text-sm leading-relaxed sm:grid-cols-2 sm:gap-10 sm:p-8"
       >
-        <p className="max-w-sm">
-          {profile.statusLine}{" "}
-          <a href={profile.statusLink.href} className="link-underline">
-            {profile.statusLink.label}
-          </a>
-          .
-        </p>
+        <div className="max-w-sm space-y-4">
+          <p>
+            {profile.statusLine}{" "}
+            <a href={profile.statusLink.href} className="link-underline">
+              {profile.statusLink.label}
+            </a>
+            .
+          </p>
+          {profile.cvUrl ? (
+            <a
+              href={profile.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="inline-flex items-center gap-2 rounded-xl bg-foreground px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              <Download size={15} />
+              Télécharger mon CV
+            </a>
+          ) : null}
+        </div>
         <p className="max-w-sm text-muted sm:justify-self-end sm:text-right sm:text-foreground">
           {profile.focusLine}
         </p>

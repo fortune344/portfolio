@@ -55,33 +55,52 @@ export async function savePortfolio(content: PortfolioData): Promise<void> {
   await fs.writeFile(LOCAL_JSON, JSON.stringify(content, null, 2) + "\n", "utf-8");
 }
 
-const IMAGE_TYPES: Record<string, string> = {
-  "image/png": "png",
-  "image/jpeg": "jpg",
-  "image/webp": "webp",
-  "image/gif": "gif",
+export type UploadKind = "image" | "document";
+
+const ACCEPTED: Record<UploadKind, { types: Record<string, string>; label: string; maxBytes: number; folder: string }> = {
+  image: {
+    types: { "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "image/gif": "gif" },
+    label: "PNG, JPEG, WebP ou GIF",
+    maxBytes: 4 * 1024 * 1024, // 4 Mo
+    folder: "projets",
+  },
+  document: {
+    types: {
+      "application/pdf": "pdf",
+      "application/msword": "doc",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "docx",
+    },
+    label: "PDF, DOC ou DOCX",
+    maxBytes: 8 * 1024 * 1024, // 8 Mo
+    folder: "documents",
+  },
 };
 
-export const MAX_IMAGE_BYTES = 4 * 1024 * 1024; // 4 Mo
+export const MAX_IMAGE_BYTES = ACCEPTED.image.maxBytes;
 
-/** Enregistre une image et retourne son URL publique. */
-export async function uploadImage(file: File): Promise<string> {
-  const ext = IMAGE_TYPES[file.type];
+/**
+ * Enregistre un fichier (image ou document) et retourne son URL publique.
+ * Stocké dans Supabase Storage, ou dans public/uploads en développement local.
+ */
+export async function uploadFile(file: File, kind: UploadKind = "image"): Promise<string> {
+  const rules = ACCEPTED[kind];
+  const ext = rules.types[file.type];
   if (!ext) {
-    throw new Error("Format non supporté (PNG, JPEG, WebP ou GIF uniquement).");
+    throw new Error(`Format non supporté (${rules.label} uniquement).`);
   }
-  if (file.size > MAX_IMAGE_BYTES) {
-    throw new Error("Image trop lourde (4 Mo maximum).");
+  if (file.size > rules.maxBytes) {
+    const mb = Math.round(rules.maxBytes / (1024 * 1024));
+    throw new Error(`Fichier trop lourd (${mb} Mo maximum).`);
   }
 
-  const base = (file.name.replace(/\.[^.]*$/, "") || "image")
+  const base = (file.name.replace(/\.[^.]*$/, "") || kind)
     .toLowerCase()
     .normalize("NFD")
     .replace(/\p{M}/gu, "")
     .replace(/[^a-z0-9-]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 40);
-  const filename = `${Date.now()}-${base || "image"}.${ext}`;
+  const filename = `${Date.now()}-${base || kind}.${ext}`;
   const buffer = Buffer.from(await file.arrayBuffer());
 
   const configError = supabaseConfigError();
@@ -89,7 +108,7 @@ export async function uploadImage(file: File): Promise<string> {
 
   const supabase = getSupabase();
   if (supabase) {
-    const objectPath = `projets/${filename}`;
+    const objectPath = `${rules.folder}/${filename}`;
     const { error } = await supabase.storage
       .from(STORAGE_BUCKET)
       .upload(objectPath, buffer, { contentType: file.type, upsert: false });
@@ -113,4 +132,9 @@ export async function uploadImage(file: File): Promise<string> {
   await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(path.join(dir, filename), buffer);
   return `/uploads/${filename}`;
+}
+
+/** Alias historique (upload d'image de projet). */
+export function uploadImage(file: File): Promise<string> {
+  return uploadFile(file, "image");
 }

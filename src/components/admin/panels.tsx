@@ -2,6 +2,7 @@
 
 import {
   Briefcase,
+  FileDown,
   FileText,
   FolderGit2,
   GraduationCap,
@@ -20,6 +21,7 @@ import {
   BTN_PRIMARY,
   BTN_SMALL,
   Field,
+  FileField,
   ImageField,
   INPUT,
   LABEL,
@@ -76,7 +78,7 @@ function ModalFooter({
 /* ═══════════════════════════ PROFIL ═══════════════════════════ */
 /* Cartes thématiques : Identité, Coordonnées, Hero. */
 
-type ProfileCard = "identite" | "contact" | "hero" | null;
+type ProfileCard = "identite" | "contact" | "hero" | "cv" | null;
 
 export function ProfilePanel({ data, setData }: PanelProps) {
   const [open, setOpen] = useState<ProfileCard>(null);
@@ -90,6 +92,7 @@ export function ProfilePanel({ data, setData }: PanelProps) {
         <Card icon={User} title="Identité" subtitle={`${profile.name} — ${profile.role}`} onClick={() => setOpen("identite")} />
         <Card icon={MapPin} title="Coordonnées & réseaux" subtitle={profile.email} onClick={() => setOpen("contact")} />
         <Card icon={FileText} title="Textes du Hero" subtitle="Disponibilité, phrases d'accroche" onClick={() => setOpen("hero")} />
+        <Card icon={FileDown} title="CV téléchargeable" subtitle={profile.cvUrl ? "CV en ligne — cliquez pour gérer" : "Aucun CV — cliquez pour en ajouter un"} onClick={() => setOpen("cv")} />
       </CardGrid>
 
       <Modal open={open === "identite"} title="Identité" onClose={() => setOpen(null)} footer={<ModalFooter onClose={() => setOpen(null)} />}>
@@ -120,6 +123,14 @@ export function ProfilePanel({ data, setData }: PanelProps) {
           <Field label="Cible du lien (#contact, URL…)" value={profile.statusLink.href} onChange={(v) => patch({ statusLink: { ...profile.statusLink, href: v } })} />
         </div>
         <Field label="Texte en bas à droite" value={profile.focusLine} onChange={(v) => patch({ focusLine: v })} textarea />
+      </Modal>
+
+      <Modal open={open === "cv"} title="CV téléchargeable" subtitle="Le bouton « Télécharger mon CV » n'apparaît sur le site que si un fichier est présent." onClose={() => setOpen(null)} footer={<ModalFooter onClose={() => setOpen(null)} />}>
+        <FileField label="Fichier du CV (PDF recommandé)" value={profile.cvUrl} onChange={(url) => patch({ cvUrl: url })} />
+        <p className="text-xs leading-relaxed text-muted">
+          Après avoir choisi un fichier, ferme cette fenêtre puis clique sur
+          <span className="text-foreground"> Enregistrer</span> en haut pour publier.
+        </p>
       </Modal>
     </>
   );

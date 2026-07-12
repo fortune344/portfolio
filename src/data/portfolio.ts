@@ -21,6 +21,8 @@ export type Profile = {
   githubUser: string;
   linkedin: string;
   availability: string;
+  /** URL du CV téléchargeable (PDF). Vide = bouton masqué. */
+  cvUrl?: string | null;
   /** Texte du coin inférieur gauche du hero. */
   statusLine: string;
   statusLink: { label: string; href: string };

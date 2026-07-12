@@ -4,30 +4,31 @@
     "firstName": "Fortune",
     "lastName": "Assouan",
     "initials": "FA",
-    "role": "Data Analyst & DÃ©veloppeur IT",
-    "location": "LomÃ©, Togo",
+    "role": "Data Analyst & Développeur IT",
+    "location": "Lomé, Togo",
     "email": "fortune.assouan@lomebs.com",
     "phone": "+228 96 03 34 86",
     "phoneHref": "tel:+22896033486",
     "github": "https://github.com/fortune344",
     "githubUser": "fortune344",
-    "linkedin": "https://www.linkedin.com/in/fortunÃ©-assouan-a29561a74",
+    "linkedin": "https://www.linkedin.com/in/fortuné-assouan-a29561a74",
     "availability": "Disponible pour un stage en Data",
-    "statusLine": "Ã‰tudiant en Bachelor 2 SystÃ¨mes d'Information Ã  LomÃ© Business School,",
+    "cvUrl": null,
+    "statusLine": "Étudiant en Bachelor 2 Systèmes d'Information à Lomé Business School,",
     "statusLink": {
       "label": "disponible pour un stage en Data",
       "href": "#contact"
     },
-    "focusLine": "PassionnÃ© par les donnÃ©es et les interfaces, basÃ© Ã  LomÃ©, Togo.",
+    "focusLine": "Passionné par les données et les interfaces, basé à Lomé, Togo.",
     "manifesto": [
-      "J'analyse les donnÃ©es,",
-      "rÃ©vÃ¨le les tendances,",
-      "Ã©claire les dÃ©cisions."
+      "J'analyse les données,",
+      "révèle les tendances,",
+      "éclaire les décisions."
     ],
     "bio": [
-      "Ã‰tudiant en Bachelor 2 SystÃ¨mes d'Information Ã  LomÃ© Business School, je suis passionnÃ© par l'analyse de donnÃ©es, les bases de donnÃ©es et le dÃ©veloppement web.",
-      "Je conÃ§ois des projets concrets avec Python, SQL, Excel et Power BI pour transformer des donnÃ©es brutes en informations exploitables â€” du nettoyage de datasets Ã  la crÃ©ation de tableaux de bord interactifs, en passant par des applications web complÃ¨tes avec Django.",
-      "Je suis Ã  la recherche d'un stage ou d'une premiÃ¨re expÃ©rience professionnelle dans le domaine de la Data."
+      "Étudiant en Bachelor 2 Systèmes d'Information à Lomé Business School, je suis passionné par l'analyse de données, les bases de données et le développement web.",
+      "Je conçois des projets concrets avec Python, SQL, Excel et Power BI pour transformer des données brutes en informations exploitables — du nettoyage de datasets à la création de tableaux de bord interactifs, en passant par des applications web complètes avec Django.",
+      "Je suis à la recherche d'un stage ou d'une première expérience professionnelle dans le domaine de la Data."
     ]
   },
   "skillGroups": [
@@ -40,23 +41,23 @@
         "Matplotlib",
         "Power BI",
         "Excel (TCD, graphiques)",
-        "Nettoyage de donnÃ©es",
-        "Visualisation de donnÃ©es"
+        "Nettoyage de données",
+        "Visualisation de données"
       ]
     },
     {
-      "title": "Bases de donnÃ©es",
+      "title": "Bases de données",
       "skills": [
         "SQL Server",
         "MySQL",
         "phpMyAdmin",
-        "ModÃ©lisation relationnelle",
-        "RequÃªtes avancÃ©es (JOIN, GROUP BY)",
-        "Contraintes d'intÃ©gritÃ©"
+        "Modélisation relationnelle",
+        "Requêtes avancées (JOIN, GROUP BY)",
+        "Contraintes d'intégrité"
       ]
     },
     {
-      "title": "DÃ©veloppement web",
+      "title": "Développement web",
       "skills": [
         "Python (Django)",
         "HTML / CSS",
@@ -66,7 +67,7 @@
       ]
     },
     {
-      "title": "Outils & MÃ©thodes",
+      "title": "Outils & Méthodes",
       "skills": [
         "Git",
         "GitHub",
@@ -78,21 +79,23 @@
   ],
   "projects": [
     {
-      "title": "DÃ©tection de fraude â€” INTELO 2026",
-      "description": "Pipeline de dÃ©tection de transactions frauduleuses dÃ©veloppÃ© en hackathon : exploration du dataset, feature engineering et modÃ¨le de classification en Python.",
+      "title": "Détection de fraude — INTELO 2026",
+      "description": "Pipeline de détection de transactions frauduleuses développé en hackathon : exploration du dataset, feature engineering et modèle de classification en Python.",
       "tags": [
         "Python",
         "Pandas",
         "Machine Learning"
       ],
       "github": "https://github.com/fortune344/fraud-challenge",
+      "liveUrl": null,
+      "image": null,
       "category": "Data",
       "featured": true,
       "screen": "terminal"
     },
     {
       "title": "GestionPro",
-      "description": "Plateforme web collaborative de suivi de projets et de tÃ¢ches : tableau Kanban, invitations par e-mail, notifications et gestion des utilisateurs. Interface responsive avec Tailwind CSS.",
+      "description": "Plateforme web collaborative de suivi de projets et de tâches : tableau Kanban, invitations par e-mail, notifications et gestion des utilisateurs. Interface responsive avec Tailwind CSS.",
       "tags": [
         "Django",
         "Python",
@@ -100,13 +103,15 @@
         "Tailwind CSS"
       ],
       "github": "https://github.com/fortune344/GestionPro",
+      "liveUrl": null,
+      "image": null,
       "category": "Web",
       "featured": true,
       "screen": "kanban"
     },
     {
       "title": "Tableau de bord Power BI",
-      "description": "Conception d'un tableau de bord d'analyse avec indicateurs de performance, visualisations dynamiques, filtres et segments pour l'exploration des donnÃ©es.",
+      "description": "Conception d'un tableau de bord d'analyse avec indicateurs de performance, visualisations dynamiques, filtres et segments pour l'exploration des données.",
       "tags": [
         "Power BI",
         "DAX",
@@ -114,19 +119,23 @@
         "Data Viz"
       ],
       "github": "https://github.com/fortune344/Projet_Tableau_de_Bord_Kin",
+      "liveUrl": null,
+      "image": null,
       "category": "Data",
       "featured": true,
       "screen": "chart"
     },
     {
       "title": "Gestion commerciale SQL Server",
-      "description": "ModÃ©lisation d'une base relationnelle complÃ¨te : tables, clÃ©s Ã©trangÃ¨res, contraintes d'intÃ©gritÃ© et requÃªtes SQL pour la gestion des clients, produits et commandes.",
+      "description": "Modélisation d'une base relationnelle complète : tables, clés étrangères, contraintes d'intégrité et requêtes SQL pour la gestion des clients, produits et commandes.",
       "tags": [
         "SQL Server",
         "T-SQL",
-        "ModÃ©lisation"
+        "Modélisation"
       ],
       "github": "https://github.com/fortune344/SQL_PROJET",
+      "liveUrl": null,
+      "image": null,
       "category": "Data",
       "featured": true,
       "screen": "table"
@@ -140,45 +149,53 @@
         "Matplotlib"
       ],
       "github": "https://github.com/fortune344/projet-visualisation-iris-python",
+      "liveUrl": null,
+      "image": null,
       "category": "Data",
       "featured": true,
       "screen": "chart"
     },
     {
       "title": "VoiceTranslate",
-      "description": "Application Windows de traduction vocale franÃ§ais â†” anglais en temps rÃ©el, basÃ©e sur la reconnaissance vocale Google Speech et Argos Translate.",
+      "description": "Application Windows de traduction vocale français ↔ anglais en temps réel, basée sur la reconnaissance vocale Google Speech et Argos Translate.",
       "tags": [
         "Python",
         "Speech-to-Text",
         "Desktop"
       ],
       "github": "https://github.com/fortune344/VoiceTranslate",
+      "liveUrl": null,
+      "image": null,
       "category": "Outil",
       "featured": true,
       "screen": "terminal"
     },
     {
       "title": "Allume",
-      "description": "Application mobile de suivi et de signalement des coupures d'Ã©lectricitÃ© au Togo.",
+      "description": "Application mobile de suivi et de signalement des coupures d'électricité au Togo.",
       "tags": [
         "Flutter",
         "Dart",
         "Mobile"
       ],
       "github": "https://github.com/fortune344/allume",
+      "liveUrl": null,
+      "image": null,
       "category": "Mobile",
       "featured": false,
       "screen": "kanban"
     },
     {
-      "title": "Analyse de donnÃ©es commerciales Excel",
-      "description": "Analyse de ventes avec tris, filtres, graphiques et tableaux croisÃ©s dynamiques.",
+      "title": "Analyse de données commerciales Excel",
+      "description": "Analyse de ventes avec tris, filtres, graphiques et tableaux croisés dynamiques.",
       "tags": [
         "Excel",
         "TCD",
         "Analyse"
       ],
       "github": "https://github.com/fortune344/Analyse_Excel",
+      "liveUrl": null,
+      "image": null,
       "category": "Data",
       "featured": false,
       "screen": "table"
@@ -186,49 +203,49 @@
   ],
   "timeline": [
     {
-      "period": "2025 â€” PrÃ©sent",
-      "title": "Bachelor 2 â€” SystÃ¨mes d'Information",
-      "place": "LomÃ© Business School, LomÃ© (Togo)",
-      "description": "Approfondissement en analyse de donnÃ©es, bases de donnÃ©es et dÃ©veloppement web. Projets pratiques en Python, SQL Server, Power BI et Django.",
+      "period": "2025 — Présent",
+      "title": "Bachelor 2 — Systèmes d'Information",
+      "place": "Lomé Business School, Lomé (Togo)",
+      "description": "Approfondissement en analyse de données, bases de données et développement web. Projets pratiques en Python, SQL Server, Power BI et Django.",
       "type": "formation"
     },
     {
       "period": "2026",
-      "title": "Hackathon INTELO 2026 â€” DÃ©tection de fraude",
-      "place": "CompÃ©tition IT",
-      "description": "DÃ©veloppement en Ã©quipe d'un modÃ¨le de dÃ©tection de transactions frauduleuses en Python : un premier dÃ©fi data grandeur nature.",
+      "title": "Hackathon INTELO 2026 — Détection de fraude",
+      "place": "Compétition IT",
+      "description": "Développement en équipe d'un modèle de détection de transactions frauduleuses en Python : un premier défi data grandeur nature.",
       "type": "projet"
     },
     {
-      "period": "DÃ©c. 2025 â€” Mai 2026",
-      "title": "MontÃ©e en compÃ©tences Data",
+      "period": "Déc. 2025 — Mai 2026",
+      "title": "Montée en compétences Data",
       "place": "Projets personnels",
-      "description": "EnchaÃ®nement de projets concrets : analyse de datasets avec Pandas, application Django, base SQL Server et tableau de bord Power BI.",
+      "description": "Enchaînement de projets concrets : analyse de datasets avec Pandas, application Django, base SQL Server et tableau de bord Power BI.",
       "type": "projet"
     },
     {
-      "period": "2024 â€” 2025",
-      "title": "Bachelor 1 â€” SystÃ¨mes d'Information",
-      "place": "LomÃ© Business School, LomÃ© (Togo)",
-      "description": "Fondamentaux des systÃ¨mes d'information : algorithmique, programmation, bases de donnÃ©es et bureautique avancÃ©e.",
+      "period": "2024 — 2025",
+      "title": "Bachelor 1 — Systèmes d'Information",
+      "place": "Lomé Business School, Lomé (Togo)",
+      "description": "Fondamentaux des systèmes d'information : algorithmique, programmation, bases de données et bureautique avancée.",
       "type": "formation"
     },
     {
       "period": "2024",
-      "title": "BaccalaurÃ©at â€” SÃ©rie D",
-      "place": "CEG HouÃ©gbo (BÃ©nin)",
-      "description": "Obtention du baccalaurÃ©at scientifique, point de dÃ©part de mon orientation vers l'informatique et la data.",
+      "title": "Baccalauréat — Série D",
+      "place": "CEG Houégbo (Bénin)",
+      "description": "Obtention du baccalauréat scientifique, point de départ de mon orientation vers l'informatique et la data.",
       "type": "formation"
     }
   ],
   "languages": [
     {
-      "name": "FranÃ§ais",
+      "name": "Français",
       "level": "Excellent"
     },
     {
       "name": "Anglais",
-      "level": "IntermÃ©diaire"
+      "level": "Intermédiaire"
     },
     {
       "name": "Fon",
@@ -239,6 +256,6 @@
     "Lecture",
     "Cuisine",
     "Sport",
-    "Jeux vidÃ©o"
+    "Jeux vidéo"
   ]
 }
