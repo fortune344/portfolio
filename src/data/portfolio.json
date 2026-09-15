@@ -1,115 +1,86 @@
 {
   "profile": {
+    "bio": [
+      "Etudiant en Bachelor 2 Systèmes d'Information à Lomé Business School, je suis passionné par l'analyse de données, les bases de données et le développement web.",
+      "Je conçois des projets concrets avec Python, SQL, Excel et Power BI pour transformer des donnés brutes en informations exploitables et du nettoyage de datasets à la création de tableaux de bord interactifs, en passant par des applications web complètes avec Django.",
+      "Je suis à la recherche d'un stage ou d'une première expérience professionnelle dans le domaine de la Data."
+    ],
     "name": "Fortune Assouan",
-    "firstName": "Fortune",
-    "lastName": "Assouan",
-    "initials": "FA",
-    "role": "Consultant BI & Analytics",
-    "location": "Lomé, Togo",
+    "role": "Data Analyst & Developpeur IT",
+    "cvUrl": "/cv/Fortune-Assouan-CV-Consultant-BI-Analytics.pdf",
     "email": "fortune.assouan@lomebs.com",
     "phone": "+228 96 03 34 86",
-    "phoneHref": "tel:+22896033486",
     "github": "https://github.com/fortune344",
-    "githubUser": "fortune344",
+    "initials": "FA",
+    "lastName": "Assouan",
     "linkedin": "https://www.linkedin.com/in/fortune-assouan-a29561a74",
-    "availability": "Disponible en freelance & télétravail",
-    "cvUrl": "/cv/Fortune-Assouan-CV-Consultant-BI-Analytics.pdf",
-    "statusLine": "Consultant BI & Analytics et étudiant en Systèmes d'Information à Lomé Business School,",
-    "statusLink": {
-      "label": "disponible en freelance et à distance",
-      "href": "#contact"
-    },
-    "focusLine": "De la question business à la recommandation chiffrée : cadrage des KPI, fiabilisation des données, tableaux de bord Power BI orientés décision.",
+    "location": "Lomé, Togo",
+    "firstName": "Fortune",
+    "focusLine": "",
     "manifesto": [
-      "Je cadre les questions,",
-      "fiabilise les données,",
-      "éclaire les décisions."
+      "J'analyse les données,",
+      "révèle les tendances,",
+      "eclaire les décisions."
     ],
-    "bio": [
-      "Analyste data spécialisé en business intelligence, je couvre la chaîne complète : cadrage des questions business et définition des KPI avec les équipes, préparation et contrôle qualité des données (SQL, Python, Excel), puis construction de tableaux de bord Power BI multi-pages orientés décision.",
-      "Mes analyses aboutissent à des recommandations chiffrées, pas à une accumulation de graphiques. En parallèle de ma Licence en Systèmes d'Information à Lomé Business School, je mène deux stages en data analytics — AnalystLab Africa et Codveda Technology — ainsi qu'une mission data au Ministère du Tourisme, de la Culture et des Arts.",
-      "Disponible en freelance et à distance pour vos missions Power BI, KPI et qualité des données — et ouvert à un stage ou une première expérience en Data."
-    ]
+    "phoneHref": "tel:+22896033486",
+    "githubUser": "fortune344",
+    "statusLine": "Etudiant en Bachelor 2 Systèmes d'Information à Lomé Business School,",
+    "statusLink": {
+      "href": "#contact",
+      "label": "disponible pour un stage "
+    },
+    "availability": "Disponible pour un stage en Data"
   },
   "skillGroups": [
     {
-      "title": "BI & Dataviz",
+      "title": "Data & Analyse",
       "skills": [
-        "Power BI",
-        "Power Query",
-        "Modélisation de données",
-        "Mesures DAX",
-        "Dashboards multi-pages",
-        "Slicers synchronisés",
-        "Définition et suivi de KPI",
-        "Reporting exécutif orienté décision"
-      ]
-    },
-    {
-      "title": "Préparation & qualité des données",
-      "skills": [
-        "SQL Server",
-        "MySQL",
-        "T-SQL (JOIN · GROUP BY · agrégats)",
-        "Modélisation relationnelle",
-        "Nettoyage et transformation",
-        "Contrôles de complétude et de cohérence",
-        "Documentation des jeux de données"
-      ]
-    },
-    {
-      "title": "Python",
-      "skills": [
+        "Python",
         "Pandas",
         "NumPy",
         "Matplotlib",
-        "Seaborn",
-        "Analyse exploratoire",
-        "Automatisation des traitements",
-        "Feature engineering"
+        "Power BI",
+        "Excel (TCD, graphiques)",
+        "Nettoyage de données",
+        "Visualisation de données"
       ]
     },
     {
-      "title": "Tableur",
+      "title": "Bases de données",
       "skills": [
-        "Excel",
-        "Google Sheets",
-        "Tableaux croisés dynamiques",
-        "Formules avancées",
-        "Analyses commerciales"
+        "SQL Server",
+        "MySQL",
+        "phpMyAdmin",
+        "Modélisation relationnelle",
+        "Requêtes avancées (JOIN, GROUP BY)",
+        "Contraintes d'intégrité"
       ]
     },
     {
-      "title": "Outils & Web",
+      "title": "Développement web",
       "skills": [
-        "Git / GitHub",
+        "Python (Django)",
+        "HTML / CSS",
+        "JavaScript",
+        "Tailwind CSS",
+        "Interfaces responsives"
+      ]
+    },
+    {
+      "title": "Outils & Méthodes",
+      "skills": [
+        "Git",
+        "GitHub",
         "VS Code",
-        "Django",
-        "HTML / CSS / JavaScript",
-        "Supabase"
+        "Word",
+        "PowerPoint"
       ]
     }
   ],
   "projects": [
     {
-      "title": "HealthConnect — Rendez-vous & absences",
-      "description": "Analyse des rendez-vous médicaux pour réduire les absences : définition des KPI (taux de no-show, taux de rappel, récurrence des absences) et contrôle qualité en amont, puis dashboard Power BI isolant les facteurs d'absence — rappels envoyés, distance, délai de réservation, type de rendez-vous.",
-      "tags": [
-        "Power BI",
-        "DAX",
-        "KPI",
-        "Qualité des données"
-      ],
-      "github": "https://github.com/fortune344/HealthConnect-Healthcare-Appointment-Analytics",
-      "liveUrl": null,
-      "image": null,
-      "category": "Data",
-      "featured": true,
-      "screen": "chart"
-    },
-    {
       "title": "Superstore Advanced Profitability Investigation",
-      "description": "Une investigation orientée décision pour comprendre pourquoi certaines ventes génèrent du chiffre d'affaires sans générer de profit : impact des remises sur la marge, catégories structurellement déficitaires, performance par produit et par région.",
+      "description": "Une investigation orientée décision pour comprendre pourquoi certaines ventes génèrent du chiffre d'affaires sans générer de profit.",
       "tags": [
         "Power BI",
         "DAX",
@@ -125,7 +96,7 @@
     },
     {
       "title": "Superstore Business Performance Analysis",
-      "description": "Dashboard Power BI multi-pages d'analyse de la performance commerciale et de la rentabilité de Global Superstore : ventes, marges, produits et régions, avec slicers synchronisés, pensé pour un décideur et non pour un analyste.",
+      "description": "Analyse de la performance commerciale et de la rentabilité",
       "tags": [
         "Power BI",
         "DAX",
@@ -142,7 +113,7 @@
     },
     {
       "title": "Telco Customer Churn Analysis Dashboard",
-      "description": "Analyse de bout en bout du jeu Telco Customer Churn pour identifier les facteurs de désabonnement : nettoyage et exploration avec Pandas, segmentation par type de contrat, charges et service internet, visualisation des profils à risque, puis dashboard Power BI.",
+      "description": "Un projet d'analyse de données de bout en bout visant à identifier les facteurs clés à l'origine du taux de désabonnement des clients dans une entreprise de télécommunications, à l'aide de Python, Pandas et Power BI.",
       "tags": [
         "Python",
         "Pandas",
@@ -158,7 +129,7 @@
       "screen": "chart"
     },
     {
-      "title": "Détection de fraude — INTELO 2026",
+      "title": "Détection de fraude à INTELO 2026",
       "description": "Pipeline de détection de transactions frauduleuses développé en hackathon : exploration du dataset, feature engineering et modèle de classification en Python.",
       "tags": [
         "Python",
@@ -170,7 +141,7 @@
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783105995793-fraude.png",
       "category": "Data",
       "featured": true,
-      "screen": "terminal"
+      "screen": "chart"
     },
     {
       "title": "Tableau de bord Power BI",
@@ -206,7 +177,7 @@
     },
     {
       "title": "Gestion commerciale SQL Server",
-      "description": "Modélisation relationnelle complète (tables, clés étrangères, contraintes d'intégrité) et requêtes d'agrégation T-SQL pour l'analyse de l'activité : clients, produits et commandes.",
+      "description": "Modélisation d'une base relationnelle complète : tables, clées Etrangères, contraintes d'intégrité et requêtes SQL pour la gestion des clients, produits et commandes.",
       "tags": [
         "SQL Server",
         "T-SQL",
@@ -236,7 +207,7 @@
     },
     {
       "title": "VoiceTranslate",
-      "description": "Application Windows de traduction vocale français ↔ anglais en temps réel, basée sur la reconnaissance vocale Google Speech et Argos Translate.",
+      "description": "Application Windows de traduction vocale français en anglais en temps réel, basé sur la reconnaissance vocale Google Speech et Argos Translate.",
       "tags": [
         "Python",
         "Speech-to-Text",
@@ -255,7 +226,7 @@
       "tags": [
         "Excel",
         "TCD",
-        "Formules"
+        "Formule Excel"
       ],
       "github": "https://github.com/fortune344/Analyse_Excel",
       "liveUrl": null,
@@ -263,86 +234,49 @@
       "category": "Data",
       "featured": true,
       "screen": "table"
-    },
-    {
-      "title": "Travaux de stage Codveda — Data Analytics",
-      "description": "Nettoyage et préparation de données, analyse exploratoire et modélisation : l'ensemble des travaux du stage, documentés et versionnés.",
-      "tags": [
-        "Python",
-        "Pandas",
-        "Matplotlib",
-        "Seaborn"
-      ],
-      "github": "https://github.com/fortune344/Codveda-data-analytics-internship",
-      "liveUrl": null,
-      "image": null,
-      "category": "Data",
-      "featured": false,
-      "screen": "terminal"
     }
   ],
   "timeline": [
     {
-      "period": "Sept. 2026 — Présent",
-      "title": "Stagiaire Data Analytics",
-      "place": "Codveda Technology — à distance",
-      "description": "Programme en trois niveaux : nettoyage et préparation de données, analyse exploratoire, puis modélisation. Travaux réalisés en Python (Pandas, Matplotlib, Seaborn), documentés et versionnés sur GitHub.",
-      "type": "experience"
-    },
-    {
-      "period": "Août 2026 — Présent",
-      "title": "Stagiaire Data Analytics",
-      "place": "AnalystLab Africa",
-      "description": "Programme intensif à livrable hebdomadaire : KPI, mesures DAX et dashboards Power BI multi-pages à slicers synchronisés sur des ventes multi-marchés. Analyse de l'impact des remises sur la marge, contrôle qualité en amont et synthèses exécutives bilingues FR / EN.",
-      "type": "experience"
-    },
-    {
-      "period": "2026 — Présent",
-      "title": "Stagiaire Data & Digital",
-      "place": "Ministère du Tourisme, de la Culture et des Arts",
-      "description": "Collecte, connexion et consolidation de sources hétérogènes du secteur touristique ; fiabilisation et documentation des jeux de données ; analyse des tendances et digitalisation du pilotage de l'information.",
-      "type": "experience"
-    },
-    {
-      "period": "2026",
-      "title": "Hackathon INTELO 2026 — Détection de fraude",
-      "place": "Compétition IT",
-      "description": "Développement en équipe d'un modèle de détection de transactions frauduleuses en Python : un premier défi data grandeur nature.",
-      "type": "projet"
-    },
-    {
-      "period": "2025 — Présent",
-      "title": "Licence Systèmes d'Information — 2e année",
+      "period": "2025 à Présent",
+      "title": "Bachelor 2  Systèmes d'Information",
       "place": "Lomé Business School, Lomé (Togo)",
       "description": "Approfondissement en analyse de données, bases de données et développement web. Projets pratiques en Python, SQL Server, Power BI et Django.",
       "type": "formation"
     },
     {
-      "period": "Déc. 2025 — Mai 2026",
-      "title": "Montée en compétences Data",
-      "place": "Projets personnels",
-      "description": "Enchaînement de projets concrets : analyse de datasets avec Pandas, application Django, base SQL Server et tableau de bord Power BI.",
+      "period": "2026",
+      "title": "Hackathon INTELO 2026  Détection de fraude",
+      "place": "Compétition IT",
+      "description": "Développement d'un modèle de détection de transactions frauduleuses en Python :  défi grandeur nature.",
       "type": "projet"
     },
     {
-      "period": "2024 — 2025",
-      "title": "Licence Systèmes d'Information — 1re année",
+      "period": "Décembre 2025 à Mai 2026",
+      "title": "Monté en compétences Data",
+      "place": "Projets personnels",
+      "description": "Enchainement de projets concrets : analyse de datasets avec Pandas, application Django, base SQL Server et tableau de bord Power BI.",
+      "type": "projet"
+    },
+    {
+      "period": "2024 à 2025",
+      "title": "Bachelor 1  Systèmes d'Information",
       "place": "Lomé Business School, Lomé (Togo)",
-      "description": "Fondamentaux des systèmes d'information : algorithmique, programmation, bases de données et bureautique avancée.",
+      "description": "Fondamentaux des systèmes d'information : algorithmique, programmation, bases de donnéés et bureautique avancé.",
       "type": "formation"
     },
     {
       "period": "2024",
-      "title": "Baccalauréat — Série D",
+      "title": "Baccalauréat  Série D",
       "place": "CEG Houègbo (Bénin)",
-      "description": "Obtention du baccalauréat scientifique, point de départ de mon orientation vers l'informatique et la data.",
+      "description": "Obtention du baccalauréat scientifique, point de départ de mon orientation vers l'informatique.",
       "type": "formation"
     }
   ],
   "languages": [
     {
       "name": "Français",
-      "level": "Courant"
+      "level": "Excellent"
     },
     {
       "name": "Anglais",
