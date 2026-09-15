@@ -1,12 +1,11 @@
 {
   "profile": {
     "bio": [
-      "Etudiant en Bachelor 2 Systèmes d'Information à Lomé Business School, je suis passionné par l'analyse de données, les bases de données et le développement web.",
-      "Je conçois des projets concrets avec Python, SQL, Excel et Power BI pour transformer des donnés brutes en informations exploitables et du nettoyage de datasets à la création de tableaux de bord interactifs, en passant par des applications web complètes avec Django.",
-      "Je suis à la recherche d'un stage ou d'une première expérience professionnelle dans le domaine de la Data."
+      "Etudiant en Bachelor 2 Systèmes d'Information à Lomé Business School, je travaille sur l'analyse de données, les bases de données et le développement web.",
+      "Je conçois des projets concrets avec Python, SQL, Excel et Power BI pour transformer des donnés brutes en informations exploitables et du nettoyage de datasets à la création de tableaux de bord interactifs, en passant par des applications web complètes avec Django."
     ],
     "name": "Fortune Assouan",
-    "role": "Data Analyst & Developpeur IT",
+    "role": "Consultant BI & Analytics · Développeur web",
     "cvUrl": "/cv/Fortune-Assouan-CV-Consultant-BI-Analytics.pdf",
     "email": "fortune.assouan@lomebs.com",
     "phone": "+228 96 03 34 86",
@@ -17,19 +16,14 @@
     "location": "Lomé, Togo",
     "firstName": "Fortune",
     "focusLine": "",
-    "manifesto": [
-      "J'analyse les données,",
-      "révèle les tendances,",
-      "eclaire les décisions."
-    ],
     "phoneHref": "tel:+22896033486",
     "githubUser": "fortune344",
-    "statusLine": "Etudiant en Bachelor 2 Systèmes d'Information à Lomé Business School,",
+    "statusLine": "Étudiant en Systèmes d'Information à Lomé Business School, actuellement en stage Data Analytics,",
     "statusLink": {
-      "href": "#contact",
-      "label": "disponible pour un stage "
+      "label": "disponible en freelance",
+      "href": "#contact"
     },
-    "availability": "Disponible pour un stage en Data"
+    "availability": "Disponible en freelance"
   },
   "skillGroups": [
     {

@@ -27,7 +27,7 @@ const isProduction = process.env.NODE_ENV === "production";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Fortune Assouan — Consultant BI & Analytics",
+    default: "Fortune Assouan — Consultant BI & Analytics · Développeur web",
     template: "%s — Fortune Assouan",
   },
   description:
@@ -56,13 +56,13 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: siteUrl,
     siteName: "Fortune Assouan — Portfolio",
-    title: "Fortune Assouan — Consultant BI & Analytics",
+    title: "Fortune Assouan — Consultant BI & Analytics · Développeur web",
     description:
       "Power BI, KPI et qualité des données : de la question business à la recommandation chiffrée. Consultant BI & Analytics à Lomé, disponible en freelance et à distance.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fortune Assouan — Consultant BI & Analytics",
+    title: "Fortune Assouan — Consultant BI & Analytics · Développeur web",
     description:
       "Power BI, KPI et qualité des données : de la question business à la recommandation chiffrée.",
   },
@@ -82,7 +82,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Fortune Assouan",
-  jobTitle: "Consultant BI & Analytics",
+  jobTitle: "Consultant BI & Analytics · Développeur web",
   url: siteUrl,
   email: "mailto:fortune.assouan@lomebs.com",
   address: {

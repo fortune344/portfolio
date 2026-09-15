@@ -9,27 +9,13 @@ type AboutProps = {
 };
 
 /**
- * À propos éditorial : manifeste typographique géant, bio à gauche,
- * compétences en listes à droite.
+ * À propos éditorial : bio à gauche, compétences en listes à droite.
  */
 export function About({ profile, skillGroups, languages, interests }: AboutProps) {
-  const manifesto = profile.manifesto;
-
   return (
     <section id="a-propos" className="scroll-mt-16 px-5 py-24 sm:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
-        {/* Manifeste */}
-        <h2 className="font-display uppercase leading-[0.95] tracking-tight">
-          {manifesto.map((line, i) => (
-            <span key={line} className="block overflow-hidden">
-              <Reveal from="bottom" delay={i * 0.1} distance={60} className="block">
-                <span className="block text-[clamp(2.4rem,7.5vw,5.8rem)]">{line}</span>
-              </Reveal>
-            </span>
-          ))}
-        </h2>
-
-        <div className="mt-16 grid gap-14 md:mt-24 md:grid-cols-[1.3fr_1fr] md:gap-20">
+        <div className="grid gap-14 md:grid-cols-[1.3fr_1fr] md:gap-20">
           {/* Bio */}
           <div className="space-y-7">
             {profile.bio.map((paragraph, i) => (

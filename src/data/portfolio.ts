@@ -28,8 +28,6 @@ export type Profile = {
   statusLink: { label: string; href: string };
   /** Texte du coin inférieur droit du hero. */
   focusLine: string;
-  /** Lignes du manifeste géant de la section À propos. */
-  manifesto: string[];
   bio: string[];
 };
 

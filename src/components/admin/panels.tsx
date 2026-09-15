@@ -8,7 +8,6 @@ import {
   GraduationCap,
   Languages as LanguagesIcon,
   MapPin,
-  Quote,
   Rocket,
   Sparkles,
   User,
@@ -138,7 +137,7 @@ export function ProfilePanel({ data, setData }: PanelProps) {
 
 /* ═══════════════════════════ À PROPOS ═══════════════════════════ */
 
-type AboutCard = "manifeste" | "bio" | null;
+type AboutCard = "bio" | null;
 
 export function AboutPanel({ data, setData }: PanelProps) {
   const [open, setOpen] = useState<AboutCard>(null);
@@ -149,27 +148,8 @@ export function AboutPanel({ data, setData }: PanelProps) {
   return (
     <>
       <CardGrid>
-        <Card icon={Quote} title="Manifeste" subtitle={`${profile.manifesto.length} ligne(s) — ${profile.manifesto[0] ?? ""}`} onClick={() => setOpen("manifeste")} />
         <Card icon={FileText} title="Biographie" subtitle={`${profile.bio.length} paragraphe(s)`} onClick={() => setOpen("bio")} />
       </CardGrid>
-
-      <Modal open={open === "manifeste"} title="Manifeste" subtitle="Les grandes lignes affichées en typographie géante" onClose={() => setOpen(null)} footer={<ModalFooter onClose={() => setOpen(null)} />}>
-        <div className="space-y-2">
-          {profile.manifesto.map((line, i) => (
-            <div key={i} className="flex gap-2">
-              <input
-                type="text"
-                value={line}
-                onChange={(e) => patch({ manifesto: profile.manifesto.map((l, j) => (j === i ? e.target.value : l)) })}
-                aria-label={`Ligne ${i + 1} du manifeste`}
-                className={INPUT}
-              />
-              <button type="button" onClick={() => patch({ manifesto: profile.manifesto.filter((_, j) => j !== i) })} className={BTN_SMALL}>✕</button>
-            </div>
-          ))}
-        </div>
-        <button type="button" onClick={() => patch({ manifesto: [...profile.manifesto, ""] })} className={BTN_ADD}>+ Ajouter une ligne</button>
-      </Modal>
 
       <Modal open={open === "bio"} title="Biographie" onClose={() => setOpen(null)} footer={<ModalFooter onClose={() => setOpen(null)} />}>
         <div className="space-y-2">

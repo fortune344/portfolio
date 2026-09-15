@@ -19,8 +19,7 @@ export function Contact({ profile }: { profile: Profile }) {
           <Reveal delay={0.1}>
             <div>
               <p className="max-w-md text-xs font-semibold uppercase leading-loose tracking-[0.2em] text-muted sm:text-sm">
-                Une question, une mission Power BI, un stage ou un projet data
-                à confier ?
+                Une question, une mission ou un projet data à confier ?
               </p>
               <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-bold uppercase tracking-[0.15em]">
                 <a href={`mailto:${profile.email}`} className="link-underline">
