@@ -80,6 +80,36 @@
   ],
   "projects": [
     {
+      "title": "Global Superstore — Dashboard Looker Studio",
+      "description": "TODO — à rédiger",
+      "tags": [
+        "Looker Studio",
+        "KPI",
+        "Data Viz"
+      ],
+      "github": "https://github.com/fortune344/Global-superstore-advanced-powerbi-analysis",
+      "liveUrl": "https://datastudio.google.com/s/sini_qd_KlM",
+      "image": null,
+      "category": "Data",
+      "featured": true,
+      "screen": "chart"
+    },
+    {
+      "title": "HealthConnect — Rendez-vous & absences",
+      "description": "TODO — à rédiger",
+      "tags": [
+        "Power BI",
+        "DAX",
+        "KPI"
+      ],
+      "github": "https://github.com/fortune344/HealthConnect-Healthcare-Appointment-Analytics",
+      "liveUrl": null,
+      "image": null,
+      "category": "Data",
+      "featured": true,
+      "screen": "chart"
+    },
+    {
       "title": "Superstore Advanced Profitability Investigation",
       "description": "Une investigation orientée décision pour comprendre pourquoi certaines ventes génèrent du chiffre d'affaires sans générer de profit.",
       "tags": [
@@ -235,6 +265,21 @@
       "category": "Data",
       "featured": true,
       "screen": "table"
+    },
+    {
+      "title": "Tracking GA4 / Google Tag Manager",
+      "description": "TODO — à rédiger",
+      "tags": [
+        "GTM",
+        "GA4",
+        "Plan de marquage"
+      ],
+      "github": null,
+      "liveUrl": "https://fortuneassouan.vercel.app",
+      "image": null,
+      "category": "Outil",
+      "featured": false,
+      "screen": "terminal"
     }
   ],
   "timeline": [
