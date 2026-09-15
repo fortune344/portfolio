@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Poppins } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -17,6 +18,11 @@ const anton = Anton({
 });
 
 const siteUrl = "https://fortune-assouan.vercel.app";
+
+// Google Tag Manager — chargé uniquement en production (pas en `next dev`)
+// pour ne pas polluer les statistiques avec les visites locales.
+const gtmId = "GTM-WHJH3BZX";
+const isProduction = process.env.NODE_ENV === "production";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -97,7 +103,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${poppins.variable} ${anton.variable}`}>
+      {isProduction && <GoogleTagManager gtmId={gtmId} />}
       <body>
+        {isProduction && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
