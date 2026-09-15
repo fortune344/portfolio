@@ -1,6 +1,6 @@
 # Portfolio — Fortune Assouan
 
-Portfolio personnel : Data Analyst & Développeur IT. Site éditorial sombre
+Portfolio personnel : Consultant BI & Analytics. Site éditorial sombre
 (Next.js) avec panneau d'administration en ligne (Supabase + mot de passe).
 
 ## Stack
@@ -49,6 +49,17 @@ ordre, mise en avant. « Enregistrer » publie immédiatement (revalidation).
 
 Sans ces variables, le site fonctionne quand même (contenu de
 `src/data/portfolio.json`) mais l'admin en ligne est désactivé.
+
+## Synchroniser le contenu avec le repo
+
+Le contenu en ligne vit dans Supabase ; `src/data/portfolio.json` sert de
+valeur par défaut. Deux commandes gardent les deux en phase (elles demandent
+le mot de passe admin) :
+
+```bash
+npm run content:pull   # site en ligne  →  src/data/portfolio.json
+npm run content:push   # src/data/portfolio.json  →  site en ligne
+```
 
 ## Notes
 

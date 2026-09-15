@@ -63,7 +63,7 @@ export type TimelineEntry = {
   title: string;
   place: string;
   description: string;
-  type: "formation" | "projet";
+  type: "experience" | "formation" | "projet";
 };
 
 export type Language = { name: string; level: string };

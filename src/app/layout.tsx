@@ -27,19 +27,24 @@ const isProduction = process.env.NODE_ENV === "production";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Fortune Assouan — Data Analyst & Développeur IT",
+    default: "Fortune Assouan — Consultant BI & Analytics",
     template: "%s — Fortune Assouan",
   },
   description:
-    "Portfolio de Fortune Assouan, étudiant en Bachelor Systèmes d'Information à Lomé Business School. Analyse de données (Python, SQL, Power BI) et développement web (Django). À la recherche d'un stage en Data.",
+    "Portfolio de Fortune Assouan, consultant BI & Analytics à Lomé (Togo) : Power BI, KPI et qualité des données. Cadrage des questions business, préparation des données (SQL, Python, Excel) et tableaux de bord orientés décision. Disponible en freelance et à distance.",
   keywords: [
     "Fortune Assouan",
+    "Consultant BI",
+    "Business Intelligence",
     "Data Analyst",
-    "Développeur IT",
-    "Python",
-    "SQL",
     "Power BI",
-    "Django",
+    "DAX",
+    "Power Query",
+    "KPI",
+    "Qualité des données",
+    "SQL",
+    "Python",
+    "Freelance",
     "Portfolio",
     "Lomé",
     "Togo",
@@ -51,15 +56,15 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: siteUrl,
     siteName: "Fortune Assouan — Portfolio",
-    title: "Fortune Assouan — Data Analyst & Développeur IT",
+    title: "Fortune Assouan — Consultant BI & Analytics",
     description:
-      "Analyse de données (Python, SQL, Power BI) et développement web (Django). Étudiant en Bachelor SI à Lomé Business School, à la recherche d'un stage en Data.",
+      "Power BI, KPI et qualité des données : de la question business à la recommandation chiffrée. Consultant BI & Analytics à Lomé, disponible en freelance et à distance.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fortune Assouan — Data Analyst & Développeur IT",
+    title: "Fortune Assouan — Consultant BI & Analytics",
     description:
-      "Analyse de données (Python, SQL, Power BI) et développement web (Django).",
+      "Power BI, KPI et qualité des données : de la question business à la recommandation chiffrée.",
   },
   robots: {
     index: true,
@@ -77,7 +82,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Fortune Assouan",
-  jobTitle: "Data Analyst / Développeur IT",
+  jobTitle: "Consultant BI & Analytics",
   url: siteUrl,
   email: "mailto:fortune.assouan@lomebs.com",
   address: {
@@ -93,7 +98,17 @@ const jsonLd = {
     "https://github.com/fortune344",
     "https://www.linkedin.com/in/fortuné-assouan-a29561a74",
   ],
-  knowsAbout: ["Python", "SQL", "Power BI", "Pandas", "Django", "Excel"],
+  knowsAbout: [
+    "Power BI",
+    "DAX",
+    "Power Query",
+    "SQL",
+    "Python",
+    "Pandas",
+    "Excel",
+    "Qualité des données",
+    "Business Intelligence",
+  ],
 };
 
 export default function RootLayout({

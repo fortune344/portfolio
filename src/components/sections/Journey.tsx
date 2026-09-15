@@ -2,13 +2,19 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { TimelineEntry } from "@/data/portfolio";
 
+const TYPE_LABELS: Record<TimelineEntry["type"], string> = {
+  experience: "Expérience",
+  formation: "Formation",
+  projet: "Projet",
+};
+
 export function Journey({ timeline }: { timeline: TimelineEntry[] }) {
   return (
     <section id="parcours" className="scroll-mt-16 px-5 py-24 sm:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Parcours"
-          title="Formation & étapes clés"
+          title="Expérience, formation & étapes clés"
         />
 
         <div className="border-t border-line">
@@ -26,7 +32,7 @@ export function Journey({ timeline }: { timeline: TimelineEntry[] }) {
                   </p>
                 </div>
                 <span className="h-fit w-fit rounded-full border border-line px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">
-                  {entry.type === "formation" ? "Formation" : "Projet"}
+                  {TYPE_LABELS[entry.type] ?? "Projet"}
                 </span>
               </article>
             </Reveal>

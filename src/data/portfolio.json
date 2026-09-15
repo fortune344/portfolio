@@ -4,80 +4,159 @@
     "firstName": "Fortune",
     "lastName": "Assouan",
     "initials": "FA",
-    "role": "Data Analyst & Développeur IT",
+    "role": "Consultant BI & Analytics",
     "location": "Lomé, Togo",
     "email": "fortune.assouan@lomebs.com",
     "phone": "+228 96 03 34 86",
     "phoneHref": "tel:+22896033486",
     "github": "https://github.com/fortune344",
     "githubUser": "fortune344",
-    "linkedin": "https://www.linkedin.com/in/fortuné-assouan-a29561a74",
-    "availability": "Disponible pour un stage en Data",
-    "cvUrl": null,
-    "statusLine": "Étudiant en Bachelor 2 Systèmes d'Information à Lomé Business School,",
+    "linkedin": "https://www.linkedin.com/in/fortune-assouan-a29561a74",
+    "availability": "Disponible en freelance & télétravail",
+    "cvUrl": "/cv/Fortune-Assouan-CV-Consultant-BI-Analytics.pdf",
+    "statusLine": "Consultant BI & Analytics et étudiant en Systèmes d'Information à Lomé Business School,",
     "statusLink": {
-      "label": "disponible pour un stage en Data",
+      "label": "disponible en freelance et à distance",
       "href": "#contact"
     },
-    "focusLine": "Passionné par les données et les interfaces, basé à Lomé, Togo.",
+    "focusLine": "De la question business à la recommandation chiffrée : cadrage des KPI, fiabilisation des données, tableaux de bord Power BI orientés décision.",
     "manifesto": [
-      "J'analyse les données,",
-      "révèle les tendances,",
+      "Je cadre les questions,",
+      "fiabilise les données,",
       "éclaire les décisions."
     ],
     "bio": [
-      "Étudiant en Bachelor 2 Systèmes d'Information à Lomé Business School, je suis passionné par l'analyse de données, les bases de données et le développement web.",
-      "Je conçois des projets concrets avec Python, SQL, Excel et Power BI pour transformer des données brutes en informations exploitables — du nettoyage de datasets à la création de tableaux de bord interactifs, en passant par des applications web complètes avec Django.",
-      "Je suis à la recherche d'un stage ou d'une première expérience professionnelle dans le domaine de la Data."
+      "Analyste data spécialisé en business intelligence, je couvre la chaîne complète : cadrage des questions business et définition des KPI avec les équipes, préparation et contrôle qualité des données (SQL, Python, Excel), puis construction de tableaux de bord Power BI multi-pages orientés décision.",
+      "Mes analyses aboutissent à des recommandations chiffrées, pas à une accumulation de graphiques. En parallèle de ma Licence en Systèmes d'Information à Lomé Business School, je mène deux stages en data analytics — AnalystLab Africa et Codveda Technology — ainsi qu'une mission data au Ministère du Tourisme, de la Culture et des Arts.",
+      "Disponible en freelance et à distance pour vos missions Power BI, KPI et qualité des données — et ouvert à un stage ou une première expérience en Data."
     ]
   },
   "skillGroups": [
     {
-      "title": "Data & Analyse",
+      "title": "BI & Dataviz",
       "skills": [
-        "Python",
-        "Pandas",
-        "NumPy",
-        "Matplotlib",
         "Power BI",
-        "Excel (TCD, graphiques)",
-        "Nettoyage de données",
-        "Visualisation de données"
+        "Power Query",
+        "Modélisation de données",
+        "Mesures DAX",
+        "Dashboards multi-pages",
+        "Slicers synchronisés",
+        "Définition et suivi de KPI",
+        "Reporting exécutif orienté décision"
       ]
     },
     {
-      "title": "Bases de données",
+      "title": "Préparation & qualité des données",
       "skills": [
         "SQL Server",
         "MySQL",
-        "phpMyAdmin",
+        "T-SQL (JOIN · GROUP BY · agrégats)",
         "Modélisation relationnelle",
-        "Requêtes avancées (JOIN, GROUP BY)",
-        "Contraintes d'intégrité"
+        "Nettoyage et transformation",
+        "Contrôles de complétude et de cohérence",
+        "Documentation des jeux de données"
       ]
     },
     {
-      "title": "Développement web",
+      "title": "Python",
       "skills": [
-        "Python (Django)",
-        "HTML / CSS",
-        "JavaScript",
-        "Tailwind CSS",
-        "Interfaces responsives"
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "Seaborn",
+        "Analyse exploratoire",
+        "Automatisation des traitements",
+        "Feature engineering"
       ]
     },
     {
-      "title": "Outils & Méthodes",
+      "title": "Tableur",
       "skills": [
-        "Git",
-        "GitHub",
+        "Excel",
+        "Google Sheets",
+        "Tableaux croisés dynamiques",
+        "Formules avancées",
+        "Analyses commerciales"
+      ]
+    },
+    {
+      "title": "Outils & Web",
+      "skills": [
+        "Git / GitHub",
         "VS Code",
-        "Word",
-        "PowerPoint"
+        "Django",
+        "HTML / CSS / JavaScript",
+        "Supabase"
       ]
     }
   ],
   "projects": [
+    {
+      "title": "HealthConnect — Rendez-vous & absences",
+      "description": "Analyse des rendez-vous médicaux pour réduire les absences : définition des KPI (taux de no-show, taux de rappel, récurrence des absences) et contrôle qualité en amont, puis dashboard Power BI isolant les facteurs d'absence — rappels envoyés, distance, délai de réservation, type de rendez-vous.",
+      "tags": [
+        "Power BI",
+        "DAX",
+        "KPI",
+        "Qualité des données"
+      ],
+      "github": "https://github.com/fortune344/HealthConnect-Healthcare-Appointment-Analytics",
+      "liveUrl": null,
+      "image": null,
+      "category": "Data",
+      "featured": true,
+      "screen": "chart"
+    },
+    {
+      "title": "Superstore Advanced Profitability Investigation",
+      "description": "Une investigation orientée décision pour comprendre pourquoi certaines ventes génèrent du chiffre d'affaires sans générer de profit : impact des remises sur la marge, catégories structurellement déficitaires, performance par produit et par région.",
+      "tags": [
+        "Power BI",
+        "DAX",
+        "Power Query",
+        "Business Analytics"
+      ],
+      "github": "https://github.com/fortune344/Global-superstore-advanced-powerbi-analysis",
+      "liveUrl": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1787586905764-capture-d-ecran-2026-08-22-093746.png",
+      "category": "Data",
+      "featured": true,
+      "screen": "chart"
+    },
+    {
+      "title": "Superstore Business Performance Analysis",
+      "description": "Dashboard Power BI multi-pages d'analyse de la performance commerciale et de la rentabilité de Global Superstore : ventes, marges, produits et régions, avec slicers synchronisés, pensé pour un décideur et non pour un analyste.",
+      "tags": [
+        "Power BI",
+        "DAX",
+        "Power Query",
+        "Business Intelligence",
+        "Data Visualization"
+      ],
+      "github": "https://github.com/fortune344/Global-Superstore-Business-Intelligence-Dashboard",
+      "liveUrl": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1787586564745-capture-d-ecran-2026-08-16-102353.png",
+      "category": "Data",
+      "featured": true,
+      "screen": "chart"
+    },
+    {
+      "title": "Telco Customer Churn Analysis Dashboard",
+      "description": "Analyse de bout en bout du jeu Telco Customer Churn pour identifier les facteurs de désabonnement : nettoyage et exploration avec Pandas, segmentation par type de contrat, charges et service internet, visualisation des profils à risque, puis dashboard Power BI.",
+      "tags": [
+        "Python",
+        "Pandas",
+        "Matplotlib",
+        "Seaborn",
+        "Power BI"
+      ],
+      "github": "https://github.com/fortune344/Telco-Customer-Churn",
+      "liveUrl": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1786118502952-capture-d-ecran-2026-08-07-145617.png",
+      "category": "Data",
+      "featured": true,
+      "screen": "chart"
+    },
     {
       "title": "Détection de fraude — INTELO 2026",
       "description": "Pipeline de détection de transactions frauduleuses développé en hackathon : exploration du dataset, feature engineering et modèle de classification en Python.",
@@ -88,26 +167,10 @@
       ],
       "github": "https://github.com/fortune344/fraud-challenge",
       "liveUrl": null,
-      "image": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783105995793-fraude.png",
       "category": "Data",
       "featured": true,
       "screen": "terminal"
-    },
-    {
-      "title": "GestionPro",
-      "description": "Plateforme web collaborative de suivi de projets et de tâches : tableau Kanban, invitations par e-mail, notifications et gestion des utilisateurs. Interface responsive avec Tailwind CSS.",
-      "tags": [
-        "Django",
-        "Python",
-        "SQLite",
-        "Tailwind CSS"
-      ],
-      "github": "https://github.com/fortune344/GestionPro",
-      "liveUrl": null,
-      "image": null,
-      "category": "Web",
-      "featured": true,
-      "screen": "kanban"
     },
     {
       "title": "Tableau de bord Power BI",
@@ -120,14 +183,30 @@
       ],
       "github": "https://github.com/fortune344/Projet_Tableau_de_Bord_Kin",
       "liveUrl": null,
-      "image": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783114684478-table.png",
       "category": "Data",
       "featured": true,
       "screen": "chart"
     },
     {
+      "title": "GestionPro",
+      "description": "Plateforme web collaborative de suivi de projets et de tâches : tableau Kanban, invitations par e-mail, notifications et gestion des utilisateurs. Interface responsive avec Tailwind CSS.",
+      "tags": [
+        "Django",
+        "Python",
+        "SQLite",
+        "Tailwind CSS"
+      ],
+      "github": "https://github.com/fortune344/GestionPro",
+      "liveUrl": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783115318644-pro.png",
+      "category": "Web",
+      "featured": true,
+      "screen": "kanban"
+    },
+    {
       "title": "Gestion commerciale SQL Server",
-      "description": "Modélisation d'une base relationnelle complète : tables, clés étrangères, contraintes d'intégrité et requêtes SQL pour la gestion des clients, produits et commandes.",
+      "description": "Modélisation relationnelle complète (tables, clés étrangères, contraintes d'intégrité) et requêtes d'agrégation T-SQL pour l'analyse de l'activité : clients, produits et commandes.",
       "tags": [
         "SQL Server",
         "T-SQL",
@@ -135,7 +214,7 @@
       ],
       "github": "https://github.com/fortune344/SQL_PROJET",
       "liveUrl": null,
-      "image": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783114471126-sqls.png",
       "category": "Data",
       "featured": true,
       "screen": "table"
@@ -150,7 +229,7 @@
       ],
       "github": "https://github.com/fortune344/projet-visualisation-iris-python",
       "liveUrl": null,
-      "image": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783113999839-capture-d-ecran-2025-11-23-210848.png",
       "category": "Data",
       "featured": true,
       "screen": "chart"
@@ -165,25 +244,10 @@
       ],
       "github": "https://github.com/fortune344/VoiceTranslate",
       "liveUrl": null,
-      "image": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783115002474-voic.webp",
       "category": "Outil",
       "featured": true,
       "screen": "terminal"
-    },
-    {
-      "title": "Allume",
-      "description": "Application mobile de suivi et de signalement des coupures d'électricité au Togo.",
-      "tags": [
-        "Flutter",
-        "Dart",
-        "Mobile"
-      ],
-      "github": "https://github.com/fortune344/allume",
-      "liveUrl": null,
-      "image": null,
-      "category": "Mobile",
-      "featured": false,
-      "screen": "kanban"
     },
     {
       "title": "Analyse de données commerciales Excel",
@@ -191,23 +255,53 @@
       "tags": [
         "Excel",
         "TCD",
-        "Analyse"
+        "Formules"
       ],
       "github": "https://github.com/fortune344/Analyse_Excel",
+      "liveUrl": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783114230540-excel.png",
+      "category": "Data",
+      "featured": true,
+      "screen": "table"
+    },
+    {
+      "title": "Travaux de stage Codveda — Data Analytics",
+      "description": "Nettoyage et préparation de données, analyse exploratoire et modélisation : l'ensemble des travaux du stage, documentés et versionnés.",
+      "tags": [
+        "Python",
+        "Pandas",
+        "Matplotlib",
+        "Seaborn"
+      ],
+      "github": "https://github.com/fortune344/Codveda-data-analytics-internship",
       "liveUrl": null,
       "image": null,
       "category": "Data",
       "featured": false,
-      "screen": "table"
+      "screen": "terminal"
     }
   ],
   "timeline": [
     {
-      "period": "2025 — Présent",
-      "title": "Bachelor 2 — Systèmes d'Information",
-      "place": "Lomé Business School, Lomé (Togo)",
-      "description": "Approfondissement en analyse de données, bases de données et développement web. Projets pratiques en Python, SQL Server, Power BI et Django.",
-      "type": "formation"
+      "period": "Sept. 2026 — Présent",
+      "title": "Stagiaire Data Analytics",
+      "place": "Codveda Technology — à distance",
+      "description": "Programme en trois niveaux : nettoyage et préparation de données, analyse exploratoire, puis modélisation. Travaux réalisés en Python (Pandas, Matplotlib, Seaborn), documentés et versionnés sur GitHub.",
+      "type": "experience"
+    },
+    {
+      "period": "Août 2026 — Présent",
+      "title": "Stagiaire Data Analytics",
+      "place": "AnalystLab Africa",
+      "description": "Programme intensif à livrable hebdomadaire : KPI, mesures DAX et dashboards Power BI multi-pages à slicers synchronisés sur des ventes multi-marchés. Analyse de l'impact des remises sur la marge, contrôle qualité en amont et synthèses exécutives bilingues FR / EN.",
+      "type": "experience"
+    },
+    {
+      "period": "2026 — Présent",
+      "title": "Stagiaire Data & Digital",
+      "place": "Ministère du Tourisme, de la Culture et des Arts",
+      "description": "Collecte, connexion et consolidation de sources hétérogènes du secteur touristique ; fiabilisation et documentation des jeux de données ; analyse des tendances et digitalisation du pilotage de l'information.",
+      "type": "experience"
     },
     {
       "period": "2026",
@@ -215,6 +309,13 @@
       "place": "Compétition IT",
       "description": "Développement en équipe d'un modèle de détection de transactions frauduleuses en Python : un premier défi data grandeur nature.",
       "type": "projet"
+    },
+    {
+      "period": "2025 — Présent",
+      "title": "Licence Systèmes d'Information — 2e année",
+      "place": "Lomé Business School, Lomé (Togo)",
+      "description": "Approfondissement en analyse de données, bases de données et développement web. Projets pratiques en Python, SQL Server, Power BI et Django.",
+      "type": "formation"
     },
     {
       "period": "Déc. 2025 — Mai 2026",
@@ -225,7 +326,7 @@
     },
     {
       "period": "2024 — 2025",
-      "title": "Bachelor 1 — Systèmes d'Information",
+      "title": "Licence Systèmes d'Information — 1re année",
       "place": "Lomé Business School, Lomé (Togo)",
       "description": "Fondamentaux des systèmes d'information : algorithmique, programmation, bases de données et bureautique avancée.",
       "type": "formation"
@@ -233,7 +334,7 @@
     {
       "period": "2024",
       "title": "Baccalauréat — Série D",
-      "place": "CEG Houégbo (Bénin)",
+      "place": "CEG Houègbo (Bénin)",
       "description": "Obtention du baccalauréat scientifique, point de départ de mon orientation vers l'informatique et la data.",
       "type": "formation"
     }
@@ -241,7 +342,7 @@
   "languages": [
     {
       "name": "Français",
-      "level": "Excellent"
+      "level": "Courant"
     },
     {
       "name": "Anglais",

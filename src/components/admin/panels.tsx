@@ -345,7 +345,7 @@ export function JourneyPanel({ data, setData }: PanelProps) {
         {data.timeline.map((t, i) => (
           <Card
             key={i}
-            icon={t.type === "formation" ? GraduationCap : Rocket}
+            icon={t.type === "experience" ? Briefcase : t.type === "formation" ? GraduationCap : Rocket}
             title={t.title || "Sans titre"}
             subtitle={t.place || t.description}
             badge={t.period}
@@ -368,7 +368,8 @@ export function JourneyPanel({ data, setData }: PanelProps) {
               <Field label="Période" value={entry.period} onChange={(v) => update(editing, { period: v })} />
               <label className="block">
                 <span className={LABEL}>Type</span>
-                <select value={entry.type} onChange={(e) => update(editing, { type: e.target.value as "formation" | "projet" })} className={INPUT}>
+                <select value={entry.type} onChange={(e) => update(editing, { type: e.target.value as TimelineEntry["type"] })} className={INPUT}>
+                  <option value="experience">Expérience</option>
                   <option value="formation">Formation</option>
                   <option value="projet">Projet</option>
                 </select>
