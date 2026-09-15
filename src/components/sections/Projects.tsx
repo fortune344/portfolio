@@ -2,6 +2,7 @@ import { GithubIcon } from "@/components/ui/BrandIcons";
 import { ProjectsGrid } from "@/components/sections/ProjectsGrid";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { TrackedLink } from "@/components/ui/TrackedLink";
 import type { Project } from "@/data/portfolio";
 
 type ProjectsProps = {
@@ -23,15 +24,16 @@ export function Projects({ projects, githubUrl }: ProjectsProps) {
         <ProjectsGrid projects={projects} />
 
         <Reveal delay={0.15} className="mt-14 text-center">
-          <a
+          <TrackedLink
             href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
+            track={{ event: "github_click", link_url: githubUrl }}
             className="inline-flex items-center gap-3 rounded-xl border border-foreground/40 px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-foreground hover:text-ink"
           >
             <GithubIcon size={16} />
             Tous mes projets sur GitHub
-          </a>
+          </TrackedLink>
         </Reveal>
       </div>
     </section>

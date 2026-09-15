@@ -1,3 +1,4 @@
+import { TrackedLink } from "@/components/ui/TrackedLink";
 import type { Profile } from "@/data/portfolio";
 
 export function Footer({ profile }: { profile: Profile }) {
@@ -7,9 +8,13 @@ export function Footer({ profile }: { profile: Profile }) {
         <p>Copyright {new Date().getFullYear()}</p>
         <p className="text-center text-muted">
           Un projet data ou web ? Écrivez-moi{" "}
-          <a href={`mailto:${profile.email}`} className="link-underline text-foreground">
+          <TrackedLink
+            href={`mailto:${profile.email}`}
+            track={{ event: "contact_submit", method: "email" }}
+            className="link-underline text-foreground"
+          >
             {profile.name}
-          </a>
+          </TrackedLink>
         </p>
       </div>
     </footer>

@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/ui/Reveal";
+import { TrackedLink } from "@/components/ui/TrackedLink";
 import type { Profile } from "@/data/portfolio";
 
 /** Contact éditorial : mot géant pleine largeur + liens soulignés. */
@@ -22,15 +23,23 @@ export function Contact({ profile }: { profile: Profile }) {
                 Une question, une mission ou un projet data à confier ?
               </p>
               <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-bold uppercase tracking-[0.15em]">
-                <a href={`mailto:${profile.email}`} className="link-underline">
+                <TrackedLink
+                  href={`mailto:${profile.email}`}
+                  track={{ event: "contact_submit", method: "email" }}
+                  className="link-underline"
+                >
                   Envoyez-moi un e-mail
-                </a>
+                </TrackedLink>
                 <span className="font-medium normal-case tracking-normal text-muted">
                   ou
                 </span>
-                <a href={profile.phoneHref} className="link-underline">
+                <TrackedLink
+                  href={profile.phoneHref}
+                  track={{ event: "contact_submit", method: "phone" }}
+                  className="link-underline"
+                >
                   Appelez-moi
-                </a>
+                </TrackedLink>
               </p>
               {profile.cvUrl ? (
                 <a
@@ -56,14 +65,15 @@ export function Contact({ profile }: { profile: Profile }) {
               >
                 LinkedIn
               </a>
-              <a
+              <TrackedLink
                 href={profile.github}
                 target="_blank"
                 rel="noopener noreferrer"
+                track={{ event: "github_click", link_url: profile.github }}
                 className="transition-opacity hover:opacity-70"
               >
                 GitHub
-              </a>
+              </TrackedLink>
             </div>
           </Reveal>
         </div>

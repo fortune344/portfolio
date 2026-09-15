@@ -10,6 +10,7 @@ import {
 import { Download } from "lucide-react";
 import { useRef } from "react";
 import type { Profile } from "@/data/portfolio";
+import { trackEvent } from "@/lib/analytics";
 
 const EASE = [0.21, 0.47, 0.32, 0.98] as const;
 
@@ -79,6 +80,7 @@ export function Hero({ profile }: { profile: Profile }) {
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent({ event: "github_click", link_url: profile.github })}
             className="transition-opacity hover:opacity-70"
           >
             GitHub

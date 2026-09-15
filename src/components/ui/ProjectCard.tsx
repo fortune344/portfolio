@@ -1,7 +1,10 @@
+"use client";
+
 import { ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 import { ProjectScreen } from "@/components/ui/ProjectScreen";
 import type { Project } from "@/data/portfolio";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 type ProjectCardProps = {
@@ -13,7 +16,10 @@ type ProjectCardProps = {
 /** Grande carte projet : texte d'un côté, mockup laptop de l'autre. */
 export function ProjectCard({ project, reversed = false }: ProjectCardProps) {
   return (
-    <article className="rounded-[2rem] bg-card p-7 sm:p-10 md:rounded-[2.5rem] md:p-14">
+    <article
+      className="rounded-[2rem] bg-card p-7 sm:p-10 md:rounded-[2.5rem] md:p-14"
+      onClick={() => trackEvent({ event: "project_click", project_name: project.title })}
+    >
       <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
         {/* Texte */}
         <div className={cn(reversed && "md:order-2")}>
@@ -24,6 +30,7 @@ export function ProjectCard({ project, reversed = false }: ProjectCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Code source de ${project.title} sur GitHub`}
+                onClick={() => trackEvent({ event: "github_click", link_url: project.github ?? "" })}
                 className="flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-ink transition-transform duration-300 hover:scale-110"
               >
                 <GithubIcon size={20} />

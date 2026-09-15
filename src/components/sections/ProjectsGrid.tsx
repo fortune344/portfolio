@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useMemo, useState, type ReactNode } from "react";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import type { Project, ProjectCategory } from "@/data/portfolio";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 const ALL = "Tout";
@@ -97,6 +98,12 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
           <AnimatePresence initial={false} mode="popLayout">
             {others.map((project) => {
               const href = project.liveUrl || project.github || undefined;
+              const onClick = () => {
+                trackEvent({ event: "project_click", project_name: project.title });
+                if (href && href.includes("github.com")) {
+                  trackEvent({ event: "github_click", link_url: href });
+                }
+              };
               const inner = (
                 <>
                   <div>
@@ -116,11 +123,13 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
               return (
                 <FilterItem key={project.title}>
                   {href ? (
-                    <a href={href} target="_blank" rel="noopener noreferrer" className={COMPACT_ROW}>
+                    <a href={href} target="_blank" rel="noopener noreferrer" className={COMPACT_ROW} onClick={onClick}>
                       {inner}
                     </a>
                   ) : (
-                    <div className={COMPACT_ROW}>{inner}</div>
+                    <div className={COMPACT_ROW} onClick={onClick}>
+                      {inner}
+                    </div>
                   )}
                 </FilterItem>
               );
