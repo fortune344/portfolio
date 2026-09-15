@@ -36,7 +36,8 @@
         "Power BI",
         "Excel (TCD, graphiques)",
         "Nettoyage de données",
-        "Visualisation de données"
+        "Visualisation de données",
+        "Looker Studio"
       ]
     },
     {
@@ -65,9 +66,15 @@
       "skills": [
         "Git",
         "GitHub",
-        "VS Code",
-        "Word",
-        "PowerPoint"
+        "VS Code"
+      ]
+    },
+    {
+      "title": "Web analytics & Tracking",
+      "skills": [
+        "Google Tag Manager",
+        "GA4",
+        "Plans de marquage"
       ]
     }
   ],
