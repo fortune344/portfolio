@@ -80,21 +80,6 @@
   ],
   "projects": [
     {
-      "title": "Global Superstore — Dashboard Looker Studio",
-      "description": "TODO — à rédiger",
-      "tags": [
-        "Looker Studio",
-        "KPI",
-        "Data Viz"
-      ],
-      "github": "https://github.com/fortune344/Global-superstore-advanced-powerbi-analysis",
-      "liveUrl": "https://datastudio.google.com/s/sini_qd_KlM",
-      "image": null,
-      "category": "Data",
-      "featured": true,
-      "screen": "chart"
-    },
-    {
       "title": "HealthConnect — Rendez-vous & absences",
       "description": "TODO — à rédiger",
       "tags": [
@@ -110,34 +95,16 @@
       "screen": "chart"
     },
     {
-      "title": "Superstore Advanced Profitability Investigation",
-      "description": "Une investigation orientée décision pour comprendre pourquoi certaines ventes génèrent du chiffre d'affaires sans générer de profit.",
+      "title": "Global Superstore — Dashboard Looker Studio",
+      "description": "TODO — à rédiger",
       "tags": [
-        "Power BI",
-        "DAX",
-        "Power Query",
-        "Business Analytics"
+        "Looker Studio",
+        "KPI",
+        "Data Viz"
       ],
       "github": "https://github.com/fortune344/Global-superstore-advanced-powerbi-analysis",
-      "liveUrl": null,
-      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1787586905764-capture-d-ecran-2026-08-22-093746.png",
-      "category": "Data",
-      "featured": true,
-      "screen": "chart"
-    },
-    {
-      "title": "Superstore Business Performance Analysis",
-      "description": "Analyse de la performance commerciale et de la rentabilité",
-      "tags": [
-        "Power BI",
-        "DAX",
-        "Power Query",
-        "Business Intelligence",
-        "Data Visualization"
-      ],
-      "github": "https://github.com/fortune344/Global-Superstore-Business-Intelligence-Dashboard",
-      "liveUrl": null,
-      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1787586564745-capture-d-ecran-2026-08-16-102353.png",
+      "liveUrl": "https://datastudio.google.com/s/sini_qd_KlM",
+      "image": null,
       "category": "Data",
       "featured": true,
       "screen": "chart"
@@ -160,37 +127,6 @@
       "screen": "chart"
     },
     {
-      "title": "Détection de fraude à INTELO 2026",
-      "description": "Pipeline de détection de transactions frauduleuses développé en hackathon : exploration du dataset, feature engineering et modèle de classification en Python.",
-      "tags": [
-        "Python",
-        "Pandas",
-        "Machine Learning"
-      ],
-      "github": "https://github.com/fortune344/fraud-challenge",
-      "liveUrl": null,
-      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783105995793-fraude.png",
-      "category": "Data",
-      "featured": true,
-      "screen": "chart"
-    },
-    {
-      "title": "Tableau de bord Power BI",
-      "description": "Conception d'un tableau de bord d'analyse avec indicateurs de performance, visualisations dynamiques, filtres et segments pour l'exploration des données.",
-      "tags": [
-        "Power BI",
-        "DAX",
-        "KPI",
-        "Data Viz"
-      ],
-      "github": "https://github.com/fortune344/Projet_Tableau_de_Bord_Kin",
-      "liveUrl": null,
-      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783114684478-table.png",
-      "category": "Data",
-      "featured": true,
-      "screen": "chart"
-    },
-    {
       "title": "GestionPro",
       "description": "Plateforme web collaborative de suivi de projets et de tâches : tableau Kanban, invitations par e-mail, notifications et gestion des utilisateurs. Interface responsive avec Tailwind CSS.",
       "tags": [
@@ -207,6 +143,70 @@
       "screen": "kanban"
     },
     {
+      "title": "Superstore Advanced Profitability Investigation",
+      "description": "Une investigation orientée décision pour comprendre pourquoi certaines ventes génèrent du chiffre d'affaires sans générer de profit.",
+      "tags": [
+        "Power BI",
+        "DAX",
+        "Power Query",
+        "Business Analytics"
+      ],
+      "github": "https://github.com/fortune344/Global-superstore-advanced-powerbi-analysis",
+      "liveUrl": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1787586905764-capture-d-ecran-2026-08-22-093746.png",
+      "category": "Data",
+      "featured": false,
+      "screen": "chart"
+    },
+    {
+      "title": "Superstore Business Performance Analysis",
+      "description": "Analyse de la performance commerciale et de la rentabilité",
+      "tags": [
+        "Power BI",
+        "DAX",
+        "Power Query",
+        "Business Intelligence",
+        "Data Visualization"
+      ],
+      "github": "https://github.com/fortune344/Global-Superstore-Business-Intelligence-Dashboard",
+      "liveUrl": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1787586564745-capture-d-ecran-2026-08-16-102353.png",
+      "category": "Data",
+      "featured": false,
+      "screen": "chart"
+    },
+    {
+      "title": "Détection de fraude à INTELO 2026",
+      "description": "Pipeline de détection de transactions frauduleuses développé en hackathon : exploration du dataset, feature engineering et modèle de classification en Python.",
+      "tags": [
+        "Python",
+        "Pandas",
+        "Machine Learning"
+      ],
+      "github": "https://github.com/fortune344/fraud-challenge",
+      "liveUrl": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783105995793-fraude.png",
+      "category": "Data",
+      "featured": false,
+      "screen": "chart"
+    },
+    {
+      "title": "Tableau de bord Power BI",
+      "description": "Conception d'un tableau de bord d'analyse avec indicateurs de performance, visualisations dynamiques, filtres et segments pour l'exploration des données.",
+      "tags": [
+        "Power BI",
+        "DAX",
+        "KPI",
+        "Data Viz"
+      ],
+      "github": "https://github.com/fortune344/Projet_Tableau_de_Bord_Kin",
+      "liveUrl": null,
+      "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783114684478-table.png",
+      "category": "Data",
+      "featured": false,
+      "screen": "chart"
+    },
+    {
       "title": "Gestion commerciale SQL Server",
       "description": "Modélisation d'une base relationnelle complète : tables, clées Etrangères, contraintes d'intégrité et requêtes SQL pour la gestion des clients, produits et commandes.",
       "tags": [
@@ -218,7 +218,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783114471126-sqls.png",
       "category": "Data",
-      "featured": true,
+      "featured": false,
       "screen": "table"
     },
     {
@@ -233,7 +233,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783113999839-capture-d-ecran-2025-11-23-210848.png",
       "category": "Data",
-      "featured": true,
+      "featured": false,
       "screen": "chart"
     },
     {
@@ -248,7 +248,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783115002474-voic.webp",
       "category": "Outil",
-      "featured": true,
+      "featured": false,
       "screen": "terminal"
     },
     {
@@ -263,7 +263,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783114230540-excel.png",
       "category": "Data",
-      "featured": true,
+      "featured": false,
       "screen": "table"
     },
     {
