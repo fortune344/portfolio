@@ -1,11 +1,13 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { TimelineEntry } from "@/data/portfolio";
+import { cn } from "@/lib/utils";
 
-const TYPE_LABELS: Record<TimelineEntry["type"], string> = {
-  experience: "Expérience",
-  formation: "Formation",
-  projet: "Projet",
+/** Libellé et style du badge selon le type d'étape : plein / contour / pointillé. */
+const TYPE_BADGE: Record<TimelineEntry["type"], { label: string; className: string }> = {
+  experience: { label: "Expérience", className: "border-foreground bg-foreground text-ink" },
+  formation: { label: "Formation", className: "border-line text-muted" },
+  projet: { label: "Projet", className: "border-dashed border-foreground/40 text-muted" },
 };
 
 export function Journey({ timeline }: { timeline: TimelineEntry[] }) {
@@ -31,8 +33,13 @@ export function Journey({ timeline }: { timeline: TimelineEntry[] }) {
                     {entry.description}
                   </p>
                 </div>
-                <span className="h-fit w-fit rounded-full border border-line px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">
-                  {TYPE_LABELS[entry.type] ?? "Projet"}
+                <span
+                  className={cn(
+                    "h-fit w-fit rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]",
+                    (TYPE_BADGE[entry.type] ?? TYPE_BADGE.projet).className
+                  )}
+                >
+                  {(TYPE_BADGE[entry.type] ?? TYPE_BADGE.projet).label}
                 </span>
               </article>
             </Reveal>

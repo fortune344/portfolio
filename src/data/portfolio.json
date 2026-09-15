@@ -239,6 +239,34 @@
   ],
   "timeline": [
     {
+      "period": "Sept. 2026 — Présent",
+      "title": "Stagiaire Data Analytics",
+      "place": "Codveda Technology (à distance)",
+      "description": "TODO — à rédiger",
+      "type": "experience"
+    },
+    {
+      "period": "Août 2026 — Présent",
+      "title": "Stagiaire Data Analytics",
+      "place": "AnalystLab Africa",
+      "description": "TODO — à rédiger",
+      "type": "experience"
+    },
+    {
+      "period": "2026 — Présent",
+      "title": "Stagiaire Data & Digital",
+      "place": "Ministère du Tourisme, de la Culture et des Arts",
+      "description": "TODO — à rédiger",
+      "type": "experience"
+    },
+    {
+      "period": "2024 — Présent",
+      "title": "Développeur web indépendant",
+      "place": "Lomé (Togo)",
+      "description": "TODO — à rédiger",
+      "type": "experience"
+    },
+    {
       "period": "2025 à Présent",
       "title": "Bachelor 2  Systèmes d'Information",
       "place": "Lomé Business School, Lomé (Togo)",
@@ -250,13 +278,6 @@
       "title": "Hackathon INTELO 2026  Détection de fraude",
       "place": "Compétition IT",
       "description": "Développement d'un modèle de détection de transactions frauduleuses en Python :  défi grandeur nature.",
-      "type": "projet"
-    },
-    {
-      "period": "Décembre 2025 à Mai 2026",
-      "title": "Monté en compétences Data",
-      "place": "Projets personnels",
-      "description": "Enchainement de projets concrets : analyse de datasets avec Pandas, application Django, base SQL Server et tableau de bord Power BI.",
       "type": "projet"
     },
     {
