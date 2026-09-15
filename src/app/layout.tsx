@@ -17,7 +17,7 @@ const anton = Anton({
   display: "swap",
 });
 
-const siteUrl = "https://fortune-assouan.vercel.app";
+const siteUrl = "https://fortuneassouan.vercel.app";
 
 // Google Tag Manager — chargé uniquement en production (pas en `next dev`)
 // pour ne pas polluer les statistiques avec les visites locales.

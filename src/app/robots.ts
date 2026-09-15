@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin", "/api/"],
     },
-    sitemap: "https://fortune-assouan.vercel.app/sitemap.xml",
+    sitemap: "https://fortuneassouan.vercel.app/sitemap.xml",
   };
 }
