@@ -45,6 +45,9 @@ const SCREENS: { value: ProjectScreenKind; label: string }[] = [
   { value: "terminal", label: "Terminal (script)" },
 ];
 
+/** Description laissée à rédiger (placeholder « TODO — … »). */
+const isTodo = (text: string) => /^\s*TODO\b/i.test(text);
+
 type SetData = Dispatch<SetStateAction<PortfolioData | null>>;
 type PanelProps = { data: PortfolioData; setData: SetData; reloadKey: number };
 
@@ -220,6 +223,8 @@ const SCREEN_ICON = { chart: Briefcase, kanban: FolderGit2, table: FileText, ter
 export function ProjectsPanel({ data, setData, reloadKey }: PanelProps) {
   const [editing, setEditing] = useState<number | null>(null);
   const project = editing !== null ? data.projects[editing] : null;
+  const featuredCount = data.projects.filter((p) => p.featured).length;
+  const todoCount = data.projects.filter((p) => isTodo(p.description)).length;
 
   const update = (index: number, patch: Partial<Project>) =>
     setData((d) => d && { ...d, projects: d.projects.map((p, j) => (j === index ? { ...p, ...patch } : p)) });
@@ -244,13 +249,19 @@ export function ProjectsPanel({ data, setData, reloadKey }: PanelProps) {
             title={p.title || "Sans titre"}
             subtitle={p.description || "Pas de description"}
             thumb={p.image}
+            placeholder
             icon={SCREEN_ICON[p.screen]}
-            badge={p.featured ? "Vedette" : p.category}
+            badge={p.featured ? `★ ${p.category}` : p.category}
+            warning={isTodo(p.description) ? "À rédiger" : undefined}
             onClick={() => setEditing(i)}
           />
         ))}
         <AddCard label="Ajouter un projet" onClick={add} />
       </CardGrid>
+      <p className="mt-4 text-xs text-muted">
+        {featuredCount} projet{featuredCount > 1 ? "s" : ""} en vedette (★) — 4 maximum conseillé pour garder la page lisible.
+        {todoCount > 0 ? ` ${todoCount} description${todoCount > 1 ? "s" : ""} à rédiger.` : ""}
+      </p>
 
       <Modal
         open={project !== null}
@@ -329,6 +340,7 @@ export function JourneyPanel({ data, setData }: PanelProps) {
             title={t.title || "Sans titre"}
             subtitle={t.place || t.description}
             badge={t.period}
+            warning={isTodo(t.description) ? "À rédiger" : undefined}
             onClick={() => setEditing(i)}
           />
         ))}

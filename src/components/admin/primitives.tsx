@@ -2,17 +2,18 @@
 
 import { useState, type ChangeEvent } from "react";
 
+/** Anneau de focus clavier commun à tous les contrôles de l'admin. */
+export const FOCUS =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
 /** Styles partagés des champs de l'admin. */
 export const INPUT =
-  "w-full rounded-lg border border-line bg-black/40 px-3 py-2 text-sm outline-none transition-colors focus:border-foreground/60";
+  "w-full rounded-lg border border-line bg-black/40 px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted/50 focus:border-foreground/60 focus-visible:ring-2 focus-visible:ring-foreground/25 aria-[invalid=true]:border-red-500/60";
 export const LABEL =
   "mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.18em] text-muted";
-export const BTN_SMALL =
-  "rounded-md border border-line px-2.5 py-1 text-xs text-muted transition-colors hover:border-foreground/50 hover:text-foreground disabled:opacity-30";
-export const BTN_ADD =
-  "rounded-lg border border-dashed border-line px-4 py-2.5 text-sm text-muted transition-colors hover:border-foreground/50 hover:text-foreground";
-export const BTN_PRIMARY =
-  "rounded-lg bg-foreground px-5 py-2 text-sm font-semibold text-ink transition-opacity hover:opacity-85 disabled:opacity-50";
+export const BTN_SMALL = `rounded-md border border-line px-2.5 py-1 text-xs text-muted transition-colors hover:border-foreground/50 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30 ${FOCUS}`;
+export const BTN_ADD = `rounded-lg border border-dashed border-line px-4 py-2.5 text-sm text-muted transition-colors hover:border-foreground/50 hover:text-foreground ${FOCUS}`;
+export const BTN_PRIMARY = `inline-flex items-center justify-center gap-2 rounded-lg bg-foreground px-5 py-2 text-sm font-semibold text-ink transition-opacity hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-40 ${FOCUS}`;
 export const CARD =
   "rounded-xl border border-line bg-white/[0.02] p-4 sm:p-5";
 

@@ -30,6 +30,17 @@ Pour chaque projet : image uploadée (affichée dans le mockup laptop), lien
 GitHub **et/ou** lien du site en ligne (les deux optionnels), tags, catégorie,
 ordre, mise en avant. « Enregistrer » publie immédiatement (revalidation).
 
+### Mot de passe oublié ?
+
+Le mot de passe n'est stocké nulle part dans le site : c'est la variable
+d'environnement `ADMIN_PASSWORD` du projet sur Vercel.
+Vercel → projet → **Settings → Environment Variables** → sur `ADMIN_PASSWORD`,
+l'icône œil révèle la valeur, **Edit** permet d'en définir une nouvelle,
+puis **Deployments → ⋯ → Redeploy** pour la prendre en compte.
+
+Raccourcis dans l'admin : **Ctrl+S / ⌘S** enregistre ; un badge signale les
+modifications non enregistrées et le navigateur prévient avant de quitter.
+
 ## Mise en production (Vercel + Supabase)
 
 1. **Supabase** : créer un projet sur [supabase.com](https://supabase.com)
