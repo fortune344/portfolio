@@ -155,7 +155,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1787586905764-capture-d-ecran-2026-08-22-093746.png",
       "category": "Data",
-      "featured": false,
+      "featured": true,
       "screen": "chart"
     },
     {
@@ -172,7 +172,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1787586564745-capture-d-ecran-2026-08-16-102353.png",
       "category": "Data",
-      "featured": false,
+      "featured": true,
       "screen": "chart"
     },
     {
@@ -187,7 +187,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783105995793-fraude.png",
       "category": "Data",
-      "featured": false,
+      "featured": true,
       "screen": "chart"
     },
     {
@@ -203,7 +203,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783114684478-table.png",
       "category": "Data",
-      "featured": false,
+      "featured": true,
       "screen": "chart"
     },
     {
@@ -218,7 +218,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783114471126-sqls.png",
       "category": "Data",
-      "featured": false,
+      "featured": true,
       "screen": "table"
     },
     {
@@ -233,7 +233,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783113999839-capture-d-ecran-2025-11-23-210848.png",
       "category": "Data",
-      "featured": false,
+      "featured": true,
       "screen": "chart"
     },
     {
@@ -248,7 +248,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783115002474-voic.webp",
       "category": "Outil",
-      "featured": false,
+      "featured": true,
       "screen": "terminal"
     },
     {
@@ -263,7 +263,7 @@
       "liveUrl": null,
       "image": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/projets/1783114230540-excel.png",
       "category": "Data",
-      "featured": false,
+      "featured": true,
       "screen": "table"
     },
     {
@@ -278,7 +278,7 @@
       "liveUrl": "https://fortuneassouan.vercel.app",
       "image": null,
       "category": "Outil",
-      "featured": false,
+      "featured": true,
       "screen": "terminal"
     }
   ],

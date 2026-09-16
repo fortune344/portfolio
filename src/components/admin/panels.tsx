@@ -259,7 +259,7 @@ export function ProjectsPanel({ data, setData, reloadKey }: PanelProps) {
         <AddCard label="Ajouter un projet" onClick={add} />
       </CardGrid>
       <p className="mt-4 text-xs text-muted">
-        {featuredCount} projet{featuredCount > 1 ? "s" : ""} en vedette (★) — 4 maximum conseillé pour garder la page lisible.
+        {featuredCount} projet{featuredCount > 1 ? "s" : ""} en vedette (★) sur {data.projects.length} — ordre d'affichage modifiable dans chaque fiche (↑ / ↓).
         {todoCount > 0 ? ` ${todoCount} description${todoCount > 1 ? "s" : ""} à rédiger.` : ""}
       </p>
 

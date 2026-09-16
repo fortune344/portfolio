@@ -47,7 +47,7 @@ const TABS: { id: TabId; label: string; description: string; icon: LucideIcon }[
   { id: "profil", label: "Profil", description: "Identité, coordonnées, textes du Hero et CV.", icon: User },
   { id: "apropos", label: "À propos", description: "Les paragraphes de la biographie.", icon: LayoutDashboard },
   { id: "competences", label: "Compétences", description: "Groupes de compétences affichés à droite de la bio.", icon: Briefcase },
-  { id: "projets", label: "Projets", description: "Cartes vedettes (4 max conseillé) et liste compacte, dans l'ordre d'affichage.", icon: FolderGit2 },
+  { id: "projets", label: "Projets", description: "Cartes projets, dans l'ordre d'affichage du site.", icon: FolderGit2 },
   { id: "parcours", label: "Parcours", description: "Expériences, formations et projets marquants, du plus récent au plus ancien.", icon: RouteIcon },
   { id: "extras", label: "Langues & intérêts", description: "Langues parlées et centres d'intérêt.", icon: Languages },
 ];
