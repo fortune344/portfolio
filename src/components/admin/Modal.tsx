@@ -22,10 +22,18 @@ const FOCUSABLE =
  * Modale d'édition : overlay flouté, fermeture par Échap, clic extérieur ou
  * croix, verrouillage du scroll de fond, focus initial, Tab confiné à la
  * modale et retour du focus à l'élément déclencheur à la fermeture.
+ *
+ * L'effet ne dépend que de `open` : `onClose` est lu via une ref, sinon une
+ * fonction recréée à chaque rendu relancerait l'effet à chaque frappe et
+ * volerait le focus au champ en cours de saisie.
  */
 export function Modal({ open, title, subtitle, onClose, children, footer }: ModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  });
 
   useEffect(() => {
     if (!open) return;
@@ -33,7 +41,7 @@ export function Modal({ open, title, subtitle, onClose, children, footer }: Moda
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onClose();
+        onCloseRef.current();
         return;
       }
       if (e.key !== "Tab" || !panelRef.current) return;
@@ -61,7 +69,7 @@ export function Modal({ open, title, subtitle, onClose, children, footer }: Moda
       document.body.style.overflow = prev;
       opener?.focus?.();
     };
-  }, [open, onClose]);
+  }, [open]);
 
   if (!open) return null;
 
