@@ -81,7 +81,7 @@
   "projects": [
     {
       "title": "HealthConnect — Rendez-vous & absences",
-      "description": "TODO — à rédiger",
+      "description": "Dashboard Power BI pour une clinique confrontée aux rendez-vous manqués : 5 000 rendez-vous analysés, KPI de suivi (taux de no-show, taux de rappel, récurrence des absences, délai de réservation, distance) et exploration des facteurs associés aux absences pour aider les responsables à décider.",
       "tags": [
         "Power BI",
         "DAX",
@@ -96,7 +96,7 @@
     },
     {
       "title": "Global Superstore — Dashboard Looker Studio",
-      "description": "TODO — à rédiger",
+      "description": "Version Looker Studio, consultable en ligne, de l'analyse Global Superstore (12,6 M$ de ventes, 7 marchés, 2011-2014) : KPI de ventes et de marge, impact des remises sur la rentabilité, performance par catégorie, produit et région, avec filtres interactifs.",
       "tags": [
         "Looker Studio",
         "KPI",
@@ -268,7 +268,7 @@
     },
     {
       "title": "Tracking GA4 / Google Tag Manager",
-      "description": "TODO — à rédiger",
+      "description": "Plan de marquage de ce portfolio : conteneur Google Tag Manager, balise GA4 et événements personnalisés poussés dans le dataLayer (clics sur les projets, liens GitHub, prise de contact) pour mesurer ce que les visiteurs consultent réellement.",
       "tags": [
         "GTM",
         "GA4",
@@ -287,28 +287,28 @@
       "period": "Sept. 2026 — Présent",
       "title": "Stagiaire Data Analytics",
       "place": "Codveda Technology (à distance)",
-      "description": "TODO — à rédiger",
+      "description": "Programme en trois niveaux : nettoyage et préparation de données, analyse exploratoire, puis modélisation (scikit-learn). Travaux réalisés en Python (pandas, matplotlib, seaborn), documentés et versionnés sur GitHub.",
       "type": "experience"
     },
     {
       "period": "Août 2026 — Présent",
       "title": "Stagiaire Data Analytics",
       "place": "AnalystLab Africa",
-      "description": "TODO — à rédiger",
+      "description": "Programme intensif à livrable hebdomadaire : analyse exploratoire, KPI, mesures DAX et dashboards Power BI multi-pages à slicers synchronisés, sur des ventes multi-marchés (Global Superstore) et des rendez-vous médicaux (HealthConnect). Analyse de l'impact des remises sur la marge, contrôle qualité en amont et synthèses exécutives bilingues FR / EN.",
       "type": "experience"
     },
     {
       "period": "2026 — Présent",
       "title": "Stagiaire Data & Digital",
       "place": "Ministère du Tourisme, de la Culture et des Arts",
-      "description": "TODO — à rédiger",
+      "description": "Collecte, connexion et consolidation de sources hétérogènes du secteur touristique ; fiabilisation des données (mise en cohérence, recoupement entre sources, documentation des jeux de données) ; analyse des tendances et digitalisation du pilotage de l'information.",
       "type": "experience"
     },
     {
       "period": "2024 — Présent",
       "title": "Développeur web indépendant",
       "place": "Lomé (Togo)",
-      "description": "TODO — à rédiger",
+      "description": "Conception et développement de sites et d'applications web : plateforme de gestion de projets (Django), site de demande d'adoption en ligne, suivi de paiements clients, et ce portfolio avec son administration (Next.js, Supabase). HTML / CSS / JavaScript, Tailwind CSS, Django, Next.js.",
       "type": "experience"
     },
     {
