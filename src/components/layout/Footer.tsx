@@ -13,8 +13,7 @@ export function Footer({ profile }: { profile: Profile }) {
         <div>
           <p className="font-display text-3xl uppercase leading-none tracking-tight">{profile.name}</p>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
-            Consultant Power BI et data analyst à {profile.location.split(",")[0]}. Missions au Togo, au Bénin et à
-            distance.
+            Développeur web et data analyst à {profile.location.split(",")[0]}. Au Togo, au Bénin et à distance.
           </p>
           <TrackedLink
             href={`mailto:${profile.email}`}

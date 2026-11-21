@@ -15,7 +15,7 @@ const LEVEL_STYLE: Record<SkillLevel, string> = {
 
 /**
  * Compétences par domaine. Pas de barres ni de pourcentages : chaque domaine
- * indique sa place dans mon activité et un exemple concret d'utilisation.
+ * indique sa place réelle dans mon activité.
  * Contenu éditable dans /admin → Compétences.
  */
 export function Skills({ groups }: { groups: SkillGroup[] }) {
@@ -28,10 +28,8 @@ export function Skills({ groups }: { groups: SkillGroup[] }) {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           id="competences-title"
-          index="04"
           eyebrow="Compétences"
-          title="Les outils, au service de la méthode"
-          description="Classés par place réelle dans mon travail : ce que je pratique au quotidien, ce que j'utilise régulièrement en projet, et ce qui vient en complément."
+          title="Mes outils"
         />
 
         <div className="grid gap-5 md:grid-cols-2">
@@ -58,12 +56,6 @@ export function Skills({ groups }: { groups: SkillGroup[] }) {
                       </li>
                     ))}
                   </ul>
-                  {group.note ? (
-                    <p className="mt-auto pt-6 text-sm leading-relaxed text-muted">
-                      <span aria-hidden className="mr-2 text-foreground">→</span>
-                      {group.note}
-                    </p>
-                  ) : null}
                 </article>
               </Reveal>
             );

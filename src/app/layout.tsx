@@ -23,21 +23,22 @@ const anton = Anton({
 const gtmId = "GTM-WHJH3BZX";
 const isProduction = process.env.NODE_ENV === "production";
 
-const TITLE = "Fortune Assouan — Consultant Power BI & Data Analyst freelance";
+const TITLE = "Fortune Assouan — Développeur web & Data Analyst";
 const DESCRIPTION =
-  "Consultant Power BI et data analyst freelance basé à Lomé (Togo) : tableaux de bord Power BI, analyse et fiabilisation des données, automatisation Excel et applications web métier. Missions au Togo, au Bénin, en Afrique francophone et à distance.";
+  "Développeur web et data analyst freelance basé à Lomé (Togo) : applications web de gestion, tableaux de bord Power BI et analyse de données. Au Togo, au Bénin, en Afrique francophone et à distance.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: TITLE, template: "%s — Fortune Assouan" },
   description: DESCRIPTION,
   keywords: [
-    "Consultant Power BI",
+    "Développeur web freelance",
     "Data Analyst freelance",
+    "Application web de gestion",
     "Tableau de bord Power BI",
-    "Business Intelligence",
     "Analyse de données",
-    "Développement d'applications web",
+    "Django",
+    "Next.js",
     "Lomé",
     "Togo",
     "Bénin",
@@ -52,13 +53,13 @@ export const metadata: Metadata = {
     siteName: "Fortune Assouan",
     title: TITLE,
     description:
-      "Tableaux de bord Power BI, analyse de données et applications web pour les entreprises. Basé à Lomé, missions au Togo, au Bénin et à distance.",
+      "Applications web, tableaux de bord Power BI et analyse de données pour les entreprises. Basé à Lomé, au Togo, au Bénin et à distance.",
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description:
-      "Tableaux de bord Power BI, analyse de données et applications web pour les entreprises. Basé à Lomé, missions à distance.",
+      "Applications web, tableaux de bord Power BI et analyse de données pour les entreprises. Basé à Lomé.",
   },
   robots: { index: true, follow: true },
 };
@@ -77,7 +78,7 @@ const jsonLd = {
       "@id": `${SITE_URL}/#person`,
       name: "Fortune Assouan",
       alternateName: "Djawou Fortuné Assouan",
-      jobTitle: "Consultant Power BI · Data Analyst",
+      jobTitle: "Développeur web · Data Analyst",
       url: SITE_URL,
       email: "mailto:fortune.assouan@lomebs.com",
       address: { "@type": "PostalAddress", addressLocality: "Lomé", addressCountry: "TG" },
@@ -86,13 +87,13 @@ const jsonLd = {
         "https://github.com/fortune344",
         "https://www.linkedin.com/in/fortun%C3%A9-assouan-a29561a7",
       ],
-      knowsAbout: ["Power BI", "DAX", "Power Query", "SQL", "Python", "Pandas", "Excel", "Qualité des données", "Business Intelligence", "Django"],
+      knowsAbout: ["Power BI", "DAX", "Power Query", "SQL", "Python", "Pandas", "Excel", "Qualité des données", "Business Intelligence", "Django", "Next.js", "Développement web"],
       knowsLanguage: ["fr", "en"],
     },
     {
       "@type": "ProfessionalService",
       "@id": `${SITE_URL}/#service`,
-      name: "Fortune Assouan — Power BI, analyse de données et applications web",
+      name: "Fortune Assouan — Applications web, Power BI et analyse de données",
       url: SITE_URL,
       email: "fortune.assouan@lomebs.com",
       founder: { "@id": `${SITE_URL}/#person` },

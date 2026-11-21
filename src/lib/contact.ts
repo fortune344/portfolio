@@ -4,10 +4,9 @@
  */
 
 export const SERVICE_OPTIONS = [
-  { value: "powerbi", label: "Tableau de bord Power BI" },
-  { value: "analyse", label: "Analyse de données" },
-  { value: "excel", label: "Automatisation / Excel" },
   { value: "web", label: "Application web" },
+  { value: "powerbi", label: "Tableau de bord" },
+  { value: "analyse", label: "Analyse de données" },
   { value: "autre", label: "Autre / je ne sais pas encore" },
 ] as const;
 

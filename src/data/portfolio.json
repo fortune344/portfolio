@@ -1,11 +1,11 @@
 {
   "profile": {
     "bio": [
-      "Data analyst basé à Lomé, j'ai fait mes armes en stage chez AnalystLab Africa et Codveda Technology, puis comme stagiaire Data & Digital au Ministère du Tourisme, de la Culture et des Arts du Togo, où j'ai consolidé et fiabilisé des sources de données hétérogènes.",
-      "Développeur web indépendant depuis 2024, je livre aussi des applications métier (Django, Next.js). Je termine un Bachelor en Systèmes d'Information à Lomé Business School, avec un cap : devenir ingénieur Data & IA."
+      "Développeur web et data analyst basé à Lomé. Je conçois des applications web en indépendant depuis 2024 (Django, Next.js), et j'ai pratiqué l'analyse de données en stage chez AnalystLab Africa, Codveda Technology et au Ministère du Tourisme, de la Culture et des Arts du Togo.",
+      "Je termine un Bachelor en Systèmes d'Information à Lomé Business School. Mon objectif : devenir ingénieur Data & IA."
     ],
     "name": "Fortune Assouan",
-    "role": "Consultant Power BI · Data Analyst",
+    "role": "Développeur web · Data Analyst",
     "cvUrl": "https://dxxwqtvgzezcydtrbquk.supabase.co/storage/v1/object/public/portfolio/documents/1789572911267-fortune-assouan-cv.pdf",
     "email": "fortune.assouan@lomebs.com",
     "phone": "+228 96 03 34 86",
@@ -18,10 +18,23 @@
     "phoneHref": "tel:+22896033486",
     "githubUser": "fortune344",
     "availability": "Disponible pour de nouvelles missions",
-    "headline": "J'accompagne les entreprises dans la valorisation de leurs données de gestion grâce à Power BI.",
-    "pitch": "Ventes, marges, stocks, activité : des tableaux de bord fiables pour décider plus vite. Basé à Lomé, j'interviens au Togo, au Bénin et à distance."
+    "headline": "Je développe des applications web et je transforme les données des entreprises en tableaux de bord utiles.",
+    "pitch": "Basé à Lomé, je travaille avec des entreprises au Togo, au Bénin et à distance."
   },
   "skillGroups": [
+    {
+      "title": "Développement web",
+      "level": "principal",
+      "skills": [
+        "Django",
+        "Python",
+        "JavaScript",
+        "React / Next.js",
+        "HTML / CSS",
+        "Tailwind CSS"
+      ],
+      "note": "GestionPro et Digi-Farm (Django), et ce portfolio avec son administration (Next.js, Supabase)."
+    },
     {
       "title": "Business Intelligence",
       "level": "principal",
@@ -56,19 +69,6 @@
         "Modélisation relationnelle"
       ],
       "note": "Base de gestion commerciale sous SQL Server : tables, clés étrangères, contraintes et requêtes."
-    },
-    {
-      "title": "Développement web",
-      "level": "regulier",
-      "skills": [
-        "Django",
-        "Python",
-        "JavaScript",
-        "React / Next.js",
-        "HTML / CSS",
-        "Tailwind CSS"
-      ],
-      "note": "GestionPro et Digi-Farm (Django), et ce portfolio avec son administration (Next.js, Supabase)."
     },
     {
       "title": "Machine learning",

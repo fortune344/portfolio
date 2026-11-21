@@ -34,13 +34,11 @@ export function Services() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           id="services-title"
-          index="01"
           eyebrow="Services"
-          title="Vos données de gestion, enfin utiles pour décider"
-          description="Quatre façons de vous aider, de la donnée brute à l'outil prêt à l'emploi. Chaque mission part d'un problème concret de votre entreprise."
+          title="Ce que je peux faire pour vous"
         />
 
-        <div className="grid border-t border-line md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:grid-rows-[auto_auto_auto_auto_1fr] md:gap-x-14">
+        <div className="grid border-t border-line md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:grid-rows-[auto_auto_auto_1fr] md:gap-x-14">
           {SERVICES.map((service, i) => {
             const isActive = i === active;
             const proofs = service.proof
@@ -58,9 +56,6 @@ export function Services() {
                       onClick={() => setActive(i)}
                       className="group flex w-full items-start gap-5 border-b border-line py-6 text-left md:py-8"
                     >
-                      <span className={cn("pt-1.5 text-xs font-semibold tracking-[0.2em] transition-colors", isActive ? "text-foreground" : "text-muted")}>
-                        {service.number}
-                      </span>
                       <span className="flex-1">
                         <span
                           className={cn(
@@ -70,7 +65,7 @@ export function Services() {
                         >
                           {service.title}
                         </span>
-                        <span className={cn("mt-2 block text-sm transition-colors", isActive ? "text-muted" : "text-muted")}>
+                        <span className="mt-2 block text-sm text-muted">
                           {service.short}
                         </span>
                       </span>
@@ -100,7 +95,7 @@ export function Services() {
                   role="region"
                   aria-labelledby={`service-tab-${service.id}`}
                   hidden={!isActive}
-                  className="md:col-start-2 md:row-span-5 md:row-start-1"
+                  className="md:col-start-2 md:row-span-4 md:row-start-1"
                 >
                   <AnimatePresence mode="wait">
                     {isActive ? (
@@ -120,48 +115,27 @@ export function Services() {
                           <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-cool">Ce que je mets en place</p>
                           <p className="mt-2 text-sm leading-relaxed text-muted sm:text-base">{service.solution}</p>
 
-                          <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-cool">Ce que vous y gagnez</p>
-                          <ul className="mt-3 space-y-2.5">
-                            {service.benefits.map((b) => (
-                              <li key={b} className="flex gap-3 text-sm leading-relaxed">
-                                <span aria-hidden className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-foreground" />
-                                {b}
-                              </li>
+                          <div className="mt-7 flex flex-wrap gap-2">
+                            {service.tools.map((t) => (
+                              <span key={t} className="rounded-full border border-line px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em]">
+                                {t}
+                              </span>
                             ))}
-                          </ul>
-
-                          <div className="mt-7 grid gap-6 border-t border-line pt-6 sm:grid-cols-2">
-                            <div>
-                              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-cool">Exemples de missions</p>
-                              <ul className="mt-3 space-y-1.5 text-sm text-muted">
-                                {service.useCases.map((u) => <li key={u}>{u}</li>)}
-                              </ul>
-                            </div>
-                            <div>
-                              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-cool">Outils</p>
-                              <p className="mt-3 flex flex-wrap gap-2">
-                                {service.tools.map((t) => (
-                                  <span key={t} className="rounded-full border border-line px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em]">
-                                    {t}
-                                  </span>
-                                ))}
-                              </p>
-                              {proofs.length > 0 ? (
-                                <>
-                                  <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-cool">Exemples réalisés</p>
-                                  <ul className="mt-2 space-y-1">
-                                    {proofs.map((c) => (
-                                      <li key={c.slug}>
-                                        <Link href={`/realisations/${c.slug}`} className="link-underline text-sm">
-                                          {c.name}
-                                        </Link>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </>
-                              ) : null}
-                            </div>
                           </div>
+
+                          {proofs.length > 0 ? (
+                            <p className="mt-6 text-sm text-muted">
+                              Exemples :{" "}
+                              {proofs.map((c, j) => (
+                                <span key={c.slug}>
+                                  {j > 0 ? ", " : null}
+                                  <Link href={`/realisations/${c.slug}`} className="link-underline text-foreground">
+                                    {c.name}
+                                  </Link>
+                                </span>
+                              ))}
+                            </p>
+                          ) : null}
 
                           <a
                             href="#contact"

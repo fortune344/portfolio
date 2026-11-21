@@ -9,7 +9,6 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TrackedLink } from "@/components/ui/TrackedLink";
 import { CASE_STUDIES, isCoveredByCaseStudy, type CaseStudy } from "@/content/case-studies";
 import type { Project } from "@/data/portfolio";
-import { cn } from "@/lib/utils";
 
 type WorkProps = { projects: Project[]; githubUrl: string };
 
@@ -52,7 +51,7 @@ function Meta({ study }: { study: CaseStudy }) {
 function ReadMore() {
   return (
     <span className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]">
-      <span className="link-underline">Lire l&apos;étude de cas</span>
+      <span className="link-underline">Voir le projet</span>
       <ArrowUpRight size={15} aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
     </span>
   );
@@ -63,7 +62,7 @@ function LeadCard({ study }: { study: CaseStudy }) {
   return (
     <Link
       href={`/realisations/${study.slug}`}
-      data-cursor="Voir l'étude"
+      data-cursor="Voir le projet"
       className="group block rounded-[2rem] bg-card p-5 transition-colors duration-500 hover:bg-[#232838] sm:p-8 md:rounded-[2.5rem] md:p-12"
     >
       <article className="grid items-center gap-8 md:grid-cols-12 md:gap-12">
@@ -102,7 +101,7 @@ function Card({ study, figure = true }: { study: CaseStudy; figure?: boolean }) 
   return (
     <Link
       href={`/realisations/${study.slug}`}
-      data-cursor="Voir l'étude"
+      data-cursor="Voir le projet"
       className="group flex h-full flex-col rounded-[2rem] bg-card p-5 transition-colors duration-500 hover:bg-[#232838] sm:p-7"
     >
       <article className="flex h-full flex-col">
@@ -129,16 +128,17 @@ function Card({ study, figure = true }: { study: CaseStudy; figure?: boolean }) 
   );
 }
 
+/** Ordre des cartes sous l'étude principale : développement et data en alternance. */
+const GRID_ORDER = ["gestionpro", "healthconnect", "telco-churn", "digi-farm"];
+
 /**
- * Réalisations, hiérarchisées par pertinence commerciale :
- * 1. l'étude phare (pilotage commercial, cœur de l'offre Power BI) ;
- * 2. les analyses de données ; 3. les solutions web ;
- * 4. les autres travaux (contenu Supabase), en liste compacte.
+ * Réalisations : l'étude principale en grand, puis applications web et
+ * analyses de données en alternance, puis les autres travaux (Supabase)
+ * en liste compacte.
  */
 export function Work({ projects, githubUrl }: WorkProps) {
   const [lead, ...rest] = CASE_STUDIES;
-  const data = rest.filter((c) => c.kind === "data");
-  const web = rest.filter((c) => c.kind === "web");
+  const grid = [...rest].sort((x, y) => GRID_ORDER.indexOf(x.slug) - GRID_ORDER.indexOf(y.slug));
   const others = projects.filter((p) => !isCoveredByCaseStudy(p));
 
   return (
@@ -146,10 +146,9 @@ export function Work({ projects, githubUrl }: WorkProps) {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
           id="realisations-title"
-          index="02"
           eyebrow="Réalisations"
-          title="Des analyses qui répondent à des questions business"
-          description="Études de cas complètes : le contexte, les données, la méthode et ce que les chiffres ont révélé. Captures réelles des tableaux de bord et des applications."
+          title="Quelques projets"
+          description="Applications web et analyses de données. Chaque projet a sa page : le contexte, la méthode et le résultat."
         />
 
         <Reveal>
@@ -157,30 +156,17 @@ export function Work({ projects, githubUrl }: WorkProps) {
         </Reveal>
 
         <div className="mt-6 grid gap-6 md:mt-8 md:grid-cols-2 md:gap-8">
-          {data.map((study, i) => (
-            <Reveal key={study.slug} delay={i * 0.1} className="h-full">
-              <Card study={study} />
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="mb-8 mt-20 flex items-end justify-between gap-6 border-b border-line pb-5">
-          <h3 className="font-display text-3xl uppercase tracking-tight sm:text-4xl">Solutions web</h3>
-          <p className="max-w-xs text-right text-xs text-muted">Applications métier développées de bout en bout.</p>
-        </Reveal>
-        <div className={cn("grid gap-6 md:gap-8", web.length > 1 && "md:grid-cols-2")}>
-          {web.map((study, i) => (
-            <Reveal key={study.slug} delay={i * 0.1} className="h-full">
-              <Card study={study} figure={false} />
+          {grid.map((study, i) => (
+            <Reveal key={study.slug} delay={(i % 2) * 0.1} className="h-full">
+              <Card study={study} figure={study.kind === "data"} />
             </Reveal>
           ))}
         </div>
 
         {others.length > 0 ? (
           <div className="mt-20">
-            <Reveal className="mb-2 flex items-end justify-between gap-6">
+            <Reveal className="mb-2">
               <h3 className="font-display text-3xl uppercase tracking-tight sm:text-4xl">Autres travaux</h3>
-              <p className="max-w-xs text-right text-xs text-muted">Exercices, hackathon et outils, avec leur code source.</p>
             </Reveal>
             <OtherWork projects={others} />
           </div>

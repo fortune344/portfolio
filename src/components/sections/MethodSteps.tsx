@@ -6,7 +6,7 @@ import { APPROACH } from "@/content/site";
 import { EASE, VIEWPORT } from "@/lib/motion";
 
 /**
- * Les 4 étapes de la méthode, reliées par une ligne verticale qui se remplit
+ * Les étapes de la méthode, reliées par une ligne verticale qui se remplit
  * au rythme du défilement (animation synchronisée au scroll).
  */
 export function MethodSteps() {
@@ -26,7 +26,7 @@ export function MethodSteps() {
       />
       {APPROACH.steps.map((step, i) => (
         <m.li
-          key={step.number}
+          key={step.title}
           className="relative"
           initial={reduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -39,8 +39,7 @@ export function MethodSteps() {
           >
             <span className="h-1.5 w-1.5 rounded-full bg-foreground sm:h-2 sm:w-2" />
           </span>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-muted">{step.number}</p>
-          <h3 className="mt-1 font-display text-3xl uppercase tracking-tight sm:text-4xl">{step.title}</h3>
+          <h3 className="font-display text-3xl uppercase tracking-tight sm:text-4xl">{step.title}</h3>
           <p className="mt-2 max-w-md text-sm leading-relaxed text-muted sm:text-base">{step.text}</p>
         </m.li>
       ))}

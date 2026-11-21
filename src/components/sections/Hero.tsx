@@ -3,14 +3,14 @@ import type { CSSProperties } from "react";
 import { HeroMenuButton, HeroParallax } from "@/components/sections/HeroClient";
 import { AvatarArt } from "@/components/ui/AvatarArt";
 import { TrackedLink } from "@/components/ui/TrackedLink";
-import { HERO, SERVICES } from "@/content/site";
+import { HERO } from "@/content/site";
 import type { Profile } from "@/data/portfolio";
 
 const d = (delay: number) => ({ "--delay": `${delay}s` }) as CSSProperties;
 
 /**
  * Hero éditorial : nom géant Anton, avatar qui le chevauche, coins d'écran.
- * La proposition de valeur et les deux appels à l'action occupent le bas.
+ * La phrase d'accroche et les deux appels à l'action occupent le bas.
  * Composant serveur : les entrées sont des animations CSS (visibles dès le
  * premier rendu) ; seule la parallaxe au scroll est en JavaScript.
  */
@@ -31,7 +31,7 @@ export function Hero({ profile }: { profile: Profile }) {
         <nav aria-label="Accès rapide" className="hidden items-center gap-8 text-sm font-medium md:flex">
           <a href="#services" className="transition-opacity hover:opacity-70">Services</a>
           <a href="#realisations" className="transition-opacity hover:opacity-70">Réalisations</a>
-          <a href="#approche" className="transition-opacity hover:opacity-70">Approche</a>
+          <a href="#approche" className="transition-opacity hover:opacity-70">À propos</a>
           {profile.cvUrl ? (
             <a href={profile.cvUrl} target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-70">
               CV
@@ -44,21 +44,12 @@ export function Hero({ profile }: { profile: Profile }) {
       {/* Nom géant + avatar */}
       <div className="relative z-0 flex flex-1 flex-col items-center justify-center px-4 pb-6 pt-2">
         <HeroParallax className="relative flex flex-col items-center">
-          {/* Rôle + disponibilité */}
-          <div className="hero-fade mb-6 flex flex-col items-center gap-3 text-center sm:mb-7" style={d(0.45)}>
-            {profile.availability ? (
-              <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-background/40 px-3.5 py-1.5 text-[11px] font-medium backdrop-blur-sm">
-                <span className="relative flex h-2 w-2" aria-hidden>
-                  <span className="pulse-ring absolute inset-0 rounded-full bg-foreground" />
-                  <span className="relative h-2 w-2 rounded-full bg-foreground" />
-                </span>
-                {profile.availability}
-              </p>
-            ) : null}
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-muted sm:text-xs">
-              {HERO.role}
-            </p>
-          </div>
+          <p
+            className="hero-fade mb-6 text-center text-[11px] font-semibold uppercase tracking-[0.3em] text-muted sm:mb-7 sm:text-xs"
+            style={d(0.45)}
+          >
+            {HERO.role}
+          </p>
 
           <h1 className="relative text-center font-display uppercase leading-[0.86] tracking-tight">
             {/* Point décoratif flottant, au-dessus du nom (comme dans la version d'origine) */}
@@ -75,7 +66,7 @@ export function Hero({ profile }: { profile: Profile }) {
                 {profile.lastName}
               </span>
             </span>
-            <span className="sr-only">, consultant Power BI et data analyst freelance à Lomé</span>
+            <span className="sr-only">, développeur web et data analyst à Lomé</span>
           </h1>
 
           {/* Avatar chevauchant le nom */}
@@ -85,7 +76,7 @@ export function Hero({ profile }: { profile: Profile }) {
                 <AvatarArt label={`Illustration de ${profile.name}`} className="block h-full w-full" />
               </div>
               <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 scale-90 whitespace-nowrap rounded-lg bg-[#f2ecdf] px-4 py-2 text-xs font-semibold text-ink opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
-                Parlons de vos données !
+                Parlons de votre projet !
               </div>
             </div>
           </HeroParallax>
@@ -93,7 +84,7 @@ export function Hero({ profile }: { profile: Profile }) {
       </div>
 
       {/* Bas du hero : proposition de valeur + appels à l'action */}
-      <div className="z-10 grid gap-8 p-5 sm:p-8 md:pt-2 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] md:items-end md:gap-12">
+      <div className="z-10 p-5 sm:p-8 md:pt-2">
         <div className="hero-fade max-w-xl" style={d(0.6)}>
           <p className="text-lg font-medium leading-snug sm:text-[1.4rem] sm:leading-snug">{headline}</p>
           <p className="mt-3 text-sm leading-relaxed text-muted">{pitch}</p>
@@ -111,26 +102,11 @@ export function Hero({ profile }: { profile: Profile }) {
               track={{ event: "cta_click", cta: "hero_realisations" }}
               className="group inline-flex items-center gap-2 rounded-xl border border-foreground/40 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-foreground hover:text-ink"
             >
-              Découvrir mes réalisations
+              Voir mes projets
               <ArrowDownRight size={15} aria-hidden className="transition-transform duration-200 group-hover:translate-y-0.5" />
             </TrackedLink>
           </div>
         </div>
-
-        <ul
-          aria-label="Services"
-          className="hero-fade hidden gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] md:grid md:justify-self-end md:text-right"
-          style={d(0.75)}
-        >
-          {SERVICES.map((s) => (
-            <li key={s.id}>
-              <a href="#services" className="text-muted transition-colors hover:text-foreground">
-                <span className="mr-3 text-foreground/70">{s.number}</span>
-                {s.title}
-              </a>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );

@@ -13,11 +13,7 @@ export function Contact({ profile }: { profile: Profile }) {
     <section id="contact" aria-labelledby="contact-title" className="overflow-hidden px-5 py-24 sm:px-8 md:py-32">
       <div className="mx-auto w-full max-w-7xl">
         <Reveal distance={80} duration={0.9}>
-          <p className="mb-4 flex items-center justify-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-muted">
-            <span className="text-foreground">06</span>
-            <span aria-hidden className="h-px w-8 bg-line" />
-            Contact
-          </p>
+          <p className="mb-4 text-center text-[11px] font-semibold uppercase tracking-[0.3em] text-muted">Contact</p>
           <h2
             id="contact-title"
             className="text-center font-display text-[clamp(3.6rem,16.5vw,15rem)] uppercase leading-[0.9] tracking-tight"

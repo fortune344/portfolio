@@ -16,10 +16,8 @@ export function Journey({ timeline }: { timeline: TimelineEntry[] }) {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           id="parcours-title"
-          index="05"
           eyebrow="Parcours"
           title="Expériences et formation"
-          description="Stages en analyse de données, mission au sein d'un ministère, projets web pour des clients : là où la méthode a été mise à l'épreuve."
         />
 
         <div className="border-t border-line">
