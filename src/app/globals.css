@@ -57,6 +57,8 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
+  /* La navigation fixe ne doit pas masquer le haut des sections ciblées par une ancre. */
+  scroll-padding-top: 5.5rem;
 }
 
 body {
@@ -113,6 +115,70 @@ body {
   opacity: 0.7;
 }
 
+/* ——— Motion system (CSS) ———
+   Mêmes courbes que src/lib/motion.ts. Les entrées du hero sont en CSS pour
+   s'afficher dès le premier rendu, sans attendre le JavaScript. */
+:root {
+  --ease-standard: cubic-bezier(0.21, 0.47, 0.32, 0.98);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes hero-rise {
+  from {
+    transform: translate3d(0, 110%, 0);
+  }
+}
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+}
+@keyframes hero-pop {
+  from {
+    transform: translate3d(0, 28px, 0) scale(0.86) rotate(-4deg);
+  }
+}
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: var(--len, 1000);
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.hero-rise {
+  animation: hero-rise 1s var(--ease-expo) both;
+  animation-delay: var(--delay, 0s);
+}
+.hero-fade {
+  animation: hero-fade 0.8s var(--ease-standard) both;
+  animation-delay: var(--delay, 0s);
+}
+/* Transform uniquement : l'avatar (élément LCP) est peint dès le premier rendu. */
+.hero-pop {
+  animation: hero-pop 1.1s var(--ease-expo) both;
+  animation-delay: var(--delay, 0s);
+}
+.draw-line {
+  stroke-dasharray: var(--len, 1000);
+  animation: draw-line 2.2s var(--ease-expo) both;
+  animation-delay: var(--delay, 0s);
+}
+/* Halo de l'indicateur de disponibilité : 3 pulsations puis immobile. */
+.pulse-ring {
+  animation: pulse-ring 1.8s var(--ease-standard) 3;
+  animation-delay: 1.4s;
+}
+
 /* Animation d'entrée des modales admin */
 @keyframes modal-in {
   from {
@@ -128,13 +194,19 @@ body {
   animation: modal-in 0.24s cubic-bezier(0.21, 0.47, 0.32, 0.98);
 }
 
-/* Images en gris par défaut, couleurs normales au survol */
-.color-reveal {
-  filter: grayscale(1);
-  transition: filter 0.4s ease;
-}
-.color-reveal:hover {
-  filter: grayscale(0);
+/* Images en gris par défaut, couleurs normales au survol.
+   Uniquement sur les appareils qui ont un survol : sur écran tactile,
+   les images restent en couleur (sinon elles ne le seraient jamais). */
+@media (hover: hover) {
+  .color-reveal {
+    filter: grayscale(1);
+    transition: filter 0.5s ease;
+  }
+  .color-reveal:hover,
+  .group:hover .color-reveal,
+  .group:focus-visible .color-reveal {
+    filter: grayscale(0);
+  }
 }
 
 /* Curseur personnalisé : uniquement sur pointeurs précis */

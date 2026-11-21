@@ -2,22 +2,26 @@
  * Événements de tracking côté application : un simple `dataLayer.push`
  * typé, sans appel à gtag. C'est le conteneur GTM qui décide quoi en faire.
  *
- * `window.dataLayer` est déclaré globalement par @next/third-parties ; il
- * n'existe qu'en production (GTM n'est chargé que là) — sinon on ne fait rien.
+ * GTM est chargé en différé (après le chargement de la page) et uniquement en
+ * production : le dataLayer est créé ici s'il n'existe pas encore, GTM traite
+ * ensuite les événements déjà empilés.
  */
 
-export type AnalyticsEvent =
-  | { event: "contact_submit"; method: "email" | "phone" }
-  | { event: "project_click"; project_name: string }
-  | { event: "github_click"; link_url: string };
-
-function getDataLayer(): unknown[] | null {
-  if (typeof window === "undefined") return null;
-  const layer: unknown = window.dataLayer;
-  return Array.isArray(layer) ? layer : null;
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+  }
 }
 
-/** Pousse un événement dans le dataLayer GTM s'il est présent. */
+export type AnalyticsEvent =
+  | { event: "contact_submit"; method: "email" | "phone" | "form"; service?: string }
+  | { event: "project_click"; project_name: string }
+  | { event: "github_click"; link_url: string }
+  | { event: "cta_click"; cta: string };
+
+/** Pousse un événement dans le dataLayer GTM (production uniquement). */
 export function trackEvent(payload: AnalyticsEvent): void {
-  getDataLayer()?.push(payload);
+  if (typeof window === "undefined" || process.env.NODE_ENV !== "production") return;
+  window.dataLayer = window.dataLayer ?? [];
+  window.dataLayer.push(payload);
 }

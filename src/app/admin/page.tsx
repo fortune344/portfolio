@@ -7,6 +7,7 @@ import {
   EyeOff,
   ExternalLink,
   FolderGit2,
+  Inbox,
   Languages,
   LayoutDashboard,
   LockKeyhole,
@@ -28,6 +29,7 @@ import {
   ProjectsPanel,
   SkillsPanel,
 } from "@/components/admin/panels";
+import { MessagesPanel } from "@/components/admin/MessagesPanel";
 import { BTN_PRIMARY, BTN_SMALL, FOCUS, INPUT, LABEL } from "@/components/admin/primitives";
 import { Toast, type ToastState } from "@/components/admin/Toast";
 import type { PortfolioData } from "@/data/portfolio";
@@ -41,15 +43,16 @@ import { cn } from "@/lib/utils";
  * fermeture de l'onglet) et accepte Ctrl+S / ⌘S pour enregistrer.
  */
 
-type TabId = "profil" | "apropos" | "competences" | "projets" | "parcours" | "extras";
+type TabId = "profil" | "apropos" | "competences" | "projets" | "parcours" | "extras" | "messages";
 
 const TABS: { id: TabId; label: string; description: string; icon: LucideIcon }[] = [
   { id: "profil", label: "Profil", description: "Identité, coordonnées, textes du Hero et CV.", icon: User },
-  { id: "apropos", label: "À propos", description: "Les paragraphes de la biographie.", icon: LayoutDashboard },
-  { id: "competences", label: "Compétences", description: "Groupes de compétences affichés à droite de la bio.", icon: Briefcase },
-  { id: "projets", label: "Projets", description: "Cartes projets, dans l'ordre d'affichage du site.", icon: FolderGit2 },
+  { id: "apropos", label: "À propos", description: "Biographie affichée dans la section Approche.", icon: LayoutDashboard },
+  { id: "competences", label: "Compétences", description: "Domaines de compétences, leur place dans l'activité et un exemple concret.", icon: Briefcase },
+  { id: "projets", label: "Projets", description: "Projets du site. Ceux qui ont une étude de cas sont présentés par elle ; les autres apparaissent dans « Autres travaux ».", icon: FolderGit2 },
   { id: "parcours", label: "Parcours", description: "Expériences, formations et projets marquants, du plus récent au plus ancien.", icon: RouteIcon },
   { id: "extras", label: "Langues & intérêts", description: "Langues parlées et centres d'intérêt.", icon: Languages },
+  { id: "messages", label: "Messages", description: "Demandes reçues via le formulaire de contact du site.", icon: Inbox },
 ];
 
 type View = "loading" | "login" | "disabled" | "ready";
@@ -106,6 +109,7 @@ export default function AdminPage() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- chargement initial asynchrone depuis l'API
     load();
   }, [load]);
 
@@ -494,6 +498,7 @@ export default function AdminPage() {
           {tab === "projets" && <ProjectsPanel {...panelProps} />}
           {tab === "parcours" && <JourneyPanel {...panelProps} />}
           {tab === "extras" && <ExtrasPanel {...panelProps} />}
+          {tab === "messages" && <MessagesPanel onError={(text) => setToast({ kind: "error", text })} />}
         </main>
       </div>
 

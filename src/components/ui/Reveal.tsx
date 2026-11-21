@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { m, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
+import { DURATION, EASE, VIEWPORT } from "@/lib/motion";
 
 type RevealProps = {
   children: ReactNode;
@@ -13,28 +14,26 @@ type RevealProps = {
   /** Décalage initial en px. */
   distance?: number;
   once?: boolean;
+  /** Élément rendu : `li` pour rester un enfant direct valide d'une liste. */
+  as?: "div" | "li";
 };
 
 /**
  * Apparition progressive au scroll.
  * N'anime que transform + opacity pour rester à 60 fps,
- * et se désactive si l'utilisateur préfère réduire les animations.
+ * et s'affiche directement si l'utilisateur préfère réduire les animations.
  */
 export function Reveal({
   children,
   from = "bottom",
   delay = 0,
-  duration = 0.6,
+  duration = DURATION.slow,
   className,
   distance = 32,
   once = true,
+  as = "div",
 }: RevealProps) {
   const reduceMotion = useReducedMotion();
-
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
   const offset = {
     bottom: { y: distance, x: 0 },
     left: { x: -distance, y: 0 },
@@ -48,19 +47,22 @@ export function Reveal({
       opacity: 1,
       x: 0,
       y: 0,
-      transition: { duration, delay, ease: [0.21, 0.47, 0.32, 0.98] },
+      transition: { duration, delay, ease: EASE.standard },
     },
   };
 
+  const Comp = as === "li" ? m.li : m.div;
   return (
-    <motion.div
+    <Comp
       className={className}
       variants={variants}
-      initial="hidden"
+      // Même arbre côté serveur et client (pas d'erreur d'hydratation) :
+      // en mouvement réduit, l'élément démarre directement dans son état final.
+      initial={reduceMotion ? "visible" : "hidden"}
       whileInView="visible"
-      viewport={{ once, margin: "-64px" }}
+      viewport={{ ...VIEWPORT, once }}
     >
       {children}
-    </motion.div>
+    </Comp>
   );
 }

@@ -27,23 +27,19 @@ import {
   ListField,
   moveInList,
 } from "@/components/admin/primitives";
+import { isCoveredByCaseStudy } from "@/content/case-studies";
+import { HERO, SKILL_LEVEL_LABEL } from "@/content/site";
 import type {
   Language,
   PortfolioData,
   Project,
   ProjectCategory,
-  ProjectScreenKind,
   SkillGroup,
+  SkillLevel,
   TimelineEntry,
 } from "@/data/portfolio";
 
 const CATEGORIES: ProjectCategory[] = ["Data", "Web", "Mobile", "Outil"];
-const SCREENS: { value: ProjectScreenKind; label: string }[] = [
-  { value: "chart", label: "Graphique (dashboard)" },
-  { value: "kanban", label: "Kanban (app web)" },
-  { value: "table", label: "Tableau (SQL / Excel)" },
-  { value: "terminal", label: "Terminal (script)" },
-];
 
 /** Description laissée à rédiger (placeholder « TODO — … »). */
 const isTodo = (text: string) => /^\s*TODO\b/i.test(text);
@@ -93,7 +89,7 @@ export function ProfilePanel({ data, setData }: PanelProps) {
       <CardGrid>
         <Card icon={User} title="Identité" subtitle={`${profile.name} — ${profile.role}`} onClick={() => setOpen("identite")} />
         <Card icon={MapPin} title="Coordonnées & réseaux" subtitle={profile.email} onClick={() => setOpen("contact")} />
-        <Card icon={FileText} title="Textes du Hero" subtitle="Disponibilité, phrases d'accroche" onClick={() => setOpen("hero")} />
+        <Card icon={FileText} title="Textes du Hero" subtitle="Disponibilité, proposition de valeur" onClick={() => setOpen("hero")} />
         <Card icon={FileDown} title="CV téléchargeable" subtitle={profile.cvUrl ? "CV en ligne — cliquez pour gérer" : "Aucun CV — cliquez pour en ajouter un"} onClick={() => setOpen("cv")} />
       </CardGrid>
 
@@ -118,13 +114,10 @@ export function ProfilePanel({ data, setData }: PanelProps) {
       </Modal>
 
       <Modal open={open === "hero"} title="Textes du Hero" onClose={() => setOpen(null)} footer={<ModalFooter onClose={() => setOpen(null)} />}>
-        <Field label="Disponibilité (bulle avatar)" value={profile.availability} onChange={(v) => patch({ availability: v })} />
-        <Field label="Texte en bas à gauche" value={profile.statusLine} onChange={(v) => patch({ statusLine: v })} textarea />
-        <div className="grid gap-5 sm:grid-cols-2">
-          <Field label="Texte du lien souligné" value={profile.statusLink.label} onChange={(v) => patch({ statusLink: { ...profile.statusLink, label: v } })} />
-          <Field label="Cible du lien (#contact, URL…)" value={profile.statusLink.href} onChange={(v) => patch({ statusLink: { ...profile.statusLink, href: v } })} />
-        </div>
-        <Field label="Texte en bas à droite" value={profile.focusLine} onChange={(v) => patch({ focusLine: v })} textarea />
+        <Field label="Indicateur de disponibilité (vide = masqué)" value={profile.availability} placeholder="Disponible pour de nouvelles missions" onChange={(v) => patch({ availability: v })} />
+        <Field label="Proposition de valeur (phrase principale)" value={profile.headline ?? ""} placeholder={HERO.headline} onChange={(v) => patch({ headline: v })} textarea />
+        <Field label="Phrase d'accompagnement" value={profile.pitch ?? ""} placeholder={HERO.pitch} onChange={(v) => patch({ pitch: v })} textarea />
+        <p className="text-xs leading-relaxed text-muted">Laisser vide pour utiliser le texte par défaut (affiché en gris).</p>
       </Modal>
 
       <Modal open={open === "cv"} title="CV téléchargeable" subtitle="Le bouton « Télécharger mon CV » n'apparaît sur le site que si un fichier est présent." onClose={() => setOpen(null)} footer={<ModalFooter onClose={() => setOpen(null)} />}>
@@ -194,7 +187,7 @@ export function SkillsPanel({ data, setData, reloadKey }: PanelProps) {
     <>
       <CardGrid>
         {data.skillGroups.map((g, i) => (
-          <Card key={i} icon={Briefcase} title={g.title || "Sans titre"} subtitle={g.skills.join(", ") || "Aucune compétence"} onClick={() => setEditing(i)} />
+          <Card key={i} icon={Briefcase} title={g.title || "Sans titre"} subtitle={g.skills.join(", ") || "Aucune compétence"} badge={SKILL_LEVEL_LABEL[g.level ?? "regulier"]} onClick={() => setEditing(i)} />
         ))}
         <AddCard label="Ajouter un groupe" onClick={add} />
       </CardGrid>
@@ -207,8 +200,15 @@ export function SkillsPanel({ data, setData, reloadKey }: PanelProps) {
       >
         {group && editing !== null ? (
           <>
-            <Field label="Titre du groupe" value={group.title} onChange={(v) => update(editing, { title: v })} />
+            <Field label="Titre du domaine" value={group.title} onChange={(v) => update(editing, { title: v })} />
+            <label className="block">
+              <span className={LABEL}>Place dans mon activité</span>
+              <select value={group.level ?? "regulier"} onChange={(e) => update(editing, { level: e.target.value as SkillLevel })} className={INPUT}>
+                {(Object.keys(SKILL_LEVEL_LABEL) as SkillLevel[]).map((l) => <option key={l} value={l}>{SKILL_LEVEL_LABEL[l]}</option>)}
+              </select>
+            </label>
             <ListField label="Compétences" values={group.skills} reloadKey={reloadKey} onCommit={(values) => update(editing, { skills: values })} />
+            <Field label="Exemple concret d'utilisation (facultatif)" value={group.note ?? ""} onChange={(v) => update(editing, { note: v })} textarea />
           </>
         ) : null}
       </Modal>
@@ -223,7 +223,7 @@ const SCREEN_ICON = { chart: Briefcase, kanban: FolderGit2, table: FileText, ter
 export function ProjectsPanel({ data, setData, reloadKey }: PanelProps) {
   const [editing, setEditing] = useState<number | null>(null);
   const project = editing !== null ? data.projects[editing] : null;
-  const featuredCount = data.projects.filter((p) => p.featured).length;
+  const coveredCount = data.projects.filter(isCoveredByCaseStudy).length;
   const todoCount = data.projects.filter((p) => isTodo(p.description)).length;
 
   const update = (index: number, patch: Partial<Project>) =>
@@ -251,7 +251,7 @@ export function ProjectsPanel({ data, setData, reloadKey }: PanelProps) {
             thumb={p.image}
             placeholder
             icon={SCREEN_ICON[p.screen]}
-            badge={p.featured ? `★ ${p.category}` : p.category}
+            badge={isCoveredByCaseStudy(p) ? "Étude de cas" : p.category}
             warning={isTodo(p.description) ? "À rédiger" : undefined}
             onClick={() => setEditing(i)}
           />
@@ -259,7 +259,7 @@ export function ProjectsPanel({ data, setData, reloadKey }: PanelProps) {
         <AddCard label="Ajouter un projet" onClick={add} />
       </CardGrid>
       <p className="mt-4 text-xs text-muted">
-        {featuredCount} projet{featuredCount > 1 ? "s" : ""} en vedette (★) sur {data.projects.length} — ordre d'affichage modifiable dans chaque fiche (↑ / ↓).
+        {coveredCount} projet{coveredCount > 1 ? "s" : ""} présenté{coveredCount > 1 ? "s" : ""} par une étude de cas, {data.projects.length - coveredCount} dans « Autres travaux » — ordre modifiable dans chaque fiche (↑ / ↓).
         {todoCount > 0 ? ` ${todoCount} description${todoCount > 1 ? "s" : ""} à rédiger.` : ""}
       </p>
 
@@ -290,17 +290,13 @@ export function ProjectsPanel({ data, setData, reloadKey }: PanelProps) {
                   {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
               </label>
-              <label className="block sm:col-span-2">
-                <span className={LABEL}>Aperçu dessiné (si aucune image)</span>
-                <select value={project.screen} onChange={(e) => update(editing, { screen: e.target.value as Project["screen"] })} className={INPUT}>
-                  {SCREENS.map((s) => <option key={s.value} value={s.value}>{s.label}</option>)}
-                </select>
-              </label>
             </div>
-            <label className="flex items-center gap-2.5 text-sm">
-              <input type="checkbox" checked={project.featured} onChange={(e) => update(editing, { featured: e.target.checked })} className="h-4 w-4 accent-[#e8e3d7]" />
-              Projet vedette (grande carte avec mockup) — sinon liste compacte
-            </label>
+            {isCoveredByCaseStudy(project) ? (
+              <p className="rounded-lg border border-line bg-white/[0.03] p-3 text-xs leading-relaxed text-muted">
+                Ce projet est présenté sur le site par une <span className="text-foreground">étude de cas</span> (contenu dans
+                src/content/case-studies.ts) : il n&apos;apparaît donc pas dans la liste « Autres travaux ».
+              </p>
+            ) : null}
             <div className="flex items-center gap-2 border-t border-line pt-4">
               <span className={LABEL}>Ordre</span>
               <button type="button" disabled={editing === 0} onClick={() => { move(editing, -1); setEditing(editing - 1); }} className={BTN_SMALL}>↑ Monter</button>

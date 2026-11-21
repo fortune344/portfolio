@@ -20,20 +20,30 @@ export type Profile = {
   github: string;
   githubUser: string;
   linkedin: string;
+  /** Indicateur de disponibilité du hero (vide = masqué). */
   availability: string;
+  /** Proposition de valeur affichée sous le nom (repli : texte du code). */
+  headline?: string;
+  /** Phrase d'accompagnement de la proposition de valeur. */
+  pitch?: string;
   /** URL du CV téléchargeable (PDF). Vide = bouton masqué. */
   cvUrl?: string | null;
-  /** Texte du coin inférieur gauche du hero. */
-  statusLine: string;
-  statusLink: { label: string; href: string };
-  /** Texte du coin inférieur droit du hero. */
-  focusLine: string;
+  /** Anciens textes du hero (conservés pour compatibilité, plus affichés). */
+  statusLine?: string;
+  statusLink?: { label: string; href: string };
+  focusLine?: string;
   bio: string[];
 };
+
+/** Place d'un domaine dans mon activité — présentée honnêtement, sans pourcentage. */
+export type SkillLevel = "principal" | "regulier" | "complementaire";
 
 export type SkillGroup = {
   title: string;
   skills: string[];
+  /** Exemple concret d'utilisation (projet, mission). */
+  note?: string;
+  level?: SkillLevel;
 };
 
 /** Type d'aperçu dessiné en CSS, utilisé quand le projet n'a pas d'image. */

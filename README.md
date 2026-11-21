@@ -1,79 +1,88 @@
 # Portfolio — Fortune Assouan
 
-Portfolio personnel : Consultant BI & Analytics. Site éditorial sombre
-(Next.js) avec panneau d'administration en ligne (Supabase + mot de passe).
+Site vitrine freelance : consultant Power BI & data analyst. Identité
+éditoriale sombre (Anton + Poppins, noir / crème), études de cas détaillées,
+formulaire de contact réel et panneau d'administration en ligne.
 
 ## Stack
 
-- [Next.js](https://nextjs.org) (App Router) + TypeScript
-- Tailwind CSS v4 — Framer Motion — Lucide Icons
-- Supabase (base de données JSONB + stockage des images)
+- [Next.js](https://nextjs.org) 16 (App Router) + TypeScript, Tailwind CSS v4
+- Motion (paquet `framer-motion`) chargé en différé (`LazyMotion`), animations
+  d'entrée du hero en CSS pur
+- Supabase : contenu éditable (JSONB), images, messages du formulaire
+- Resend (optionnel) : notification e-mail des messages
 - Session admin par cookie HttpOnly signé (HMAC)
 
 ## Démarrage local
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000  (admin : /admin)
-npm run build    # build de production
+npm run dev        # http://localhost:3000  (admin : /admin)
+npm run lint       # ESLint
+npm run typecheck  # TypeScript
+npm run build      # build de production
 ```
 
-En local **sans** Supabase configuré, le site lit/écrit
-`src/data/portfolio.json` et les images vont dans `public/uploads/` —
-l'admin est ouvert sans mot de passe (machine locale uniquement).
+En local **sans** Supabase, le site lit/écrit `src/data/portfolio.json` et
+l'admin est ouvert sans mot de passe (machine locale uniquement). Le
+formulaire de contact répond alors « pas encore activé » : il ne simule
+jamais d'envoi.
 
-## Administration
+## Où vit le contenu ?
 
-Ouvrir **`/admin`** : connexion par mot de passe, puis modification de tout le
-contenu (profil, manifeste, bio, compétences, projets, parcours, langues).
-Pour chaque projet : image uploadée (affichée dans le mockup laptop), lien
-GitHub **et/ou** lien du site en ligne (les deux optionnels), tags, catégorie,
-ordre, mise en avant. « Enregistrer » publie immédiatement (revalidation).
+| Contenu | Où le modifier |
+| --- | --- |
+| Profil, textes du hero, bio, compétences, projets, parcours, langues | `/admin` (Supabase) — valeurs par défaut dans `src/data/portfolio.json` |
+| Services, méthode, navigation, textes de contact | `src/content/site.ts` |
+| Études de cas (`/realisations/...`) | `src/content/case-studies.ts` + captures dans `public/realisations/` |
+| Durées / courbes d'animation | `src/lib/motion.ts` (et variables CSS dans `globals.css`) |
 
-### Mot de passe oublié ?
+Règle des études de cas : aucun chiffre qui ne figure pas dans les README
+ou dashboards des dépôts GitHub ; chaque bloc de chiffres cite sa source.
 
-Le mot de passe n'est stocké nulle part dans le site : c'est la variable
-d'environnement `ADMIN_PASSWORD` du projet sur Vercel.
-Vercel → projet → **Settings → Environment Variables** → sur `ADMIN_PASSWORD`,
-l'icône œil révèle la valeur, **Edit** permet d'en définir une nouvelle,
-puis **Deployments → ⋯ → Redeploy** pour la prendre en compte.
+Un projet de l'admin dont le lien GitHub (ou le titre) correspond à une étude
+de cas est présenté par l'étude ; les autres apparaissent dans « Autres travaux ».
 
-Raccourcis dans l'admin : **Ctrl+S / ⌘S** enregistre ; un badge signale les
-modifications non enregistrées et le navigateur prévient avant de quitter.
+## Formulaire de contact
+
+Deux canaux indépendants ; il en faut au moins un. Un message est accepté
+dès qu'un canal réussit.
+
+1. **Supabase** (messages lisibles dans `/admin` → Messages) : exécuter la
+   partie « 3) Messages du formulaire de contact » de
+   [`supabase/schema.sql`](supabase/schema.sql) dans le SQL Editor.
+2. **Resend** (notification e-mail) : créer un compte sur
+   [resend.com](https://resend.com), une clé API, puis sur Vercel :
+   - `RESEND_API_KEY`
+   - `CONTACT_TO_EMAIL` — sans domaine vérifié, l'expéditeur de test
+     `onboarding@resend.dev` ne peut écrire **qu'à l'adresse du compte Resend**
+   - `RESEND_FROM` (optionnel, seulement avec un domaine vérifié)
+
+Anti-spam : champ piège invisible + 5 envois max par IP et par 10 minutes.
 
 ## Mise en production (Vercel + Supabase)
 
-1. **Supabase** : créer un projet sur [supabase.com](https://supabase.com)
-   (gratuit), ouvrir *SQL Editor* et exécuter le contenu de
-   [`supabase/schema.sql`](supabase/schema.sql).
-2. Récupérer dans *Settings → API* : l'URL du projet et la clé `service_role`.
-3. **Vercel** : importer ce repo GitHub sur [vercel.com/new](https://vercel.com/new),
-   puis dans *Settings → Environment Variables* ajouter :
-   - `SUPABASE_URL`
-   - `SUPABASE_SERVICE_ROLE_KEY`
-   - `ADMIN_PASSWORD` (le mot de passe de ton admin)
-4. Déployer. Ouvrir `https://ton-site.vercel.app/admin`, se connecter et
-   cliquer « Enregistrer » une première fois pour copier les données par
-   défaut dans Supabase. Ensuite, tout se gère en ligne.
-5. Mettre à jour `siteUrl` dans `src/app/layout.tsx`, `src/app/sitemap.ts` et
-   `src/app/robots.ts` avec l'URL définitive, puis pousser.
+Variables d'environnement (Vercel → Settings → Environment Variables) :
 
-Sans ces variables, le site fonctionne quand même (contenu de
-`src/data/portfolio.json`) mais l'admin en ligne est désactivé.
+| Variable | Rôle |
+| --- | --- |
+| `SUPABASE_URL` | URL du projet Supabase |
+| `SUPABASE_SERVICE_ROLE_KEY` | clé `service_role` (serveur uniquement) |
+| `ADMIN_PASSWORD` | mot de passe de `/admin` |
+| `RESEND_API_KEY`, `CONTACT_TO_EMAIL` | notification e-mail (optionnel) |
+
+Un `git push` sur `main` déclenche le déploiement Vercel.
+
+### Mot de passe admin oublié ?
+
+C'est la variable `ADMIN_PASSWORD` sur Vercel : l'icône œil la révèle, **Edit**
+en définit une nouvelle, puis **Deployments → ⋯ → Redeploy**.
 
 ## Synchroniser le contenu avec le repo
-
-Le contenu en ligne vit dans Supabase ; `src/data/portfolio.json` sert de
-valeur par défaut. Deux commandes gardent les deux en phase (elles demandent
-le mot de passe admin) :
 
 ```bash
 npm run content:pull   # site en ligne  →  src/data/portfolio.json
 npm run content:push   # src/data/portfolio.json  →  site en ligne
 ```
 
-## Notes
-
-- Avatar du hero : `public/avatar.svg` (illustration remplaçable).
-- Les projets sans image affichent un aperçu dessiné en CSS
-  (graphique, kanban, tableau ou terminal — au choix dans l'admin).
+(les deux demandent le mot de passe admin)

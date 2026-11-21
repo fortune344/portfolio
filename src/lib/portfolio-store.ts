@@ -1,5 +1,6 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { cache } from "react";
 import { defaultPortfolio, type PortfolioData } from "@/data/portfolio";
 import { getSupabase, STORAGE_BUCKET, supabaseConfigError } from "@/lib/supabase";
 
@@ -15,7 +16,8 @@ const LOCAL_JSON = path.join(process.cwd(), "src", "data", "portfolio.json");
 const ROW_ID = 1;
 const isProd = process.env.NODE_ENV === "production";
 
-export async function getPortfolio(): Promise<PortfolioData> {
+/** Lecture du contenu, mémoïsée par requête (layout + page = un seul appel). */
+export const getPortfolio = cache(async function getPortfolio(): Promise<PortfolioData> {
   const supabase = getSupabase();
   if (supabase) {
     const { data, error } = await supabase
@@ -26,7 +28,7 @@ export async function getPortfolio(): Promise<PortfolioData> {
     if (!error && data?.content) return data.content as PortfolioData;
   }
   return defaultPortfolio;
-}
+});
 
 export async function savePortfolio(content: PortfolioData): Promise<void> {
   const configError = supabaseConfigError();

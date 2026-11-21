@@ -12,22 +12,25 @@ const TYPE_BADGE: Record<TimelineEntry["type"], { label: string; className: stri
 
 export function Journey({ timeline }: { timeline: TimelineEntry[] }) {
   return (
-    <section id="parcours" className="scroll-mt-16 px-5 py-24 sm:px-8 md:py-32">
+    <section id="parcours" aria-labelledby="parcours-title" className="px-5 py-24 sm:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
+          id="parcours-title"
+          index="05"
           eyebrow="Parcours"
-          title="Expérience, formation & étapes clés"
+          title="Expériences et formation"
+          description="Stages en analyse de données, mission au sein d'un ministère, projets web pour des clients : là où la méthode a été mise à l'épreuve."
         />
 
         <div className="border-t border-line">
           {timeline.map((entry, i) => (
             <Reveal key={`${entry.period}-${entry.title}`} delay={i * 0.05}>
-              <article className="grid gap-3 border-b border-line py-8 transition-colors duration-200 hover:bg-white/[0.02] md:grid-cols-[220px_1fr_auto] md:gap-8 md:py-10">
+              <article className="group grid gap-3 border-b border-line py-8 transition-colors duration-200 hover:bg-white/[0.02] md:grid-cols-[220px_1fr_auto] md:gap-8 md:py-10">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                   {entry.period}
                 </p>
                 <div>
-                  <h3 className="text-xl font-semibold sm:text-2xl">{entry.title}</h3>
+                  <h3 className="text-xl font-semibold transition-transform duration-300 ease-out group-hover:translate-x-1 sm:text-2xl">{entry.title}</h3>
                   <p className="mt-1 text-sm text-muted">{entry.place}</p>
                   <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
                     {entry.description}

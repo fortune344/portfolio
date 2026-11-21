@@ -6,12 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "content:pull": "node scripts/sync-content.mjs pull",
-    "content:push": "node scripts/sync-content.mjs push"
+    "content:push": "node scripts/sync-content.mjs push",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@next/third-parties": "^16.3.5",
     "@supabase/supabase-js": "^2.110.0",
     "framer-motion": "^12.42.2",
     "lucide-react": "^1.23.0",
@@ -24,6 +24,8 @@
     "@types/node": "^26.1.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.2.10",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3"
   }

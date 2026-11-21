@@ -1,203 +1,137 @@
-"use client";
-
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-  type Variants,
-} from "framer-motion";
-import { Download } from "lucide-react";
-import { useRef } from "react";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import type { CSSProperties } from "react";
+import { HeroMenuButton, HeroParallax } from "@/components/sections/HeroClient";
+import { AvatarArt } from "@/components/ui/AvatarArt";
+import { TrackedLink } from "@/components/ui/TrackedLink";
+import { HERO, SERVICES } from "@/content/site";
 import type { Profile } from "@/data/portfolio";
-import { trackEvent } from "@/lib/analytics";
 
-const EASE = [0.21, 0.47, 0.32, 0.98] as const;
+const d = (delay: number) => ({ "--delay": `${delay}s` }) as CSSProperties;
 
-const nameLine: Variants = {
-  hidden: { y: "110%" },
-  visible: (i: number) => ({
-    y: 0,
-    transition: { duration: 0.9, delay: 0.15 + i * 0.12, ease: EASE },
-  }),
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (delay: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay, ease: EASE },
-  }),
-};
-
+/**
+ * Hero éditorial : nom géant Anton, avatar qui le chevauche, coins d'écran.
+ * La proposition de valeur et les deux appels à l'action occupent le bas.
+ * Composant serveur : les entrées sont des animations CSS (visibles dès le
+ * premier rendu) ; seule la parallaxe au scroll est en JavaScript.
+ */
 export function Hero({ profile }: { profile: Profile }) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const reduceMotion = useReducedMotion();
-
-  // Parallaxe légère : le nom remonte moins vite que le scroll.
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const nameY = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const avatarY = useTransform(scrollYProgress, [0, 1], [0, 60]);
-  const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const headline = profile.headline?.trim() || HERO.headline;
+  const pitch = profile.pitch?.trim() || HERO.pitch;
 
   return (
-    <section
-      ref={sectionRef}
-      id="accueil"
-      className="relative flex min-h-svh flex-col overflow-hidden"
-    >
+    <section id="accueil" className="relative flex min-h-svh flex-col overflow-hidden">
       {/* Coins supérieurs */}
-      <motion.div
-        variants={fadeUp}
-        custom={0.9}
-        initial="hidden"
-        animate="visible"
-        className="z-20 flex items-center justify-between p-5 sm:p-8"
-      >
+      <div className="hero-fade z-20 flex items-center justify-between p-5 sm:p-8" style={d(0.7)}>
         <a
           href="#contact"
           className="rounded-xl border border-foreground/40 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-foreground hover:text-ink sm:px-5 sm:text-xs"
         >
           Me contacter
         </a>
-        <nav className="flex items-center gap-5 text-sm font-medium sm:gap-8">
+        <nav aria-label="Accès rapide" className="hidden items-center gap-8 text-sm font-medium md:flex">
+          <a href="#services" className="transition-opacity hover:opacity-70">Services</a>
+          <a href="#realisations" className="transition-opacity hover:opacity-70">Réalisations</a>
+          <a href="#approche" className="transition-opacity hover:opacity-70">Approche</a>
           {profile.cvUrl ? (
-            <a
-              href={profile.cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className="hidden transition-opacity hover:opacity-70 sm:inline"
-            >
+            <a href={profile.cvUrl} target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-70">
               CV
             </a>
           ) : null}
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackEvent({ event: "github_click", link_url: profile.github })}
-            className="transition-opacity hover:opacity-70"
-          >
-            GitHub
-          </a>
-          <a
-            href={profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-opacity hover:opacity-70"
-          >
-            LinkedIn
-          </a>
         </nav>
-      </motion.div>
+        <HeroMenuButton />
+      </div>
 
       {/* Nom géant + avatar */}
-      <div className="relative z-0 flex flex-1 flex-col items-center justify-center px-4">
-        <motion.div
-          style={reduceMotion ? undefined : { y: nameY, opacity: fade }}
-          className="relative flex flex-col items-center"
-        >
-          {/* Point décoratif flottant */}
-          <motion.span
-            aria-hidden
-            variants={fadeUp}
-            custom={1.1}
-            initial="hidden"
-            animate="visible"
-            className="absolute -top-8 left-[12%] z-20 sm:-top-10"
-          >
-            <span className="block h-6 w-6 animate-float-slow rounded-full bg-foreground sm:h-9 sm:w-9" />
-          </motion.span>
+      <div className="relative z-0 flex flex-1 flex-col items-center justify-center px-4 pb-6 pt-2">
+        <HeroParallax className="relative flex flex-col items-center">
+          {/* Rôle + disponibilité */}
+          <div className="hero-fade mb-6 flex flex-col items-center gap-3 text-center sm:mb-7" style={d(0.45)}>
+            {profile.availability ? (
+              <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-background/40 px-3.5 py-1.5 text-[11px] font-medium backdrop-blur-sm">
+                <span className="relative flex h-2 w-2" aria-hidden>
+                  <span className="pulse-ring absolute inset-0 rounded-full bg-foreground" />
+                  <span className="relative h-2 w-2 rounded-full bg-foreground" />
+                </span>
+                {profile.availability}
+              </p>
+            ) : null}
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-muted sm:text-xs">
+              {HERO.role}
+            </p>
+          </div>
 
-          <h1 className="text-center font-display uppercase leading-[0.86] tracking-tight">
+          <h1 className="relative text-center font-display uppercase leading-[0.86] tracking-tight">
+            {/* Point décoratif flottant, au-dessus du nom (comme dans la version d'origine) */}
+            <span aria-hidden className="hero-fade absolute -left-5 top-[0.6em] z-20 sm:-left-12" style={d(1.1)}>
+              <span className="block h-4 w-4 animate-float-slow rounded-full bg-foreground sm:h-7 sm:w-7" />
+            </span>
             <span className="block overflow-hidden">
-              <motion.span
-                variants={nameLine}
-                custom={0}
-                initial="hidden"
-                animate="visible"
-                className="block text-[clamp(3.8rem,15vw,11.5rem)]"
-              >
+              <span className="hero-rise block text-[clamp(3.7rem,min(18vw,17svh),11.5rem)]" style={d(0.15)}>
                 {profile.firstName}
-              </motion.span>
+              </span>
             </span>
             <span className="block overflow-hidden">
-              <motion.span
-                variants={nameLine}
-                custom={1}
-                initial="hidden"
-                animate="visible"
-                className="block text-[clamp(3.8rem,15vw,11.5rem)]"
-              >
+              <span className="hero-rise block text-[clamp(3.7rem,min(18vw,17svh),11.5rem)]" style={d(0.27)}>
                 {profile.lastName}
-              </motion.span>
+              </span>
             </span>
+            <span className="sr-only">, consultant Power BI et data analyst freelance à Lomé</span>
           </h1>
 
           {/* Avatar chevauchant le nom */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.85, y: 24 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7, ease: EASE }}
-            style={reduceMotion ? undefined : { y: avatarY }}
-            className="z-10 -mt-[2.2rem] sm:-mt-[3.6rem] md:-mt-[4.5rem]"
-          >
-            <div className="group relative">
-              <div className="color-reveal h-36 w-36 overflow-hidden rounded-[1.75rem] border border-foreground/15 bg-[#26272e] shadow-[0_24px_60px_rgba(0,0,0,0.55)] sm:h-48 sm:w-48 md:h-56 md:w-56 md:rounded-[2.25rem]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/avatar.svg"
-                  alt={`Avatar de ${profile.name}`}
-                  className="h-full w-full object-cover"
-                />
+          <HeroParallax distance={-50} fade={false} className="z-10 -mt-[0.6rem] sm:-mt-[2.6rem] md:-mt-[3.4rem]">
+            <div className="hero-pop group relative" style={d(0.55)}>
+              <div className="color-reveal h-28 w-28 overflow-hidden rounded-[1.4rem] border border-foreground/15 bg-[#26272e] shadow-[0_24px_60px_rgba(0,0,0,0.55)] sm:h-40 sm:w-40 md:h-48 md:w-48 md:rounded-[2rem]">
+                <AvatarArt label={`Illustration de ${profile.name}`} className="block h-full w-full" />
               </div>
-              {/* Info-bulle au survol, comme sur la référence */}
               <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 scale-90 whitespace-nowrap rounded-lg bg-[#f2ecdf] px-4 py-2 text-xs font-semibold text-ink opacity-0 shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
-                {profile.availability} — Écrivez-moi !
+                Parlons de vos données !
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </HeroParallax>
+        </HeroParallax>
       </div>
 
-      {/* Coins inférieurs */}
-      <motion.div
-        variants={fadeUp}
-        custom={1.2}
-        initial="hidden"
-        animate="visible"
-        className="z-10 grid gap-3 p-5 text-sm leading-relaxed sm:grid-cols-2 sm:gap-10 sm:p-8"
-      >
-        <div className="max-w-sm space-y-4">
-          <p>
-            {profile.statusLine}{" "}
-            <a href={profile.statusLink.href} className="link-underline">
-              {profile.statusLink.label}
-            </a>
-            .
-          </p>
-          {profile.cvUrl ? (
-            <a
-              href={profile.cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className="inline-flex items-center gap-2 rounded-xl bg-foreground px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink transition-transform duration-200 hover:-translate-y-0.5"
+      {/* Bas du hero : proposition de valeur + appels à l'action */}
+      <div className="z-10 grid gap-8 p-5 sm:p-8 md:pt-2 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] md:items-end md:gap-12">
+        <div className="hero-fade max-w-xl" style={d(0.6)}>
+          <p className="text-lg font-medium leading-snug sm:text-[1.4rem] sm:leading-snug">{headline}</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted">{pitch}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <TrackedLink
+              href="#contact"
+              track={{ event: "cta_click", cta: "hero_discutons" }}
+              className="group inline-flex items-center gap-2 rounded-xl bg-foreground px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink transition-transform duration-200 hover:-translate-y-0.5"
             >
-              <Download size={15} />
-              Télécharger mon CV
-            </a>
-          ) : null}
+              Discutons de votre projet
+              <ArrowUpRight size={15} aria-hidden className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </TrackedLink>
+            <TrackedLink
+              href="#realisations"
+              track={{ event: "cta_click", cta: "hero_realisations" }}
+              className="group inline-flex items-center gap-2 rounded-xl border border-foreground/40 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-foreground hover:text-ink"
+            >
+              Découvrir mes réalisations
+              <ArrowDownRight size={15} aria-hidden className="transition-transform duration-200 group-hover:translate-y-0.5" />
+            </TrackedLink>
+          </div>
         </div>
-        <p className="max-w-sm text-muted sm:justify-self-end sm:text-right sm:text-foreground">
-          {profile.focusLine}
-        </p>
-      </motion.div>
+
+        <ul
+          aria-label="Services"
+          className="hero-fade hidden gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] md:grid md:justify-self-end md:text-right"
+          style={d(0.75)}
+        >
+          {SERVICES.map((s) => (
+            <li key={s.id}>
+              <a href="#services" className="text-muted transition-colors hover:text-foreground">
+                <span className="mr-3 text-foreground/70">{s.number}</span>
+                {s.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

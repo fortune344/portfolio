@@ -1,6 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-import { adminEnabled, isAuthenticated, passwordConfigured } from "@/lib/auth";
+import { adminGuard } from "@/lib/admin-guard";
+import { passwordConfigured } from "@/lib/auth";
 import { getPortfolio, savePortfolio } from "@/lib/portfolio-store";
 import { getSupabase, supabaseConfigError } from "@/lib/supabase";
 
@@ -11,21 +12,8 @@ import { getSupabase, supabaseConfigError } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
 
-async function guard(): Promise<NextResponse | null> {
-  if (!adminEnabled()) {
-    return NextResponse.json(
-      { error: "Admin désactivé : définissez ADMIN_PASSWORD sur le serveur." },
-      { status: 403 }
-    );
-  }
-  if (!(await isAuthenticated())) {
-    return NextResponse.json({ error: "Authentification requise." }, { status: 401 });
-  }
-  return null;
-}
-
 export async function GET() {
-  const denied = await guard();
+  const denied = await adminGuard();
   if (denied) return denied;
   const data = await getPortfolio();
   return NextResponse.json({
@@ -48,7 +36,7 @@ const REQUIRED_KEYS = [
 ] as const;
 
 export async function PUT(request: Request) {
-  const denied = await guard();
+  const denied = await adminGuard();
   if (denied) return denied;
 
   let body: unknown;
@@ -76,7 +64,7 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 
-  // Republie la page d'accueil immédiatement.
-  revalidatePath("/");
+  // Republie immédiatement toutes les pages (accueil et études de cas).
+  revalidatePath("/", "layout");
   return NextResponse.json({ ok: true });
 }

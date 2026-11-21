@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { adminEnabled, isAuthenticated } from "@/lib/auth";
+import { adminGuard } from "@/lib/admin-guard";
 import { uploadFile, type UploadKind } from "@/lib/portfolio-store";
 
 /** Upload d'un fichier image ou document (protégé par session admin). */
@@ -7,15 +7,8 @@ import { uploadFile, type UploadKind } from "@/lib/portfolio-store";
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
-  if (!adminEnabled()) {
-    return NextResponse.json(
-      { error: "Admin désactivé : définissez ADMIN_PASSWORD sur le serveur." },
-      { status: 403 }
-    );
-  }
-  if (!(await isAuthenticated())) {
-    return NextResponse.json({ error: "Authentification requise." }, { status: 401 });
-  }
+  const denied = await adminGuard();
+  if (denied) return denied;
 
   let file: File | null = null;
   let kind: UploadKind = "image";

@@ -1,0 +1,33 @@
+/**
+ * Avatar cartoon original (même dessin que public/avatar.svg), intégré directement
+ * dans le HTML : aucune requête réseau, affiché dès le premier rendu.
+ */
+export function AvatarArt({ label, className }: { label: string; className?: string }) {
+  return (
+    <svg viewBox="0 0 200 200" role="img" aria-label={label} className={className}>
+      <rect width="200" height="200" fill="#8678d9" />
+      <rect x="87" y="118" width="26" height="34" rx="11" fill="#6e4225" />
+      <path d="M36 200 C36 160 66 144 100 144 C134 144 164 160 164 200 Z" fill="#17181d" />
+      <circle cx="62" cy="94" r="8" fill="#7d4c2c" />
+      <circle cx="138" cy="94" r="8" fill="#7d4c2c" />
+      <ellipse cx="100" cy="90" rx="37" ry="41" fill="#7d4c2c" />
+      <path
+        d="M63 96 L63 74 C63 46 80 34 100 34 C120 34 137 46 137 74 L137 96 C137 88 133 80 128 76 L122 84 L116 73 L109 82 L102 71 L95 81 L88 72 L81 83 L75 75 C69 79 63 88 63 96 Z"
+        fill="#131317"
+      />
+      <path d="M70 52 Q78 42 90 40 M96 38 Q106 36 116 41 M122 44 Q130 50 133 60" stroke="#26262c" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path d="M76 84 Q84 79 93 82" stroke="#131317" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+      <path d="M107 82 Q116 79 124 84" stroke="#131317" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+      <ellipse cx="84" cy="95" rx="9" ry="6.5" fill="#f2ecdf" />
+      <ellipse cx="116" cy="95" rx="9" ry="6.5" fill="#f2ecdf" />
+      <circle cx="85" cy="96" r="3.6" fill="#131317" />
+      <circle cx="115" cy="96" r="3.6" fill="#131317" />
+      <rect x="74" y="86" width="20" height="7" fill="#7d4c2c" />
+      <rect x="106" y="86" width="20" height="7" fill="#7d4c2c" />
+      <path d="M75 93 L93 93" stroke="#131317" strokeWidth="3.2" strokeLinecap="round" />
+      <path d="M107 93 L125 93" stroke="#131317" strokeWidth="3.2" strokeLinecap="round" />
+      <path d="M100 100 Q97 106 100 108" stroke="#6e4225" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M92 117 Q100 122 108 117" stroke="#4f2f17" strokeWidth="3.5" strokeLinecap="round" fill="none" />
+    </svg>
+  );
+}
